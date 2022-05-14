@@ -24,8 +24,8 @@ export default class MNS {
     );
   }
 
-  name(name: string): Name {
-    return new Name(name, this.mns, this.provider, namehash(name), undefined);
+  name(name: string, resolver?: string): Name {
+    return new Name(name, this.mns, this.provider, namehash(name), resolver);
   }
 
   resolver(address: string) {
