@@ -1,5 +1,11 @@
 # mnslib
 
+### Installation
+
+```
+npm install --save @metrixnames/mnslib
+```
+
 ### Example Usage
 
 ```
