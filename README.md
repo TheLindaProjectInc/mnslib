@@ -1,4 +1,8 @@
+[![Node.js CI](https://github.com/TheLindaProjectInc/mnslib/actions/workflows/node.js.yml/badge.svg)](https://github.com/TheLindaProjectInc/mnslib/actions/workflows/node.js.yml)
+
 # mnslib
+
+mnslib is an update/port of [**ensjs**](https://github.com/ensdomains/ensjs) made to work for the Metrix Name Service and MetrixCoin blockchain.
 
 ### Installation
 
