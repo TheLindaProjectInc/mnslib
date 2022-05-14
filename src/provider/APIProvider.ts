@@ -28,7 +28,6 @@ export default class APIProvider implements Provider {
       default:
         return undefined;
     }
-    //const raw = await fetch(`${uri}/contract/${contract}/call?data=${encoded}`);
     const raw = await (
       await fetch(
         `${uri}/contract/${
