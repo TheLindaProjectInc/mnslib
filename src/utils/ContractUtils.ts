@@ -8,127 +8,6 @@ import {NetworkType} from '../types/NetworkType';
 import {decodeContenthash, encodeContenthash} from './Content';
 import {namehash} from './Namehash';
 
-/*
-const callContractAPI = async (
-  network: 'MainNet' | 'TestNet',
-  contract: string,
-  method: string,
-  data: string[],
-  abi: any[]
-) => {
-  const iface = new ethers.utils.Interface(abi);
-  const encoded = iface.encodeFunctionData(method, data).replace('0x', '');
-
-  try {
-    let uri = '';
-    switch (network) {
-      case 'MainNet':
-        uri = 'https://explorer.metrixcoin.com/api';
-        break;
-      case 'TestNet':
-        uri = 'https://testnet-explorer.metrixcoin.com/api';
-        break;
-      default:
-        throw new Error('Invalid Network');
-    }
-    const response = JSON.parse(
-      JSON.stringify(
-        await (
-          await fetch(`${uri}/contract/${contract}/call?data=${encoded}`)
-        ).json()
-      )
-    );
-
-    if (response) {
-      const output = response.executionResult.output;
-      const decoded = iface.decodeFunctionResult(method, `0x${output}`);
-      return decoded;
-    } else {
-      // failed to get a response
-      console.log('response failed');
-    }
-  } catch (e) {
-    console.log('error!!!');
-    console.log(e);
-  }
-  return undefined;
-};
-*/
-/**
- * Read only call to contract
- *
- * @param contract
- * @param method
- * @param data
- * @param abi
- * @returns response result
- */
-/*
-const callContractWeb3 = async (
-  contract: string,
-  method: string,
-  data: string[],
-  abi: any[]
-): Promise<any> => {
-  const iface = new ethers.utils.Interface(abi);
-  const encoded = iface.encodeFunctionData(method, data).replace('0x', '');
-  try {
-    const result = (window as any).metrimask.rpcProvider.rawCall(
-      'callcontract',
-      [contract, encoded.replace('0x', '')]
-    );
-    const response = (await result).executionResult.output;
-    const decoded: ethers.utils.Result = iface.decodeFunctionResult(
-      method,
-      `0x${response}`
-    );
-    return decoded;
-  } catch (e) {
-    console.log('error!!!');
-    console.log(e);
-  }
-  return undefined;
-};
-*/
-/**
- * Write call to contract
- *
- * @param contract
- * @param method
- * @param data
- * @param value
- * @param gasLimit
- * @param gasPrice
- * @param abi
- * @returns response result
- */
-/*
-const sendToContractWeb3 = async (
-  contract: string,
-  method: string,
-  data: string[],
-  value: string = '0',
-  gasLimit: number = 250000,
-  gasPrice: number = 5000,
-  abi: any[]
-): Promise<any> => {
-  const iface = new ethers.utils.Interface(abi);
-  const encoded = iface.encodeFunctionData(method, data).replace('0x', '');
-  try {
-    const result = await (window as any).metrimask.rpcProvider.rawCall(
-      'sendtocontract',
-      [contract, encoded.replace('0x', ''), value, gasLimit, gasPrice]
-    );
-    return result.txid
-      ? result.txid
-      : ethers.constants.HashZero.replace('0x', '');
-  } catch (e) {
-    console.log('error!!!');
-    console.log(e);
-  }
-  return undefined;
-};
-*/
 const getMNSAddress = (network: NetworkType) => {
   return CONTRACTS[network].MNSRegistryWithFallback;
 };
@@ -229,9 +108,9 @@ const getContentWithResolver = async (
       [contentHashSignature]
     );
 
-    if (isContentHashSupported) {
+    if (isContentHashSupported?.toString() === 'true') {
       const {protocolType, decoded, error} = decodeContenthash(
-        await Resolver.call('contenthash(bytes32)', [nh])
+        (await Resolver.call('contenthash(bytes32)', [nh]))?.toString()
       );
       if (error) {
         console.log('error decoding', error);
@@ -247,7 +126,7 @@ const getContentWithResolver = async (
     } else {
       const value = await Resolver.call('contenthash(bytes32)', [nh]);
       return {
-        value,
+        value: value ? value.toString() : '',
         contentType: 'oldcontent',
       };
     }
@@ -289,7 +168,7 @@ const getTextWithResolver = async (
   try {
     const Resolver = getResolverContract(resolverAddr, provider);
     const addr = await Resolver.call('text(bytes32, string)', [nh, key]);
-    return addr;
+    return addr ? addr.toString() : '';
   } catch (e) {
     console.warn(
       'Error getting text record on the resolver contract, are you sure the resolver address is a resolver contract?'

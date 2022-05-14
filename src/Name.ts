@@ -52,7 +52,8 @@ export default class Name {
   }
 
   async getTTL() {
-    return this.mns.call('ttl(bytes32)', [this.hash]);
+    const response = await this.mns.call('ttl(bytes32)', [this.hash]);
+    return response ? parseInt(response.toString()) : 0;
   }
 
   async getResolverAddr() {
@@ -69,9 +70,7 @@ export default class Name {
     const Resolver = getResolverContract(resolverAddr, this.provider);
     if (!coinId) {
       const response = await Resolver.call('addr(bytes32)', [this.hash]);
-      return response
-        ? response.toString().toLowerCase()
-        : ethers.constants.AddressZero;
+      return response ? response.toString() : ethers.constants.AddressZero;
     }
 
     return getAddrWithResolver(this.name, coinId, resolverAddr, this.provider);
