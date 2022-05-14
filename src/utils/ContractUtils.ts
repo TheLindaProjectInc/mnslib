@@ -163,6 +163,9 @@ const getAddrWithResolver = async (
   try {
     const Resolver = getResolverContract(resolverAddr, provider);
     const {coinType, encoder} = formatsByName[key];
+    if (!coinType || !encoder) {
+      return ethers.constants.AddressZero;
+    }
     const addr = await Resolver.call('addr(bytes32,uint256)', [
       nh,
       `${coinType}`,

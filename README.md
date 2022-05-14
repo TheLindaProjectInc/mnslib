@@ -14,7 +14,7 @@ const mns = new MNS(network, provider, getMNSAddress(network));
 
 const name: Name = mns.name('burn.mrx');             // return a Name object which can be used to make record queries
 
-const address = await name.getAddress('0x146');      // return a standard MetrixCoin address slip44:326
+const address = await name.getAddress('MRX');      // return a standard MetrixCoin address slip44:326
                                                      // ex: M7uAERuQW2AotfyLDyewFGcLUDtAYu9v5V
 
 const resAddress = await name.getResolverAddr();     // an EVM address of the resolver for the name

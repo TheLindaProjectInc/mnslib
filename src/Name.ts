@@ -61,7 +61,7 @@ export default class Name {
     }
   }
 
-  async getAddress(coinId: string) {
+  async getAddress(coinId?: string) {
     const resolverAddr = await this.getResolverAddr();
     if (parseInt(resolverAddr, 16) === 0) return ethers.constants.AddressZero;
     const Resolver = getResolverContract(resolverAddr, this.provider);
