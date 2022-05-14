@@ -30,7 +30,13 @@ export default class APIProvider implements Provider {
     }
     //const raw = await fetch(`${uri}/contract/${contract}/call?data=${encoded}`);
     const raw = await (
-      await fetch(`${uri}/contract/${contract}/call?data=${encoded}`)
+      await fetch(
+        `${uri}/contract/${
+          contract.startsWith('0x')
+            ? contract.slice(2).toLowerCase()
+            : contract.toLowerCase()
+        }/call?data=${encoded}`
+      )
     ).json();
 
     if (raw) {

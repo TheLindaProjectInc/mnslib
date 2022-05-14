@@ -43,7 +43,10 @@ export default class Name {
 
   async getResolver() {
     const response = await this.mns.call('resolver(bytes32)', [this.hash]);
-    return response ? response.toString() : ethers.constants.AddressZero;
+    this.resolver = response
+      ? response.toString()
+      : ethers.constants.AddressZero;
+    return this.resolver;
   }
 
   async setResolver(address: string) {
