@@ -15,12 +15,15 @@ export function namehash(inputName: string) {
     let labels = name.split('.');
 
     for (var i = labels.length - 1; i >= 0; i--) {
-      var labelSha = keccak256(ethers.utils.toUtf8Bytes(labels[i]));
+      var labelSha = keccak256(ethers.utils.toUtf8Bytes(labels[i])).replace(
+        '0x',
+        ''
+      );
       node = keccak256(Buffer.from(node + labelSha, 'hex'));
     }
   }
 
-  return '0x' + node;
+  return node;
 }
 
 export function normalize(name: string) {

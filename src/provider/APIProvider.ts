@@ -1,4 +1,5 @@
 import {ethers} from 'ethers';
+import fetch from 'node-fetch';
 import {Result} from 'ethers/lib/utils';
 import Provider from '../interfaces/Provider';
 
@@ -27,16 +28,13 @@ export default class APIProvider implements Provider {
       default:
         return undefined;
     }
-    const response = JSON.parse(
-      JSON.stringify(
-        await (
-          await fetch(`${uri}/contract/${contract}/call?data=${encoded}`)
-        ).json()
-      )
-    );
+    //const raw = await fetch(`${uri}/contract/${contract}/call?data=${encoded}`);
+    const raw = await (
+      await fetch(`${uri}/contract/${contract}/call?data=${encoded}`)
+    ).json();
 
-    if (response) {
-      const output = response.executionResult.output;
+    if (raw) {
+      const output = raw.executionResult.output;
       const decoded = iface.decodeFunctionResult(method, `0x${output}`);
       return decoded;
     } else {

@@ -1,4 +1,5 @@
 import {ethers, utils} from 'ethers';
+import {Result} from 'ethers/lib/utils';
 import Provider from './interfaces/Provider';
 
 const AddressZero = ethers.constants.AddressZero.replace('0x', '');
@@ -31,8 +32,16 @@ export default class MetrixContract {
    *
    * @public
    */
-  public async call(method: string, args: string[]): Promise<any> {
-    return this.provider.callContract(this.address, method, args, this.abi);
+  public async call(
+    method: string,
+    args: string[]
+  ): Promise<Result | undefined> {
+    return await this.provider.callContract(
+      this.address,
+      method,
+      args,
+      this.abi
+    );
   }
 
   /**
@@ -59,7 +68,7 @@ export default class MetrixContract {
     sender: string;
     hash160: string;
   }> {
-    return this.provider.sendToContract(
+    return await this.provider.sendToContract(
       this.address,
       method,
       args,

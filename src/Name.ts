@@ -32,7 +32,8 @@ export default class Name {
     this.resolver = resolver;
   }
   async getOwner() {
-    return this.mns.call('owner(bytes32)', [this.hash]);
+    const response = await this.mns.call('owner(bytes32)', [this.hash]);
+    return response ? response.toString() : ethers.constants.AddressZero;
   }
 
   async setOwner(address: string) {
@@ -41,7 +42,8 @@ export default class Name {
   }
 
   async getResolver() {
-    return this.mns.call('resolver(bytes32)', [this.hash]);
+    const response = await this.mns.call('resolver(bytes32)', [this.hash]);
+    return response ? response.toString() : ethers.constants.AddressZero;
   }
 
   async setResolver(address: string) {
@@ -66,7 +68,10 @@ export default class Name {
     if (parseInt(resolverAddr, 16) === 0) return ethers.constants.AddressZero;
     const Resolver = getResolverContract(resolverAddr, this.provider);
     if (!coinId) {
-      return Resolver.call('addr(bytes32)', [this.hash]);
+      const response = await Resolver.call('addr(bytes32)', [this.hash]);
+      return response
+        ? response.toString().toLowerCase()
+        : ethers.constants.AddressZero;
     }
 
     return getAddrWithResolver(this.name, coinId, resolverAddr, this.provider);
@@ -97,7 +102,6 @@ export default class Name {
 
   async setContenthash(content: string) {
     const resolverAddr = await this.getResolverAddr();
-    console.log(content);
     return setContenthashWithResolver(
       this.name,
       content,

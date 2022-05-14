@@ -162,6 +162,10 @@ const getAddrWithResolver = async (
   const nh = namehash(name);
   try {
     const Resolver = getResolverContract(resolverAddr, provider);
+    const format = formatsByName[key];
+    if (!format) {
+      return ethers.constants.AddressZero;
+    }
     const {coinType, encoder} = formatsByName[key];
     if (!coinType || !encoder) {
       return ethers.constants.AddressZero;
@@ -170,9 +174,9 @@ const getAddrWithResolver = async (
       nh,
       `${coinType}`,
     ]);
-    if (addr === '0x') return ethers.constants.AddressZero;
+    if (!addr || addr.toString() === '0x') return ethers.constants.AddressZero;
 
-    return encoder(Buffer.from(addr.slice(2), 'hex'));
+    return encoder(Buffer.from(addr.toString().slice(2), 'hex'));
   } catch (e) {
     console.log(e);
     console.warn(
