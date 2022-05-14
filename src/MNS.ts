@@ -25,13 +25,7 @@ export default class MNS {
   }
 
   name(name: string): Name {
-    return new Name(
-      name,
-      this.mns,
-      this.provider,
-      namehash(name),
-      CONTRACTS[this.network].PublicResolver
-    );
+    return new Name(name, this.mns, this.provider, namehash(name), undefined);
   }
 
   resolver(address: string) {

@@ -17,13 +17,13 @@ export default class Name {
   mns: MetrixContract;
   provider: Provider;
   hash: string;
-  resolver: string;
+  resolver: string | undefined;
   constructor(
     name: string,
     mns: MetrixContract,
     provider: Provider,
     hash: string,
-    resolver: string
+    resolver?: string
   ) {
     this.name = name;
     this.mns = mns;
