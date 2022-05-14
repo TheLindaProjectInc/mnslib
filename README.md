@@ -5,10 +5,19 @@
 ```
 import MNS, { getMNSAddress } from '@metrixnames/mnslib';
 
-
 const network = 'MainNet'; // can be 'MainNet' or 'TestNet'
 
-const provider = new APIProvider(network);           // create a readonly provider using the explorer API
+//  const mrpc = new MetrixRPCNode(
+//    null,
+//    'http://localhost:33841',
+//    'rpcuser',
+//    'rpcpass'
+//  );
+//  const provider = new RPCProvider(network, mrpc); // create a read/write provider using a local wallet daemon (usually used server side)
+
+//  const provider = new Web3Provider(network); // create a read/write provider using web3 (MetriMask) (always used client side)
+
+const provider = new APIProvider(network); // create a readonly provider using the explorer API (usually used client side)
 
 const mns = new MNS(network, provider, getMNSAddress(network));
 
