@@ -1,14 +1,14 @@
-import {Result} from 'ethers/lib/utils';
+import { Result } from 'ethers/lib/utils'
 
 export default interface Provider {
-  network: 'MainNet' | 'TestNet';
+  network: 'MainNet' | 'TestNet'
 
   callContract(
     contract: string,
     method: string,
     data: string[],
-    abi: any[]
-  ): Promise<Result | undefined>;
+    abi: any[] // eslint-disable-line @typescript-eslint/no-explicit-any
+  ): Promise<Result | undefined>
 
   sendToContract(
     contract: string,
@@ -17,6 +17,6 @@ export default interface Provider {
     value: string,
     gasLimit: number,
     gasPrice: number,
-    abi: any[]
-  ): Promise<any>;
+    abi: any[] // eslint-disable-line @typescript-eslint/no-explicit-any
+  ): Promise<any> // eslint-disable-line @typescript-eslint/no-explicit-any
 }

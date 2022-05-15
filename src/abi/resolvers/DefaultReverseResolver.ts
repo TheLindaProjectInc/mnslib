@@ -60,4 +60,4 @@ export const DefaultReverseResolver = [
     stateMutability: 'nonpayable',
     type: 'function',
   },
-];
+]

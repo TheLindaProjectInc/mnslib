@@ -11,6 +11,8 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write \"**/*.+(js|ts|json)\"",
     "build": "tsc"
   },
   "author": "SeqSEE",
@@ -19,6 +21,10 @@
     "@types/locks": "^0.2.1",
     "@types/node": "^17.0.31",
     "@types/node-fetch": "^2.6.1",
+    "@typescript-eslint/eslint-plugin": "^5.23.0",
+    "@typescript-eslint/parser": "^5.23.0",
+    "eslint": "^8.15.0",
+    "prettier": "^2.6.2",
     "typescript": "^4.6.4"
   },
   "dependencies": {

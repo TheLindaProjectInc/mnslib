@@ -392,4 +392,4 @@ export const MNSRegistryWithFallback = [
     stateMutability: 'view',
     type: 'function',
   },
-];
+]

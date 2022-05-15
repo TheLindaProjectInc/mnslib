@@ -1,25 +1,22 @@
-import {ethers, utils} from 'ethers';
-import {Result} from 'ethers/lib/utils';
-import Provider from './interfaces/Provider';
-
-const AddressZero = ethers.constants.AddressZero.replace('0x', '');
+import { Result } from 'ethers/lib/utils'
+import Provider from './interfaces/Provider'
 
 export default class MetrixContract {
-  address: string;
-  provider: Provider;
-  abi: any[];
-  bytecode: string | undefined;
+  address: string
+  provider: Provider
+  abi: any[] // eslint-disable-line @typescript-eslint/no-explicit-any
+  bytecode: string | undefined
 
   constructor(
     address: string,
     provider: Provider,
-    abi: any[],
+    abi: any[], // eslint-disable-line @typescript-eslint/no-explicit-any
     bytecode?: string
   ) {
-    this.address = address;
-    this.provider = provider;
-    this.abi = abi;
-    this.bytecode = bytecode;
+    this.address = address
+    this.provider = provider
+    this.abi = abi
+    this.bytecode = bytecode
   }
 
   /**
@@ -41,7 +38,7 @@ export default class MetrixContract {
       method,
       args,
       this.abi
-    );
+    )
   }
 
   /**
@@ -64,9 +61,9 @@ export default class MetrixContract {
     gasLimit: number | undefined = 250000,
     gasPrice: number | undefined = 5000
   ): Promise<{
-    txid: string;
-    sender: string;
-    hash160: string;
+    txid: string
+    sender: string
+    hash160: string
   }> {
     return await this.provider.sendToContract(
       this.address,
@@ -76,6 +73,6 @@ export default class MetrixContract {
       gasLimit,
       gasPrice,
       this.abi
-    );
+    )
   }
 }

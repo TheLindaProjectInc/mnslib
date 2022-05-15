@@ -862,4 +862,4 @@ export const PublicResolver = [
     stateMutability: 'view',
     type: 'function',
   },
-];
+]

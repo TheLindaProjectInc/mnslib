@@ -1,32 +1,32 @@
-import {ethers} from 'ethers';
-import fetch from 'node-fetch';
-import {Result} from 'ethers/lib/utils';
-import Provider from '../interfaces/Provider';
+import { ethers } from 'ethers'
+import fetch from 'node-fetch'
+import { Result } from 'ethers/lib/utils'
+import Provider from '../interfaces/Provider'
 
 export default class APIProvider implements Provider {
-  network: 'MainNet' | 'TestNet';
+  network: 'MainNet' | 'TestNet'
 
   constructor(network: 'MainNet' | 'TestNet') {
-    this.network = network;
+    this.network = network
   }
   async callContract(
     contract: string,
     method: string,
     data: string[],
-    abi: any[]
+    abi: any[] // eslint-disable-line @typescript-eslint/no-explicit-any
   ): Promise<Result | undefined> {
-    const iface = new ethers.utils.Interface(abi);
-    const encoded = iface.encodeFunctionData(method, data).replace('0x', '');
-    let uri = '';
+    const iface = new ethers.utils.Interface(abi)
+    const encoded = iface.encodeFunctionData(method, data).replace('0x', '')
+    let uri = ''
     switch (this.network) {
       case 'MainNet':
-        uri = 'https://explorer.metrixcoin.com/api';
-        break;
+        uri = 'https://explorer.metrixcoin.com/api'
+        break
       case 'TestNet':
-        uri = 'https://testnet-explorer.metrixcoin.com/api';
-        break;
+        uri = 'https://testnet-explorer.metrixcoin.com/api'
+        break
       default:
-        return undefined;
+        return undefined
     }
     const raw = await (
       await fetch(
@@ -36,28 +36,29 @@ export default class APIProvider implements Provider {
             : contract.toLowerCase()
         }/call?data=${encoded}`
       )
-    ).json();
+    ).json()
 
     if (raw) {
-      const output = raw.executionResult.output;
-      const decoded = iface.decodeFunctionResult(method, `0x${output}`);
-      return decoded;
+      const output = raw.executionResult.output
+      const decoded = iface.decodeFunctionResult(method, `0x${output}`)
+      return decoded
     } else {
       // failed to get a response
-      console.log('response failed');
+      console.log('response failed')
     }
-    return undefined;
+    return undefined
   }
 
   async sendToContract(
-    contract: string,
-    method: string,
-    data: string[],
-    value: string,
-    gasLimit: number,
-    gasPrice: number,
-    abi: any[]
+    contract: string, // eslint-disable-line
+    method: string, // eslint-disable-line
+    data: string[], // eslint-disable-line
+    value: string, // eslint-disable-line
+    gasLimit: number, // eslint-disable-line
+    gasPrice: number, // eslint-disable-line
+    abi: any[] // eslint-disable-line
+    // eslint-disable-next-line
   ): Promise<any> {
-    return undefined;
+    return undefined
   }
 }

@@ -373,4 +373,4 @@ export const MNSRegistry = [
     stateMutability: 'view',
     type: 'function',
   },
-];
+]
