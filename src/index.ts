@@ -11,6 +11,8 @@ import Web3Provider from './provider/Web3Provider';
 import { CONTRACTS } from './constants';
 import { namehash } from 'ethers/lib/utils';
 import { ethers } from 'ethers';
+import Name from './Name';
+import Resolver from './Resolver';
 
 export default MNS;
 
@@ -19,6 +21,8 @@ const labelhash = (label: string) => {
 };
 
 export {
+  Name,
+  Resolver,
   namehash,
   labelhash,
   getMNSAddress,
