@@ -10,11 +10,11 @@ const AddressZero = ethers.constants.AddressZero.replace('0x', '');
 export default class RPCProvider implements Provider {
   network: 'MainNet' | 'TestNet';
   mrpc: MetrixRPCNode;
-  sender: string;
+  sender: string | undefined;
   constructor(
     network: 'MainNet' | 'TestNet',
     mrpc: MetrixRPCNode,
-    sender: string
+    sender?: string
   ) {
     this.network = network;
     this.mrpc = mrpc;
@@ -118,6 +118,7 @@ export default class RPCProvider implements Provider {
     changeToSender: boolean | undefined = true
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ): Promise<any> {
+    if (!this.sender) return undefined;
     let result = {
       txid: ethers.constants.HashZero.replace('0x', ''),
       sender: AddressZero,
