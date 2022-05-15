@@ -1,5 +1,8 @@
+import {ethers} from 'ethers';
+import {namehash} from 'ethers/lib/utils';
 import {CONTRACTS} from './constants';
 import Provider from './interfaces/Provider';
+import MetrixContract from './MetrixContract';
 import Name from './Name';
 import Resolver from './Resolver';
 import {NetworkType} from './types/NetworkType';
@@ -8,12 +11,11 @@ import {
   getResolverContract,
   getReverseRegistrarContract,
 } from './utils/ContractUtils';
-import {namehash} from './utils/Namehash';
 
 export default class MNS {
   network: NetworkType;
   provider: Provider;
-  mns: any;
+  mns: MetrixContract;
 
   constructor(network: NetworkType, provider: Provider, mnsAddress: string) {
     this.network = network;
@@ -34,8 +36,14 @@ export default class MNS {
 
   async getName(address: string) {
     const reverseNode = `${address}.addr.reverse`;
-    const resolverAddr = await this.mns.resolver(namehash(reverseNode));
-    return this.getNameWithResolver(address, resolverAddr);
+    const resolverAddr = await this.mns.call(`resolver(bytes32)`, [
+      namehash(reverseNode),
+    ]);
+    console.log(`namehash(reverseNode): ${namehash(reverseNode)}`);
+    return this.getNameWithResolver(
+      address,
+      resolverAddr ? resolverAddr.toString() : ethers.constants.AddressZero
+    );
   }
 
   async getNameWithResolver(address: string, resolverAddr: string) {

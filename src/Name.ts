@@ -9,8 +9,8 @@ import {
   setContenthashWithResolver,
   setTextWithResolver,
 } from './utils/ContractUtils';
-import {labelhash} from './utils/Namehash';
 import MetrixContract from './MetrixContract';
+import {labelhash} from '.';
 
 export default class Name {
   name: string;

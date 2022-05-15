@@ -5,12 +5,18 @@ import {
   getResolverContract,
   getReverseRegistrarContract,
 } from './utils/ContractUtils';
-import {labelhash, namehash} from './utils/Namehash';
 import APIProvider from './provider/APIProvider';
 import RPCProvider from './provider/RPCProvider';
 import Web3Provider from './provider/Web3Provider';
+import {CONTRACTS} from './constants';
+import {namehash} from 'ethers/lib/utils';
+import {ethers} from 'ethers';
 
 export default MNS;
+
+const labelhash = (label: string) => {
+  return ethers.utils.keccak256(ethers.utils.toUtf8Bytes(label));
+};
 
 export {
   namehash,
@@ -22,4 +28,5 @@ export {
   APIProvider,
   RPCProvider,
   Web3Provider,
+  CONTRACTS,
 };

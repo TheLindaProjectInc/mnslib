@@ -1,12 +1,12 @@
 import {formatsByName} from '@ensdomains/address-encoder';
 import {ethers} from 'ethers';
+import {namehash} from 'ethers/lib/utils';
 import ABI from '../abi';
 import {CONTRACTS} from '../constants';
 import Provider from '../interfaces/Provider';
 import MetrixContract from '../MetrixContract';
 import {NetworkType} from '../types/NetworkType';
 import {decodeContenthash, encodeContenthash} from './Content';
-import {namehash} from './Namehash';
 
 const getMNSAddress = (network: NetworkType) => {
   return CONTRACTS[network].MNSRegistryWithFallback;
