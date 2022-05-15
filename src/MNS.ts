@@ -35,11 +35,14 @@ export default class MNS {
   }
 
   async getName(address: string) {
-    const reverseNode = `${address}.addr.reverse`;
+    const reverseNode = `${
+      address.startsWith('0x')
+        ? address.slice(2).toLowerCase()
+        : address.toLowerCase()
+    }.addr.reverse`;
     const resolverAddr = await this.mns.call(`resolver(bytes32)`, [
       namehash(reverseNode),
     ]);
-    console.log(`namehash(reverseNode): ${namehash(reverseNode)}`);
     return this.getNameWithResolver(
       address,
       resolverAddr ? resolverAddr.toString() : ethers.constants.AddressZero
@@ -47,22 +50,23 @@ export default class MNS {
   }
 
   async getNameWithResolver(address: string, resolverAddr: string) {
-    const reverseNode = `${address}.addr.reverse`;
+    const reverseNode = `${
+      address.startsWith('0x')
+        ? address.slice(2).toLowerCase()
+        : address.toLowerCase()
+    }.addr.reverse`;
     const reverseNamehash = namehash(reverseNode);
     if (parseInt(resolverAddr, 16) === 0) {
-      return {
-        name: null,
-      };
+      return undefined;
     }
 
     try {
       const Resolver = getResolverContract(resolverAddr, this.provider);
       const name = await Resolver.call('name(bytes32)', [reverseNamehash]);
-      return {
-        name,
-      };
+      return name ? name.toString() : undefined;
     } catch (e) {
       console.log(`Error getting name for reverse record of ${address}`, e);
+      return undefined;
     }
   }
 
