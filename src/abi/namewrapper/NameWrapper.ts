@@ -1134,4 +1134,4 @@ export const NameWrapper = [
     stateMutability: 'nonpayable',
     type: 'function',
   },
-]
+];

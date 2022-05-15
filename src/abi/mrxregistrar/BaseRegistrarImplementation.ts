@@ -727,4 +727,4 @@ export const BaseRegistrarImplementation = [
     stateMutability: 'nonpayable',
     type: 'function',
   },
-]
+];

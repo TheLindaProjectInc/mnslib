@@ -331,4 +331,4 @@ export const ReverseRegistrar = [
     stateMutability: 'nonpayable',
     type: 'function',
   },
-]
+];

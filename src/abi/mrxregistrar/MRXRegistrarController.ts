@@ -500,4 +500,4 @@ export const MRXRegistrarController = [
     stateMutability: 'nonpayable',
     type: 'function',
   },
-]
+];

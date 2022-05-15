@@ -78,4 +78,4 @@ export const TestRegistrar = [
     stateMutability: 'view',
     type: 'function',
   },
-]
+];

@@ -83,4 +83,4 @@ export const MNSMigrations = [
     stateMutability: 'nonpayable',
     type: 'function',
   },
-]
+];
