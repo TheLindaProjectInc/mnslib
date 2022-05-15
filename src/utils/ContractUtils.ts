@@ -4,7 +4,7 @@ import { namehash } from 'ethers/lib/utils';
 import ABI from '../abi';
 import { CONTRACTS } from '../constants';
 import Provider from '../interfaces/Provider';
-import MetrixContract from '../MetrixContract';
+import MetrixContract from '../mrx/MetrixContract';
 import { NetworkType } from '../types/NetworkType';
 import { fromHexAddress } from './AddressUtils';
 import { decodeContenthash, encodeContenthash } from './Content';

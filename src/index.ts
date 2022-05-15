@@ -1,4 +1,4 @@
-import MNS from './MNS';
+import MNS from './mns/MNS';
 import {
   getMNSAddress,
   getMNSContract,
@@ -11,8 +11,8 @@ import Web3Provider from './provider/Web3Provider';
 import { CONTRACTS } from './constants';
 import { namehash } from 'ethers/lib/utils';
 import { ethers } from 'ethers';
-import Name from './Name';
-import Resolver from './Resolver';
+import Name from './mns/Name';
+import Resolver from './mns/Resolver';
 
 export default MNS;
 

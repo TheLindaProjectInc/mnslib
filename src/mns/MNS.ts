@@ -1,16 +1,16 @@
 import { ethers } from 'ethers';
 import { namehash } from 'ethers/lib/utils';
-import { CONTRACTS } from './constants';
-import Provider from './interfaces/Provider';
-import MetrixContract from './MetrixContract';
+import { CONTRACTS } from '../constants';
+import Provider from '../interfaces/Provider';
+import MetrixContract from '../mrx/MetrixContract';
 import Name from './Name';
 import Resolver from './Resolver';
-import { NetworkType } from './types/NetworkType';
+import { NetworkType } from '../types/NetworkType';
 import {
   getMNSContract,
   getResolverContract,
   getReverseRegistrarContract,
-} from './utils/ContractUtils';
+} from '../utils/ContractUtils';
 
 export default class MNS {
   network: NetworkType;
