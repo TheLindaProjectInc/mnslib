@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import Provider from './interfaces/Provider';
+import Provider from '../interfaces/Provider';
 import {
   getAddrWithResolver,
   getContentWithResolver,
@@ -8,9 +8,9 @@ import {
   setAddrWithResolver,
   setContenthashWithResolver,
   setTextWithResolver,
-} from './utils/ContractUtils';
-import MetrixContract from './MetrixContract';
-import { labelhash } from '.';
+} from '../utils/ContractUtils';
+import MetrixContract from '../mrx/MetrixContract';
+import { labelhash } from '..';
 
 export default class Name {
   name: string;

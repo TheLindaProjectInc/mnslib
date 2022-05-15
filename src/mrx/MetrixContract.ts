@@ -1,5 +1,5 @@
 import { Result } from 'ethers/lib/utils';
-import Provider from './interfaces/Provider';
+import Provider from '../interfaces/Provider';
 
 export default class MetrixContract {
   address: string;

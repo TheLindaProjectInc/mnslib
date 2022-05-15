@@ -1,6 +1,6 @@
 import { namehash } from 'ethers/lib/utils';
-import Provider from './interfaces/Provider';
-import MetrixContract from './MetrixContract';
+import Provider from '../interfaces/Provider';
+import MetrixContract from '../mrx/MetrixContract';
 import Name from './Name';
 
 export default class Resolver {
