@@ -10,9 +10,15 @@ const AddressZero = ethers.constants.AddressZero.replace('0x', '');
 export default class RPCProvider implements Provider {
   network: 'MainNet' | 'TestNet';
   mrpc: MetrixRPCNode;
-  constructor(network: 'MainNet' | 'TestNet', mrpc: MetrixRPCNode) {
+  sender: string | undefined;
+  constructor(
+    network: 'MainNet' | 'TestNet',
+    mrpc: MetrixRPCNode,
+    sender?: string
+  ) {
     this.network = network;
     this.mrpc = mrpc;
+    this.sender = sender;
   }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private async getTxReceipts(tx: any, abi: any[], contract?: string) {
@@ -108,9 +114,11 @@ export default class RPCProvider implements Provider {
     value = '0',
     gasLimit = 250000,
     gasPrice = 5000,
-    abi: any[] // eslint-disable-line @typescript-eslint/no-explicit-any
+    abi: any[], // eslint-disable-line @typescript-eslint/no-explicit-any
+    changeToSender: boolean | undefined = true
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ): Promise<any> {
+    if (!this.sender) return undefined;
     let result = {
       txid: ethers.constants.HashZero.replace('0x', ''),
       sender: AddressZero,
@@ -129,9 +137,9 @@ export default class RPCProvider implements Provider {
       value,
       gasLimit,
       gasPrice * 1e-8,
-      process.env.DEPLOYMENT_ACCT as string,
+      this.sender,
       true,
-      true
+      changeToSender === true
     );
     if (response) {
       const receipts = await this.getTxReceipts(response, abi, contract);

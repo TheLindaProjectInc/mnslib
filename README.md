@@ -15,7 +15,7 @@ npm install --save @metrixnames/mnslib
 ```
 import MNS, { getMNSAddress } from '@metrixnames/mnslib';
 
-const network = 'MainNet'; // can be 'MainNet' or 'TestNet'
+const network = 'TestNet'; // can be 'MainNet' or 'TestNet'
 
 //  const mrpc = new MetrixRPCNode(
 //    null,
@@ -23,7 +23,8 @@ const network = 'MainNet'; // can be 'MainNet' or 'TestNet'
 //    'rpcuser',
 //    'rpcpass'
 //  );
-//  const provider = new RPCProvider(network, mrpc); // create a read/write provider using a local wallet daemon (usually used server side)
+//  const sender = 'maTQfd4w7mqCzGL32RgBFMYY9ehCmjLEGf'; // sending address which the wallet controls the keys for
+//  const provider = new RPCProvider(network, mrpc, sender); // create a read/write provider using a local wallet daemon (usually used server side)
 
 //  const provider = new Web3Provider(network); // create a read/write provider using web3 (MetriMask) (always used client side)
 
