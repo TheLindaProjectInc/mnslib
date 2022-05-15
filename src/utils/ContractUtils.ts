@@ -6,6 +6,7 @@ import { CONTRACTS } from '../constants';
 import Provider from '../interfaces/Provider';
 import MetrixContract from '../MetrixContract';
 import { NetworkType } from '../types/NetworkType';
+import { fromHexAddress } from './AddressUtils';
 import { decodeContenthash, encodeContenthash } from './Content';
 
 const getMNSAddress = (network: NetworkType) => {
@@ -54,7 +55,9 @@ const getAddrWithResolver = async (
       `${coinType}`,
     ]);
     if (!addr || addr.toString() === '0x') return ethers.constants.AddressZero;
-
+    if (coinType === 326) {
+      return fromHexAddress(provider.network, addr.toString().slice(2));
+    }
     return encoder(Buffer.from(addr.toString().slice(2), 'hex'));
   } catch (e) {
     console.log(e);
