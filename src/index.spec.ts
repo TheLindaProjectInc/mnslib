@@ -2,7 +2,7 @@ import MNS, { APIProvider, getMNSAddress } from './';
 import Name from './mns/Name';
 import { equal } from 'assert';
 
-describe('Typescript usage suite', () => {
+describe('mnslib tests', () => {
   const network = 'TestNet';
   const provider = new APIProvider(network);
 
