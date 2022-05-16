@@ -9,7 +9,7 @@ import { NetworkType } from '../types/NetworkType';
 import {
   getMNSContract,
   getResolverContract,
-  getReverseRegistrarContract,
+  getReverseRegistrarContract
 } from '../utils/ContractUtils';
 
 export default class MNS {
@@ -41,7 +41,7 @@ export default class MNS {
         : address.toLowerCase()
     }.addr.reverse`;
     const resolverAddr = await this.mns.call(`resolver(bytes32)`, [
-      namehash(reverseNode),
+      namehash(reverseNode)
     ]);
     return this.getNameWithResolver(
       address,

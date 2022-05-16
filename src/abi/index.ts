@@ -21,7 +21,7 @@ const ABI = {
   ReverseRegistrar,
   TestRegistrar,
   DefaultReverseResolver,
-  PublicResolver,
+  PublicResolver
 };
 
 export default ABI;

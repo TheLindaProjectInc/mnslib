@@ -76,7 +76,7 @@ export function encodeContenthash(text: string) {
         const bs58content = bs58.encode(
           Buffer.concat([
             Buffer.from([0, content.length]),
-            Buffer.from(content),
+            Buffer.from(content)
           ])
         );
         encoded = '0x' + contentHash.encode('ipns-ns', bs58content);
@@ -95,7 +95,7 @@ export function encodeContenthash(text: string) {
       } else {
         console.warn('Unsupported protocol or invalid value', {
           contentType,
-          text,
+          text
         });
       }
     } catch (err) {

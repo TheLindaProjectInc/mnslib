@@ -4,11 +4,11 @@ export const DefaultReverseResolver = [
       {
         internalType: 'contract MNS',
         name: 'mnsAddr',
-        type: 'address',
-      },
+        type: 'address'
+      }
     ],
     stateMutability: 'nonpayable',
-    type: 'constructor',
+    type: 'constructor'
   },
   {
     inputs: [],
@@ -17,47 +17,47 @@ export const DefaultReverseResolver = [
       {
         internalType: 'contract MNS',
         name: '',
-        type: 'address',
-      },
+        type: 'address'
+      }
     ],
     stateMutability: 'view',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'bytes32',
         name: '',
-        type: 'bytes32',
-      },
+        type: 'bytes32'
+      }
     ],
     name: 'name',
     outputs: [
       {
         internalType: 'string',
         name: '',
-        type: 'string',
-      },
+        type: 'string'
+      }
     ],
     stateMutability: 'view',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'bytes32',
         name: 'node',
-        type: 'bytes32',
+        type: 'bytes32'
       },
       {
         internalType: 'string',
         name: '_name',
-        type: 'string',
-      },
+        type: 'string'
+      }
     ],
     name: 'setName',
     outputs: [],
     stateMutability: 'nonpayable',
-    type: 'function',
-  },
+    type: 'function'
+  }
 ];

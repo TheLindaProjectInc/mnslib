@@ -4,35 +4,35 @@ export const TestRegistrar = [
       {
         internalType: 'contract MNS',
         name: 'mnsAddr',
-        type: 'address',
+        type: 'address'
       },
       {
         internalType: 'bytes32',
         name: 'node',
-        type: 'bytes32',
-      },
+        type: 'bytes32'
+      }
     ],
     stateMutability: 'nonpayable',
-    type: 'constructor',
+    type: 'constructor'
   },
   {
     inputs: [
       {
         internalType: 'bytes32',
         name: '',
-        type: 'bytes32',
-      },
+        type: 'bytes32'
+      }
     ],
     name: 'expiryTimes',
     outputs: [
       {
         internalType: 'uint256',
         name: '',
-        type: 'uint256',
-      },
+        type: 'uint256'
+      }
     ],
     stateMutability: 'view',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [],
@@ -41,29 +41,29 @@ export const TestRegistrar = [
       {
         internalType: 'contract MNS',
         name: '',
-        type: 'address',
-      },
+        type: 'address'
+      }
     ],
     stateMutability: 'view',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'bytes32',
         name: 'label',
-        type: 'bytes32',
+        type: 'bytes32'
       },
       {
         internalType: 'address',
         name: 'owner',
-        type: 'address',
-      },
+        type: 'address'
+      }
     ],
     name: 'register',
     outputs: [],
     stateMutability: 'nonpayable',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [],
@@ -72,10 +72,10 @@ export const TestRegistrar = [
       {
         internalType: 'bytes32',
         name: '',
-        type: 'bytes32',
-      },
+        type: 'bytes32'
+      }
     ],
     stateMutability: 'view',
-    type: 'function',
-  },
+    type: 'function'
+  }
 ];

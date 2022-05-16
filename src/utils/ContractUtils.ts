@@ -52,7 +52,7 @@ const getAddrWithResolver = async (
     }
     const addr = await Resolver.call('addr(bytes32,uint256)', [
       nh,
-      `${coinType}`,
+      `${coinType}`
     ]);
     if (!addr || addr.toString() === '0x') return ethers.constants.AddressZero;
     if (coinType === 326) {
@@ -87,7 +87,7 @@ const setAddrWithResolver = async (
   return Resolver.send('setAddr(bytes32,uint256,bytes)', [
     nh,
     `0x${BigInt(coinType).toString(16)}`,
-    addressAsBytes.toString('hex'),
+    addressAsBytes.toString('hex')
   ]);
 };
 
@@ -119,18 +119,18 @@ const getContentWithResolver = async (
         console.log('error decoding', error);
         return {
           value: ethers.constants.AddressZero,
-          contentType: 'contenthash',
+          contentType: 'contenthash'
         };
       }
       return {
         value: `${protocolType}://${decoded}`,
-        contentType: 'contenthash',
+        contentType: 'contenthash'
       };
     } else {
       const value = await Resolver.call('contenthash(bytes32)', [nh]);
       return {
         value: value ? value.toString() : '',
-        contentType: 'oldcontent',
+        contentType: 'oldcontent'
       };
     }
   } catch (e) {
@@ -154,7 +154,7 @@ const setContenthashWithResolver = (
   const Resolver = getResolverContract(resolverAddr, provider);
   return Resolver.send('setContenthash(bytes32, bytes)', [
     namehash(name),
-    `${encodedContenthash}`,
+    `${encodedContenthash}`
   ]);
 };
 
@@ -204,7 +204,7 @@ export {
   getContentWithResolver,
   setContenthashWithResolver,
   getTextWithResolver,
-  setTextWithResolver,
+  setTextWithResolver
   //callContractWeb3,
   //callContractAPI,
   //sendToContractWeb3,

@@ -3,7 +3,7 @@ import {
   getMNSAddress,
   getMNSContract,
   getResolverContract,
-  getReverseRegistrarContract,
+  getReverseRegistrarContract
 } from './utils/ContractUtils';
 import APIProvider from './provider/APIProvider';
 import RPCProvider from './provider/RPCProvider';
@@ -32,5 +32,5 @@ export {
   APIProvider,
   RPCProvider,
   Web3Provider,
-  CONTRACTS,
+  CONTRACTS
 };
