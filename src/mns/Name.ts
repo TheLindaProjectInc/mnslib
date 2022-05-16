@@ -7,7 +7,7 @@ import {
   getTextWithResolver,
   setAddrWithResolver,
   setContenthashWithResolver,
-  setTextWithResolver,
+  setTextWithResolver
 } from '../utils/ContractUtils';
 import MetrixContract from '../mrx/MetrixContract';
 import { labelhash } from '..';
@@ -133,7 +133,7 @@ export default class Name {
     return this.mns.send('setSubnodeOwner(bytes32, bytes32, address)', [
       this.hash,
       lh,
-      newOwner,
+      newOwner
     ]);
   }
 
@@ -155,7 +155,7 @@ export default class Name {
     const ownerPromise = this.getOwner();
     const [resolver, owner] = await Promise.all([
       resolverPromise,
-      ownerPromise,
+      ownerPromise
     ]);
     return this.setSubnodeRecord(label, owner, resolver);
   }

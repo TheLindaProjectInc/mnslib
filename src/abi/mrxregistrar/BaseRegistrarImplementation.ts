@@ -4,16 +4,16 @@ export const BaseRegistrarImplementation = [
       {
         internalType: 'contract MNS',
         name: '_mns',
-        type: 'address',
+        type: 'address'
       },
       {
         internalType: 'bytes32',
         name: '_baseNode',
-        type: 'bytes32',
-      },
+        type: 'bytes32'
+      }
     ],
     stateMutability: 'nonpayable',
-    type: 'constructor',
+    type: 'constructor'
   },
   {
     anonymous: false,
@@ -22,23 +22,23 @@ export const BaseRegistrarImplementation = [
         indexed: true,
         internalType: 'address',
         name: 'owner',
-        type: 'address',
+        type: 'address'
       },
       {
         indexed: true,
         internalType: 'address',
         name: 'approved',
-        type: 'address',
+        type: 'address'
       },
       {
         indexed: true,
         internalType: 'uint256',
         name: 'tokenId',
-        type: 'uint256',
-      },
+        type: 'uint256'
+      }
     ],
     name: 'Approval',
-    type: 'event',
+    type: 'event'
   },
   {
     anonymous: false,
@@ -47,23 +47,23 @@ export const BaseRegistrarImplementation = [
         indexed: true,
         internalType: 'address',
         name: 'owner',
-        type: 'address',
+        type: 'address'
       },
       {
         indexed: true,
         internalType: 'address',
         name: 'operator',
-        type: 'address',
+        type: 'address'
       },
       {
         indexed: false,
         internalType: 'bool',
         name: 'approved',
-        type: 'bool',
-      },
+        type: 'bool'
+      }
     ],
     name: 'ApprovalForAll',
-    type: 'event',
+    type: 'event'
   },
   {
     anonymous: false,
@@ -72,11 +72,11 @@ export const BaseRegistrarImplementation = [
         indexed: true,
         internalType: 'address',
         name: 'controller',
-        type: 'address',
-      },
+        type: 'address'
+      }
     ],
     name: 'ControllerAdded',
-    type: 'event',
+    type: 'event'
   },
   {
     anonymous: false,
@@ -85,11 +85,11 @@ export const BaseRegistrarImplementation = [
         indexed: true,
         internalType: 'address',
         name: 'controller',
-        type: 'address',
-      },
+        type: 'address'
+      }
     ],
     name: 'ControllerRemoved',
-    type: 'event',
+    type: 'event'
   },
   {
     anonymous: false,
@@ -98,23 +98,23 @@ export const BaseRegistrarImplementation = [
         indexed: true,
         internalType: 'uint256',
         name: 'id',
-        type: 'uint256',
+        type: 'uint256'
       },
       {
         indexed: true,
         internalType: 'address',
         name: 'owner',
-        type: 'address',
+        type: 'address'
       },
       {
         indexed: false,
         internalType: 'uint256',
         name: 'expires',
-        type: 'uint256',
-      },
+        type: 'uint256'
+      }
     ],
     name: 'NameMigrated',
-    type: 'event',
+    type: 'event'
   },
   {
     anonymous: false,
@@ -123,23 +123,23 @@ export const BaseRegistrarImplementation = [
         indexed: true,
         internalType: 'uint256',
         name: 'id',
-        type: 'uint256',
+        type: 'uint256'
       },
       {
         indexed: true,
         internalType: 'address',
         name: 'owner',
-        type: 'address',
+        type: 'address'
       },
       {
         indexed: false,
         internalType: 'uint256',
         name: 'expires',
-        type: 'uint256',
-      },
+        type: 'uint256'
+      }
     ],
     name: 'NameRegistered',
-    type: 'event',
+    type: 'event'
   },
   {
     anonymous: false,
@@ -148,17 +148,17 @@ export const BaseRegistrarImplementation = [
         indexed: true,
         internalType: 'uint256',
         name: 'id',
-        type: 'uint256',
+        type: 'uint256'
       },
       {
         indexed: false,
         internalType: 'uint256',
         name: 'expires',
-        type: 'uint256',
-      },
+        type: 'uint256'
+      }
     ],
     name: 'NameRenewed',
-    type: 'event',
+    type: 'event'
   },
   {
     anonymous: false,
@@ -167,17 +167,17 @@ export const BaseRegistrarImplementation = [
         indexed: true,
         internalType: 'address',
         name: 'previousOwner',
-        type: 'address',
+        type: 'address'
       },
       {
         indexed: true,
         internalType: 'address',
         name: 'newOwner',
-        type: 'address',
-      },
+        type: 'address'
+      }
     ],
     name: 'OwnershipTransferred',
-    type: 'event',
+    type: 'event'
   },
   {
     anonymous: false,
@@ -186,23 +186,23 @@ export const BaseRegistrarImplementation = [
         indexed: true,
         internalType: 'address',
         name: 'from',
-        type: 'address',
+        type: 'address'
       },
       {
         indexed: true,
         internalType: 'address',
         name: 'to',
-        type: 'address',
+        type: 'address'
       },
       {
         indexed: true,
         internalType: 'uint256',
         name: 'tokenId',
-        type: 'uint256',
-      },
+        type: 'uint256'
+      }
     ],
     name: 'Transfer',
-    type: 'event',
+    type: 'event'
   },
   {
     inputs: [],
@@ -211,80 +211,80 @@ export const BaseRegistrarImplementation = [
       {
         internalType: 'uint256',
         name: '',
-        type: 'uint256',
-      },
+        type: 'uint256'
+      }
     ],
     stateMutability: 'view',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'address',
         name: 'controller',
-        type: 'address',
-      },
+        type: 'address'
+      }
     ],
     name: 'addController',
     outputs: [],
     stateMutability: 'nonpayable',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'address',
         name: 'to',
-        type: 'address',
+        type: 'address'
       },
       {
         internalType: 'uint256',
         name: 'tokenId',
-        type: 'uint256',
-      },
+        type: 'uint256'
+      }
     ],
     name: 'approve',
     outputs: [],
     stateMutability: 'nonpayable',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'uint256',
         name: 'id',
-        type: 'uint256',
-      },
+        type: 'uint256'
+      }
     ],
     name: 'available',
     outputs: [
       {
         internalType: 'bool',
         name: '',
-        type: 'bool',
-      },
+        type: 'bool'
+      }
     ],
     stateMutability: 'view',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'address',
         name: 'owner',
-        type: 'address',
-      },
+        type: 'address'
+      }
     ],
     name: 'balanceOf',
     outputs: [
       {
         internalType: 'uint256',
         name: '',
-        type: 'uint256',
-      },
+        type: 'uint256'
+      }
     ],
     stateMutability: 'view',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [],
@@ -293,73 +293,73 @@ export const BaseRegistrarImplementation = [
       {
         internalType: 'bytes32',
         name: '',
-        type: 'bytes32',
-      },
+        type: 'bytes32'
+      }
     ],
     stateMutability: 'view',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'address',
         name: '',
-        type: 'address',
-      },
+        type: 'address'
+      }
     ],
     name: 'controllers',
     outputs: [
       {
         internalType: 'bool',
         name: '',
-        type: 'bool',
-      },
+        type: 'bool'
+      }
     ],
     stateMutability: 'view',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'uint256',
         name: 'tokenId',
-        type: 'uint256',
-      },
+        type: 'uint256'
+      }
     ],
     name: 'getApproved',
     outputs: [
       {
         internalType: 'address',
         name: '',
-        type: 'address',
-      },
+        type: 'address'
+      }
     ],
     stateMutability: 'view',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'address',
         name: 'owner',
-        type: 'address',
+        type: 'address'
       },
       {
         internalType: 'address',
         name: 'operator',
-        type: 'address',
-      },
+        type: 'address'
+      }
     ],
     name: 'isApprovedForAll',
     outputs: [
       {
         internalType: 'bool',
         name: '',
-        type: 'bool',
-      },
+        type: 'bool'
+      }
     ],
     stateMutability: 'view',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [],
@@ -368,11 +368,11 @@ export const BaseRegistrarImplementation = [
       {
         internalType: 'contract MNS',
         name: '',
-        type: 'address',
-      },
+        type: 'address'
+      }
     ],
     stateMutability: 'view',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [],
@@ -381,30 +381,30 @@ export const BaseRegistrarImplementation = [
       {
         internalType: 'string',
         name: '',
-        type: 'string',
-      },
+        type: 'string'
+      }
     ],
     stateMutability: 'view',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'uint256',
         name: 'id',
-        type: 'uint256',
-      },
+        type: 'uint256'
+      }
     ],
     name: 'nameExpires',
     outputs: [
       {
         internalType: 'uint256',
         name: '',
-        type: 'uint256',
-      },
+        type: 'uint256'
+      }
     ],
     stateMutability: 'view',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [],
@@ -413,251 +413,251 @@ export const BaseRegistrarImplementation = [
       {
         internalType: 'address',
         name: '',
-        type: 'address',
-      },
+        type: 'address'
+      }
     ],
     stateMutability: 'view',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'uint256',
         name: 'tokenId',
-        type: 'uint256',
-      },
+        type: 'uint256'
+      }
     ],
     name: 'ownerOf',
     outputs: [
       {
         internalType: 'address',
         name: '',
-        type: 'address',
-      },
+        type: 'address'
+      }
     ],
     stateMutability: 'view',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'uint256',
         name: 'id',
-        type: 'uint256',
+        type: 'uint256'
       },
       {
         internalType: 'address',
         name: 'owner',
-        type: 'address',
-      },
+        type: 'address'
+      }
     ],
     name: 'reclaim',
     outputs: [],
     stateMutability: 'nonpayable',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'uint256',
         name: 'id',
-        type: 'uint256',
+        type: 'uint256'
       },
       {
         internalType: 'address',
         name: 'owner',
-        type: 'address',
+        type: 'address'
       },
       {
         internalType: 'uint256',
         name: 'duration',
-        type: 'uint256',
-      },
+        type: 'uint256'
+      }
     ],
     name: 'register',
     outputs: [
       {
         internalType: 'uint256',
         name: '',
-        type: 'uint256',
-      },
+        type: 'uint256'
+      }
     ],
     stateMutability: 'nonpayable',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'uint256',
         name: 'id',
-        type: 'uint256',
+        type: 'uint256'
       },
       {
         internalType: 'address',
         name: 'owner',
-        type: 'address',
+        type: 'address'
       },
       {
         internalType: 'uint256',
         name: 'duration',
-        type: 'uint256',
-      },
+        type: 'uint256'
+      }
     ],
     name: 'registerOnly',
     outputs: [
       {
         internalType: 'uint256',
         name: '',
-        type: 'uint256',
-      },
+        type: 'uint256'
+      }
     ],
     stateMutability: 'nonpayable',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'address',
         name: 'controller',
-        type: 'address',
-      },
+        type: 'address'
+      }
     ],
     name: 'removeController',
     outputs: [],
     stateMutability: 'nonpayable',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'uint256',
         name: 'id',
-        type: 'uint256',
+        type: 'uint256'
       },
       {
         internalType: 'uint256',
         name: 'duration',
-        type: 'uint256',
-      },
+        type: 'uint256'
+      }
     ],
     name: 'renew',
     outputs: [
       {
         internalType: 'uint256',
         name: '',
-        type: 'uint256',
-      },
+        type: 'uint256'
+      }
     ],
     stateMutability: 'nonpayable',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [],
     name: 'renounceOwnership',
     outputs: [],
     stateMutability: 'nonpayable',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'address',
         name: 'from',
-        type: 'address',
+        type: 'address'
       },
       {
         internalType: 'address',
         name: 'to',
-        type: 'address',
+        type: 'address'
       },
       {
         internalType: 'uint256',
         name: 'tokenId',
-        type: 'uint256',
-      },
+        type: 'uint256'
+      }
     ],
     name: 'safeTransferFrom',
     outputs: [],
     stateMutability: 'nonpayable',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'address',
         name: 'from',
-        type: 'address',
+        type: 'address'
       },
       {
         internalType: 'address',
         name: 'to',
-        type: 'address',
+        type: 'address'
       },
       {
         internalType: 'uint256',
         name: 'tokenId',
-        type: 'uint256',
+        type: 'uint256'
       },
       {
         internalType: 'bytes',
         name: '_data',
-        type: 'bytes',
-      },
+        type: 'bytes'
+      }
     ],
     name: 'safeTransferFrom',
     outputs: [],
     stateMutability: 'nonpayable',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'address',
         name: 'operator',
-        type: 'address',
+        type: 'address'
       },
       {
         internalType: 'bool',
         name: 'approved',
-        type: 'bool',
-      },
+        type: 'bool'
+      }
     ],
     name: 'setApprovalForAll',
     outputs: [],
     stateMutability: 'nonpayable',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'address',
         name: 'resolver',
-        type: 'address',
-      },
+        type: 'address'
+      }
     ],
     name: 'setResolver',
     outputs: [],
     stateMutability: 'nonpayable',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'bytes4',
         name: 'interfaceID',
-        type: 'bytes4',
-      },
+        type: 'bytes4'
+      }
     ],
     name: 'supportsInterface',
     outputs: [
       {
         internalType: 'bool',
         name: '',
-        type: 'bool',
-      },
+        type: 'bool'
+      }
     ],
     stateMutability: 'pure',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [],
@@ -666,65 +666,65 @@ export const BaseRegistrarImplementation = [
       {
         internalType: 'string',
         name: '',
-        type: 'string',
-      },
+        type: 'string'
+      }
     ],
     stateMutability: 'view',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'uint256',
         name: 'tokenId',
-        type: 'uint256',
-      },
+        type: 'uint256'
+      }
     ],
     name: 'tokenURI',
     outputs: [
       {
         internalType: 'string',
         name: '',
-        type: 'string',
-      },
+        type: 'string'
+      }
     ],
     stateMutability: 'view',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'address',
         name: 'from',
-        type: 'address',
+        type: 'address'
       },
       {
         internalType: 'address',
         name: 'to',
-        type: 'address',
+        type: 'address'
       },
       {
         internalType: 'uint256',
         name: 'tokenId',
-        type: 'uint256',
-      },
+        type: 'uint256'
+      }
     ],
     name: 'transferFrom',
     outputs: [],
     stateMutability: 'nonpayable',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'address',
         name: 'newOwner',
-        type: 'address',
-      },
+        type: 'address'
+      }
     ],
     name: 'transferOwnership',
     outputs: [],
     stateMutability: 'nonpayable',
-    type: 'function',
-  },
+    type: 'function'
+  }
 ];

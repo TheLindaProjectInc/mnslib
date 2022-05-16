@@ -36,7 +36,7 @@ export default class RPCProvider implements Provider {
         transactionReceipt.length < 1 ||
         (transaction.confirmations < 1 && transaction.confirmations > -1)
       ) {
-        await new Promise(resolve => setTimeout(resolve, 60000));
+        await new Promise((resolve) => setTimeout(resolve, 60000));
         transaction = await this.mrpc.promiseGetTransaction(txid);
         transactionReceipt = await this.mrpc.promiseGetTransactionReceipt(txid);
       }
@@ -122,7 +122,7 @@ export default class RPCProvider implements Provider {
     let result = {
       txid: ethers.constants.HashZero.replace('0x', ''),
       sender: AddressZero,
-      hash160: AddressZero,
+      hash160: AddressZero
     };
     if (!abi) {
       return result;
@@ -147,7 +147,7 @@ export default class RPCProvider implements Provider {
         result = {
           txid: receipts[0].transactionHash,
           sender: await this.mrpc.promiseFromHexAddress(receipts[0].from),
-          hash160: receipts[0].from,
+          hash160: receipts[0].from
         };
       }
     }

@@ -6,36 +6,36 @@ export const MNSMigrations = [
         indexed: true,
         internalType: 'address',
         name: 'previousOwner',
-        type: 'address',
+        type: 'address'
       },
       {
         indexed: true,
         internalType: 'address',
         name: 'newOwner',
-        type: 'address',
-      },
+        type: 'address'
+      }
     ],
     name: 'OwnershipTransferred',
-    type: 'event',
+    type: 'event'
   },
   {
     inputs: [
       {
         internalType: 'uint256',
         name: '',
-        type: 'uint256',
-      },
+        type: 'uint256'
+      }
     ],
     name: 'migrations',
     outputs: [
       {
         internalType: 'bool',
         name: '',
-        type: 'bool',
-      },
+        type: 'bool'
+      }
     ],
     stateMutability: 'view',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [],
@@ -44,43 +44,43 @@ export const MNSMigrations = [
       {
         internalType: 'address',
         name: '',
-        type: 'address',
-      },
+        type: 'address'
+      }
     ],
     stateMutability: 'view',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [],
     name: 'renounceOwnership',
     outputs: [],
     stateMutability: 'nonpayable',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'uint256',
         name: 'completed',
-        type: 'uint256',
-      },
+        type: 'uint256'
+      }
     ],
     name: 'setCompleted',
     outputs: [],
     stateMutability: 'nonpayable',
-    type: 'function',
+    type: 'function'
   },
   {
     inputs: [
       {
         internalType: 'address',
         name: 'newOwner',
-        type: 'address',
-      },
+        type: 'address'
+      }
     ],
     name: 'transferOwnership',
     outputs: [],
     stateMutability: 'nonpayable',
-    type: 'function',
-  },
+    type: 'function'
+  }
 ];

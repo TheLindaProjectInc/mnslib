@@ -10,5 +10,5 @@ export const contracts = {
   MRXRegistrarController: '59d98399b6b812a34d9c64fbe0862edb77e4db5e',
   StaticMetadataService: 'b4d4280c5f8a12e5fd793a9b57bfe0138d74cf17',
   NameWrapper: 'a1c7859c60392f5fbdafe2a6010a51fb61780213',
-  PublicResolver: 'e45f6870ee50d31bfedfddeb88c7c22809e8281d',
+  PublicResolver: 'e45f6870ee50d31bfedfddeb88c7c22809e8281d'
 };
