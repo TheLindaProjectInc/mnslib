@@ -15,5 +15,7 @@ export default interface TransactionReceipt {
   utxoRoot: string;
   createdContracts: any[];
   destructedContracts: any[];
-  log: any[];
+  log?: any[];
+  logs?: any[];
+  confirmations?: number
 }

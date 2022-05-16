@@ -21,7 +21,7 @@ export default class RPCProvider implements Provider {
     this.sender = sender;
   }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private async getTxReceipts(tx: any, abi: any[], contract?: string) {
+  async getTxReceipts(tx: any, abi: any[], contract?: string) {
     if (!abi) {
       return [];
     }
@@ -49,7 +49,7 @@ export default class RPCProvider implements Provider {
 
       const eventMap = new Map();
       for (const receipt of transactionReceipt) {
-        for (const log of receipt.log) {
+        for (const log of receipt.log ? receipt.log : []) {
           console.log(`log: ${JSON.stringify(log)}`);
 
           if (log.address === contract) {
