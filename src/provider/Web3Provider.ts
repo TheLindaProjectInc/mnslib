@@ -40,7 +40,7 @@ export default class Web3Provider implements Provider {
     return receipt;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line
   async getTxReceipts(tx: any, abi: any[], contract?: string) {
     if (!abi) {
       return [];

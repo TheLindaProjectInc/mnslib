@@ -10,7 +10,7 @@ export default class APIProvider implements Provider {
     this.network = network;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line
   async getTxReceipts(tx: any, abi: any[], contract?: string) {
     return [];
   }

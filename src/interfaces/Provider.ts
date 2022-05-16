@@ -5,8 +5,8 @@ export default interface Provider {
   network: 'MainNet' | 'TestNet';
 
   getTxReceipts(
-    tx: any,
-    abi: any[],
+    tx: any, // eslint-disable-line @typescript-eslint/no-explicit-any
+    abi: any[], // eslint-disable-line @typescript-eslint/no-explicit-any
     contract?: string
   ): Promise<TransactionReceipt[]>;
 
