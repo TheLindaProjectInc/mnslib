@@ -9,6 +9,11 @@ export default class APIProvider implements Provider {
   constructor(network: 'MainNet' | 'TestNet') {
     this.network = network;
   }
+
+  // eslint-disable-next-line
+  async getTxReceipts(tx: any, abi: any[], contract?: string) {
+    return [];
+  }
   async callContract(
     contract: string,
     method: string,

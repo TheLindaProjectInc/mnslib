@@ -1,7 +1,14 @@
 import { Result } from 'ethers/lib/utils';
+import TransactionReceipt from '../lib/interface/TransactionReceipt';
 
 export default interface Provider {
   network: 'MainNet' | 'TestNet';
+
+  getTxReceipts(
+    tx: any, // eslint-disable-line @typescript-eslint/no-explicit-any
+    abi: any[], // eslint-disable-line @typescript-eslint/no-explicit-any
+    contract?: string
+  ): Promise<TransactionReceipt[]>;
 
   callContract(
     contract: string,
