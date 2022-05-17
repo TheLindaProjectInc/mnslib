@@ -42,9 +42,6 @@ export default class Web3Provider implements Provider {
 
   // eslint-disable-next-line
   async getTxReceipts(tx: any, abi: any[], contract?: string) {
-    if (!abi) {
-      return [];
-    }
     const receipts: TransactionReceipt[] = [];
     try {
       const { txid, sender, hash160 } = tx; // eslint-disable-line @typescript-eslint/no-unused-vars
@@ -111,7 +108,7 @@ export default class Web3Provider implements Provider {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result = (window as any).metrimask.rpcProvider.rawCall(
         'callcontract',
-        [contract, encoded.replace('0x', '')]
+        [contract.toLowerCase().replace('0x', ''), encoded.replace('0x', '')]
       );
       const response = (await result).executionResult.output;
       const decoded: ethers.utils.Result = iface.decodeFunctionResult(
@@ -150,7 +147,13 @@ export default class Web3Provider implements Provider {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result = await (window as any).metrimask.rpcProvider.rawCall(
         'sendtocontract',
-        [contract, encoded.replace('0x', ''), value, gasLimit, gasPrice]
+        [
+          contract.toLowerCase().replace('0x', ''),
+          encoded.replace('0x', ''),
+          value,
+          gasLimit,
+          gasPrice
+        ]
       );
       return result.txid
         ? result.txid
