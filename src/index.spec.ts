@@ -9,7 +9,8 @@ describe('mnslib tests', () => {
 
   const mns = new MNS(network, provider, getMNSAddress(network));
 
-  const name: Name = mns.name('first.mrx');
+  const first = 'first.mrx';
+  const name: Name = mns.name(first);
 
   it('should return expected TestNet MRX address', async () => {
     const address = await name.getAddress('MRX');
@@ -28,13 +29,13 @@ describe('mnslib tests', () => {
     const addrName = await mns.getName(
       '0xC87bB8Ab63De99A58a5339217C4A1C92f0FBFEFe'
     );
-    equal(addrName, 'Test non-owner');
+    equal(addrName, first);
   });
 
   it('should return expected TestNet name given hex address', async () => {
     const addrName = await mns.getName(
       'c87bb8ab63de99a58a5339217c4a1c92f0fbfefe'
     );
-    equal(addrName, 'Test non-owner');
+    equal(addrName, first);
   });
 });
