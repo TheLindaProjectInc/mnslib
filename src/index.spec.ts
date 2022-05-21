@@ -1,6 +1,7 @@
-import MNS, { APIProvider, getMNSAddress } from './';
-import Name from './mns/Name';
 import { equal } from 'assert';
+import { MNS, Name } from './mns';
+import { APIProvider } from './provider';
+import { getMNSAddress } from './utils/ContractUtils';
 
 describe('mnslib tests', () => {
   const network = 'TestNet';
