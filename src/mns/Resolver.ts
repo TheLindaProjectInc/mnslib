@@ -1,5 +1,5 @@
 import { namehash } from 'ethers/lib/utils';
-import Provider from '../interfaces/Provider';
+import Provider from '../provider/Provider';
 import MetrixContract from '../mrx/MetrixContract';
 import Name from './Name';
 

@@ -1,36 +1,30 @@
-import MNS from './mns/MNS';
 import {
   getMNSAddress,
   getMNSContract,
   getResolverContract,
   getReverseRegistrarContract
 } from './utils/ContractUtils';
-import APIProvider from './provider/APIProvider';
-import RPCProvider from './provider/RPCProvider';
-import Web3Provider from './provider/Web3Provider';
-import { CONTRACTS } from './constants';
+
 import { namehash } from 'ethers/lib/utils';
 import { ethers } from 'ethers';
-import Name from './mns/Name';
-import Resolver from './mns/Resolver';
-
-export default MNS;
+import Deployment from './interfaces/Deployment';
 
 const labelhash = (label: string) => {
   return ethers.utils.keccak256(ethers.utils.toUtf8Bytes(label));
 };
 
+export * from './mns';
+export * from './mrx';
+export * from './types';
+export * from './constants';
+export * from './provider';
+
 export {
-  Name,
-  Resolver,
+  Deployment,
   namehash,
   labelhash,
   getMNSAddress,
   getMNSContract,
   getResolverContract,
-  getReverseRegistrarContract,
-  APIProvider,
-  RPCProvider,
-  Web3Provider,
-  CONTRACTS
+  getReverseRegistrarContract
 };

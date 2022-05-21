@@ -1,12 +1,13 @@
 import { ethers } from 'ethers';
 import { Result } from 'ethers/lib/utils';
-import Provider from '../interfaces/Provider';
-import TransactionReceipt from '../lib/interface/TransactionReceipt';
+import Provider from './Provider';
+import { TransactionReceipt } from '../mrx';
+import { NetworkType } from '../types/NetworkType';
 
 export default class Web3Provider implements Provider {
-  network: 'MainNet' | 'TestNet';
+  network: NetworkType;
 
-  constructor(network: 'MainNet' | 'TestNet') {
+  constructor(network: NetworkType) {
     this.network = network;
   }
 

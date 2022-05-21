@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import Provider from '../interfaces/Provider';
+import Provider from '../provider/Provider';
 import {
   getAddrWithResolver,
   getContentWithResolver,
@@ -31,7 +31,13 @@ export default class Name {
     this.hash = hash;
     this.resolver = resolver;
   }
-  async getOwner() {
+
+  /**
+   * Get the owning address of the Name
+   *
+   * @returns {Promise<string>} the address of the name
+   */
+  async getOwner(): Promise<string> {
     const response = await this.mns.call('owner(bytes32)', [this.hash]);
     return response ? response.toString() : ethers.constants.AddressZero;
   }
