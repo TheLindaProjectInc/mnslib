@@ -1,7 +1,7 @@
 import { ethers } from 'ethers';
 import { namehash } from 'ethers/lib/utils';
 import { CONTRACTS } from '../constants';
-import Provider from '../interfaces/Provider';
+import Provider from '../provider/Provider';
 import MetrixContract from '../mrx/MetrixContract';
 import Name from './Name';
 import Resolver from './Resolver';

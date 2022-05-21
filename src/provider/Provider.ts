@@ -1,8 +1,9 @@
 import { Result } from 'ethers/lib/utils';
-import TransactionReceipt from '../lib/interface/TransactionReceipt';
+import { TransactionReceipt } from '../mrx';
+import { NetworkType } from '../types/NetworkType';
 
 export default interface Provider {
-  network: 'MainNet' | 'TestNet';
+  network: NetworkType;
 
   getTxReceipts(
     tx: any, // eslint-disable-line @typescript-eslint/no-explicit-any

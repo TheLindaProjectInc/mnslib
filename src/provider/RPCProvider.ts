@@ -1,21 +1,18 @@
 import { ethers, utils } from 'ethers';
 import { Result } from 'ethers/lib/utils';
-import Provider from '../interfaces/Provider';
-import ContractResponse from '../lib/interface/ContractResponse';
-import TransactionReceipt from '../lib/interface/TransactionReceipt';
+import Provider from './Provider';
+import ContractResponse from '../mrx/ContractResponse';
+import { TransactionReceipt } from '../mrx';
 import { MetrixRPCNode } from '../lib/MetrixRPC/MetrixRPC';
+import { NetworkType } from '../types/NetworkType';
 
 const AddressZero = ethers.constants.AddressZero.replace('0x', '');
 
 export default class RPCProvider implements Provider {
-  network: 'MainNet' | 'TestNet';
+  network: NetworkType;
   mrpc: MetrixRPCNode;
   sender: string | undefined;
-  constructor(
-    network: 'MainNet' | 'TestNet',
-    mrpc: MetrixRPCNode,
-    sender?: string
-  ) {
+  constructor(network: NetworkType, mrpc: MetrixRPCNode, sender?: string) {
     this.network = network;
     this.mrpc = mrpc;
     this.sender = sender;

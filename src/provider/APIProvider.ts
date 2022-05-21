@@ -1,12 +1,13 @@
 import { ethers } from 'ethers';
 import fetch from 'node-fetch';
 import { Result } from 'ethers/lib/utils';
-import Provider from '../interfaces/Provider';
+import Provider from './Provider';
+import { NetworkType } from '../types/NetworkType';
 
 export default class APIProvider implements Provider {
-  network: 'MainNet' | 'TestNet';
+  network: NetworkType;
 
-  constructor(network: 'MainNet' | 'TestNet') {
+  constructor(network: NetworkType) {
     this.network = network;
   }
 
