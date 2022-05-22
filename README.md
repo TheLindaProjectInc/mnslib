@@ -4,6 +4,8 @@
 
 mnslib is an update/port of [**ensjs**](https://github.com/ensdomains/ensjs) made to work for the Metrix Name Service and MetrixCoin blockchain.
 
+### [**Documentation**](https://thelindaprojectinc.github.io/mnslib/modules.html)
+
 ### Installation
 
 ```
