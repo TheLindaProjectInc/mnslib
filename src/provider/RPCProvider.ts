@@ -12,7 +12,7 @@ export default class RPCProvider implements Provider {
   network: NetworkType;
   mrpc: MetrixRPCNode;
   sender: string | undefined;
-  constructor(network: NetworkType, mrpc: MetrixRPCNode, sender?: string) {
+  constructor(network: NetworkType, mrpc: MetrixRPCNode, sender: string) {
     this.network = network;
     this.mrpc = mrpc;
     this.sender = sender;
@@ -87,7 +87,7 @@ export default class RPCProvider implements Provider {
     abi: any[] // eslint-disable-line @typescript-eslint/no-explicit-any
   ): Promise<Result | undefined> {
     let result: utils.Result | undefined = undefined;
-    if (!abi) {
+    if (!abi || !this.sender) {
       return result;
     }
     const iface = new utils.Interface(abi);
@@ -95,7 +95,7 @@ export default class RPCProvider implements Provider {
     const response: ContractResponse = (await this.mrpc.promiseCallContract(
       contract,
       encoded,
-      process.env.DEPLOYMENT_ACCT as string
+      this.sender
     )) as ContractResponse;
     if (response) {
       const output = response.executionResult.output;

@@ -61,7 +61,12 @@ export default class MNS {
     }
 
     try {
-      const Resolver = getResolverContract(resolverAddr, this.provider);
+      const Resolver = getResolverContract(
+        resolverAddr.startsWith('0x')
+          ? resolverAddr.slice(2).toLowerCase()
+          : resolverAddr.toLowerCase(),
+        this.provider
+      );
       const name = await Resolver.call('name(bytes32)', [reverseNamehash]);
       return name ? name.toString() : undefined;
     } catch (e) {

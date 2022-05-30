@@ -41,7 +41,10 @@ const getAddrWithResolver = async (
 ) => {
   const nh = namehash(name);
   try {
-    const Resolver = getResolverContract(resolverAddr, provider);
+    const Resolver = getResolverContract(
+      resolverAddr.replace('0x', ''),
+      provider
+    );
     const format = formatsByName[key];
     if (!format) {
       return ethers.constants.AddressZero;
