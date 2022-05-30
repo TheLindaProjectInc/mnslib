@@ -1,6 +1,6 @@
 {
     "name": "@metrixnames/mnslib",
-    "version": "1.0.25",
+    "version": "1.0.26",
     "description": "Library for interacting with the Metrix Name Service",
     "repository": "TheLindaProjectInc/mnslib",
     "source": "src/index.ts",
