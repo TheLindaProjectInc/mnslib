@@ -17,5 +17,5 @@ export default interface TransactionReceipt {
   destructedContracts: any[];
   log?: any[];
   logs?: any[];
-  confirmations?: number
+  confirmations?: number;
 }
