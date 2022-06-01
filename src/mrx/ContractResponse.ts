@@ -16,8 +16,8 @@ export default interface ContractResponse {
     utxoRoot?: string;
     gasUsed: number;
     bloom: string;
-    createdContracts?: any[];
-    destructedContracts?: any[];
+    createdContracts?: any[]; // eslint-disable-line @typescript-eslint/no-explicit-any
+    destructedContracts?: any[]; // eslint-disable-line @typescript-eslint/no-explicit-any
     log: [];
   };
 }

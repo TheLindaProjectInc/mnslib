@@ -13,9 +13,9 @@ export default interface TransactionReceipt {
   exceptedMessage: string;
   stateRoot: string;
   utxoRoot: string;
-  createdContracts: any[];
-  destructedContracts: any[];
-  log?: any[];
-  logs?: any[];
+  createdContracts: any[]; // eslint-disable-line @typescript-eslint/no-explicit-any
+  destructedContracts: any[]; // eslint-disable-line @typescript-eslint/no-explicit-any
+  log?: any[]; // eslint-disable-line @typescript-eslint/no-explicit-any
+  logs?: any[]; // eslint-disable-line @typescript-eslint/no-explicit-any
   confirmations?: number;
 }
