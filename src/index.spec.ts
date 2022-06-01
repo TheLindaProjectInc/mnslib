@@ -17,6 +17,11 @@ describe('mnslib tests', () => {
     equal(address, 'maTQfd4w7mqCzGL32RgBFMYY9ehCmjLEGf');
   }).timeout(5000);
 
+  it('should return expected TestNet address', async () => {
+    const address = await name.getAddress();
+    equal(address, '0xC87bB8Ab63De99A58a5339217C4A1C92f0FBFEFe');
+  }).timeout(5000);
+
   it('should return expected TestNet owner', async () => {
     const owner = await name.getOwner();
     equal(
