@@ -47,8 +47,6 @@ export default class RPCProvider implements Provider {
       const eventMap = new Map();
       for (const receipt of transactionReceipt) {
         for (const log of receipt.log ? receipt.log : []) {
-          console.log(`log: ${JSON.stringify(log)}`);
-
           if (log.address === contract) {
             const topics = log.topics.map((topic: string) => {
               return `0x${topic}`;
@@ -65,11 +63,6 @@ export default class RPCProvider implements Provider {
           }
         }
         receipts.push(receipt);
-      }
-      for (const key of eventMap.keys()) {
-        for (const event of eventMap.get(key) ? eventMap.get(key) : []) {
-          console.log(JSON.stringify(event, null, 2));
-        }
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
