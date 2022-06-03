@@ -18,7 +18,7 @@ export default class DefaultReverseResolver
   }
 
   async setName(node: string, name: string): Promise<TransactionReceipt[]> {
-    const tx = await this.send('setName(bytes32,address)', [node, name]);
+    const tx = await this.send('setName(bytes32,string)', [node, name]);
     return await this.provider.getTxReceipts(tx, this.abi, this.address);
   }
 
