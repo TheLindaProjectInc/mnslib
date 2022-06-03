@@ -78,20 +78,22 @@ export default class PublicResolver
     ]);
     return await this.provider.getTxReceipts(tx, this.abi, this.address);
   }
+
   async addr(node: string): Promise<string> {
     const result = await this.call('addr(bytes32)', [node]);
     if (result) {
-      result.toString();
+      return result.toString();
     }
     return ethers.constants.AddressZero.replace('0x', '');
   }
+
   async addrByType(node: string, coinType: bigint): Promise<string> {
-    const result = await this.call('addr(bytes32)', [
+    const result = await this.call('addr(bytes32,uint256)', [
       node,
       `0x${coinType.toString(16)}`
     ]);
     if (result) {
-      result.toString();
+      return result.toString();
     }
     return ethers.constants.AddressZero.replace('0x', '');
   }
