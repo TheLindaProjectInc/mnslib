@@ -44,7 +44,15 @@ export default class Name {
 
   async setOwner(address: string) {
     if (!address) throw new Error('No newOwner address provided!');
-    return this.mns.send('setOwner(bytes32, address)', [this.hash, address]);
+    const tx = await this.mns.send('setOwner(bytes32, address)', [
+      this.hash,
+      address
+    ]);
+    return await this.provider.getTxReceipts(
+      tx,
+      this.mns.abi,
+      this.mns.address
+    );
   }
 
   async getResolver() {
@@ -57,7 +65,15 @@ export default class Name {
 
   async setResolver(address: string) {
     if (!address) throw new Error('No resolver address provided!');
-    return this.mns.send('setResolver(bytes32, address)', [this.hash, address]);
+    const tx = await this.mns.send('setResolver(bytes32, address)', [
+      this.hash,
+      address
+    ]);
+    return await this.provider.getTxReceipts(
+      tx,
+      this.mns.abi,
+      this.mns.address
+    );
   }
 
   async getTTL() {
@@ -136,11 +152,15 @@ export default class Name {
 
   async setSubnodeOwner(label: string, newOwner: string) {
     const lh = labelhash(label);
-    return this.mns.send('setSubnodeOwner(bytes32, bytes32, address)', [
-      this.hash,
-      lh,
-      newOwner
-    ]);
+    const tx = await this.mns.send(
+      'setSubnodeOwner(bytes32, bytes32, address)',
+      [this.hash, lh, newOwner]
+    );
+    return await this.provider.getTxReceipts(
+      tx,
+      this.mns.abi,
+      this.mns.address
+    );
   }
 
   async setSubnodeRecord(
@@ -150,9 +170,14 @@ export default class Name {
     ttl = 0
   ) {
     const lh = labelhash(label);
-    return this.mns.send(
+    const tx = await this.mns.send(
       'setSubnodeRecord(bytes32, bytes32, address, address, uint64)',
       [this.hash, lh, newOwner, resolver, `0x${BigInt(ttl).toString(16)}`]
+    );
+    return await this.provider.getTxReceipts(
+      tx,
+      this.mns.abi,
+      this.mns.address
     );
   }
 
