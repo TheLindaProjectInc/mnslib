@@ -81,6 +81,11 @@ export default class MNS {
       reverseRegistrarAddr,
       this.provider
     );
-    return reverseRegistrar.send('setName(string)', [name]);
+    const tx = await reverseRegistrar.send('setName(string)', [name]);
+    return await this.provider.getTxReceipts(
+      tx,
+      reverseRegistrar.abi,
+      reverseRegistrar.address
+    );
   }
 }
