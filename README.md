@@ -1,4 +1,4 @@
-[![GitHub license](https://img.shields.io/github/license/TheLindaProjectInc/mnslib)](https://github.com/TheLindaProjectInc/mnslib/blob/main/LICENSE.md) [![npm version](https://badge.fury.io/js/@metrixnames%2Fmnslib.svg)](https://badge.fury.io/js/@metrixnames%2Fmnslib) ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/TheLindaProjectInc/mnslib/main) [![Node.js CI](https://github.com/TheLindaProjectInc/mnslib/actions/workflows/node.js.yml/badge.svg)](https://github.com/TheLindaProjectInc/mnslib/actions/workflows/node.js.yml)
+[![GitHub license](https://img.shields.io/github/license/TheLindaProjectInc/mnslib)](https://github.com/TheLindaProjectInc/mnslib/blob/main/LICENSE.md) [![npm version](https://badge.fury.io/js/@metrixnames%2Fmnslib.svg)](https://badge.fury.io/js/@metrixnames%2Fmnslib) ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/TheLindaProjectInc/mnslib/develop) [![Node.js CI](https://github.com/TheLindaProjectInc/mnslib/actions/workflows/node.js.yml/badge.svg)](https://github.com/TheLindaProjectInc/mnslib/actions/workflows/node.js.yml)
 
 # mnslib
 

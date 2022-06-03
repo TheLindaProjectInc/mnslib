@@ -57,9 +57,14 @@ const getAddrWithResolver = async (
       nh,
       `${coinType}`
     ]);
-    if (!addr || addr.toString() === '0x') return ethers.constants.AddressZero;
+    if (addr === undefined) return ethers.constants.AddressZero;
+    if (addr.toString() === '0x') return ethers.constants.AddressZero;
     if (coinType === 326) {
-      return fromHexAddress(provider.network, addr.toString().slice(2));
+      const hexAddress = fromHexAddress(
+        provider.network,
+        addr.toString().slice(2)
+      );
+      return hexAddress ? hexAddress : ethers.constants.AddressZero;
     }
     return encoder(Buffer.from(addr.toString().slice(2), 'hex'));
   } catch (e) {
@@ -208,7 +213,4 @@ export {
   setContenthashWithResolver,
   getTextWithResolver,
   setTextWithResolver
-  //callContractWeb3,
-  //callContractAPI,
-  //sendToContractWeb3,
 };
