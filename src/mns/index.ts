@@ -10,8 +10,8 @@ export {
   MNS,
   Name,
   Resolver,
+  BaseResolver,
   PublicResolver,
   DefaultReverseResolver,
-  BaseResolver,
   profiles
 };
