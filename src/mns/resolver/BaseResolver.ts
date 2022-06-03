@@ -1,5 +1,4 @@
-import { CONTRACTS, MetrixContract, Provider } from '../..';
-import ABI from '../../abi';
+import { MetrixContract } from '../..';
 import ResolverBase from './profiles/ResolverBase';
 
 export default abstract class BaseResolver

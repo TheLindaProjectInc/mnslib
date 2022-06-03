@@ -1,5 +1,4 @@
 import { ethers } from 'ethers';
-import { Result } from 'ethers/lib/utils';
 import ABI from '../../abi';
 import { CONTRACTS } from '../../constants';
 import { TransactionReceipt } from '../../mrx';
