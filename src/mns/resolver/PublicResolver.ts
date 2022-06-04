@@ -46,13 +46,16 @@ export default class PublicResolver
     return await this.provider.getTxReceipts(tx, this.abi, this.address);
   }
 
-  async ABI(node: string, contentType: bigint): Promise<[bigint, string]> {
+  async ABI(
+    node: string,
+    contentType: bigint
+  ): Promise<[contentType: bigint, data: string]> {
     const result = await this.call('ABI(bytes32,uint256)', [
       node,
       `0x${contentType.toString(16)}`
     ]);
     if (result && result.length >= 2) {
-      const tup: [bigint, string] = [
+      const tup: [contentType: bigint, data: string] = [
         BigInt(result[0].toString()),
         result[1].toString()
       ];
