@@ -21,12 +21,4 @@ export default abstract class BaseResolver
     }
     return false;
   }
-
-  async isAuthorized(node: string): Promise<boolean> {
-    const result = await this.call('isAuthorzied(bytes32)', [node]);
-    if (result) {
-      return result.toString() === 'true';
-    }
-    return false;
-  }
 }
