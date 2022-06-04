@@ -1,6 +1,11 @@
 import { TransactionReceipt } from '../../../mrx';
 import ResolverBase from './ResolverBase';
 
+/**
+ * Interface that represents an Interface Resolver
+ *
+ * @interface
+ */
 export default interface InterfaceResolver extends ResolverBase {
   /**
    * Sets an interface associated with a name.
@@ -8,7 +13,7 @@ export default interface InterfaceResolver extends ResolverBase {
    * @param node The node to update.
    * @param interfaceId The EIP 165 interface ID.
    * @param implementer The address of a contract that implements this interface for this node.
-   * @returns {Promise<TransactionReceipt[]} an array of TransactionReceipt objects
+   * @returns {Promise<TransactionReceipt[]>} an array of TransactionReceipt objects
    */
   setInterface(
     node: string,

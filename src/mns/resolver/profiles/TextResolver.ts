@@ -1,6 +1,11 @@
 import { TransactionReceipt } from '../../../mrx';
 import ResolverBase from './ResolverBase';
 
+/**
+ * Interface that represents an Text Resolver
+ *
+ * @interface
+ */
 export default interface TextResolver extends ResolverBase {
   /**
    * Sets the text data associated with an MNS node and key.
@@ -8,7 +13,7 @@ export default interface TextResolver extends ResolverBase {
    * @param node The node to update.
    * @param key The key to set.
    * @param value The text data value to set.
-   * @returns {Promise<TransactionReceipt[]} an array of TransactionReceipt objects
+   * @returns {Promise<TransactionReceipt[]>} an array of TransactionReceipt objects
    */
   setText(
     node: string,

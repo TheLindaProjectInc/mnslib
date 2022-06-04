@@ -1,6 +1,11 @@
 import { TransactionReceipt } from '../../../mrx';
 import ResolverBase from './ResolverBase';
 
+/**
+ * Interface that represent an ABI Resolver
+ *
+ * @interface
+ */
 export default interface ABIResolver extends ResolverBase {
   /**
    * Sets the ABI associated with an MNS node.
@@ -9,7 +14,7 @@ export default interface ABIResolver extends ResolverBase {
    * @param node The node to update.
    * @param contentType The content type of the ABI
    * @param data The ABI data.
-   * @returns {Promise<TransactionReceipt[]} an array of TransactionReceipt objects
+   * @returns {Promise<TransactionReceipt[]>} an array of TransactionReceipt objects
    */
   setABI(
     node: string,

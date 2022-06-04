@@ -11,7 +11,9 @@ import {
   getResolverContract,
   getReverseRegistrarContract
 } from '../utils/ContractUtils';
+import { TransactionReceipt } from '../mrx';
 
+/** Class which can be used to make registry record queries. */
 export default class MNS {
   network: NetworkType;
   provider: Provider;
@@ -26,15 +28,31 @@ export default class MNS {
     );
   }
 
+  /**
+   * Returns a Name object which can be used to make record queries
+   * @param name The name for example 'first.mrx'
+   * @param resolver The resolver address
+   * @returns {Name} a Name object
+   */
   name(name: string, resolver?: string): Name {
     return new Name(name, this.mns, this.provider, namehash(name), resolver);
   }
 
-  resolver(address: string) {
+  /**
+   * Returns a Resolver object which can be used to make record queries
+   * @param address an EVM compatible address
+   * @returns {Resolver} a Resolver object
+   */
+  resolver(address: string): Resolver {
     return new Resolver(this.mns, this.provider, address);
   }
 
-  async getName(address: string) {
+  /**
+   * Returns the name for an address from the default reverse resolver
+   * @param address an EVM compatible address
+   * @returns {Promise<string | undefined>} a name or undefined if one is not found
+   */
+  async getName(address: string): Promise<string | undefined> {
     const reverseNode = `${
       address.startsWith('0x')
         ? address.slice(2).toLowerCase()
@@ -49,7 +67,16 @@ export default class MNS {
     );
   }
 
-  async getNameWithResolver(address: string, resolverAddr: string) {
+  /**
+   * Returns the name for an address from the resolver
+   * @param address an EVM compatible address
+   * @param resolverAddr a specific resolver address to use
+   * @returns {Promise<string | undefined>} a name or undefined if one is not found
+   */
+  async getNameWithResolver(
+    address: string,
+    resolverAddr: string
+  ): Promise<string | undefined> {
     const reverseNode = `${
       address.startsWith('0x')
         ? address.slice(2).toLowerCase()
@@ -75,7 +102,12 @@ export default class MNS {
     }
   }
 
-  async setReverseRecord(name: string) {
+  /**
+   * Set a reverse record for an address
+   * @param name The name for example 'first.mrx'
+   * @returns {Promise<TransactionReceipt[]>} an array of TransactionReceipt objects
+   */
+  async setReverseRecord(name: string): Promise<TransactionReceipt[]> {
     const reverseRegistrarAddr = await this.name('addr.reverse').getOwner();
     const reverseRegistrar = getReverseRegistrarContract(
       reverseRegistrarAddr,

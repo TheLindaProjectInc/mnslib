@@ -13,6 +13,11 @@ import NameResolver from './profiles/NameResolver';
 import PubkeyResolver from './profiles/PubkeyResolver';
 import TextResolver from './profiles/TextResolver';
 
+/**
+ * Class which can be used to interact with the PublicResolver
+ *
+ * @class
+ */
 export default class PublicResolver
   extends BaseResolver
   implements
@@ -105,7 +110,7 @@ export default class PublicResolver
     node: string,
     hash: string
   ): Promise<TransactionReceipt[]> {
-    const tx = await this.send('setContenhash(bytes32,bytes)', [node, hash]);
+    const tx = await this.send('setContenthash(bytes32,bytes)', [node, hash]);
     return await this.provider.getTxReceipts(tx, this.abi, this.address);
   }
 

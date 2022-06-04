@@ -1,3 +1,8 @@
+/**
+ * Interface that represents a Resolver, which implements EIP165
+ *
+ * @interface
+ */
 export default interface ResolverBase {
   /**
    * Returns true if this contract implements the interface defined by
