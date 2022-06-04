@@ -1,7 +1,8 @@
 import { equal } from 'assert';
+import { CONTRACTS } from './constants';
 import { MNS, Name } from './mns';
 import { APIProvider } from './provider';
-import { getMNSAddress } from './utils/ContractUtils';
+import { getMNSAddress, getMNSContract } from './utils/ContractUtils';
 
 describe('mnslib tests', () => {
   const network = 'TestNet';
@@ -11,6 +12,18 @@ describe('mnslib tests', () => {
 
   const first = 'first.mrx';
   const name: Name = mns.name(first);
+
+  it('should have a record', async () => {
+    const mnsContract = getMNSContract(
+      CONTRACTS[network].MNSRegistryWithFallback,
+      provider
+    );
+    const recordExists = await mnsContract.call('recordExists(bytes32)', [
+      name.hash
+    ]);
+    const exists = recordExists ? recordExists.toString() === 'true' : false;
+    equal(exists, true);
+  }).timeout(5000);
 
   it('should return expected TestNet MRX address', async () => {
     const address = await name.getAddress('MRX');

@@ -98,16 +98,16 @@ export default class PublicResolver
     return ethers.constants.AddressZero.replace('0x', '');
   }
 
-  async setContentHash(
+  async setContenthash(
     node: string,
     hash: string
   ): Promise<TransactionReceipt[]> {
-    const tx = await this.send('setContentHash(bytes32,bytes)', [node, hash]);
+    const tx = await this.send('setContenhash(bytes32,bytes)', [node, hash]);
     return await this.provider.getTxReceipts(tx, this.abi, this.address);
   }
 
-  async contentHash(node: string): Promise<string> {
-    const result = await this.call('contentHash(bytes32)', [node]);
+  async contenthash(node: string): Promise<string> {
+    const result = await this.call('contenthash(bytes32)', [node]);
     if (result) {
       return result.toString();
     }
