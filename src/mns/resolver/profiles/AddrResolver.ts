@@ -1,13 +1,18 @@
 import { TransactionReceipt } from '../../../mrx';
 import ResolverBase from './ResolverBase';
 
+/**
+ * Interface that represent an Address Resolver
+ *
+ * @interface
+ */
 export default interface AddrResolver extends ResolverBase {
   /**
    * Sets the address associated with an MNS node.
    * May only be called by the owner of that node in the MNS registry.
    * @param node The node to update.
    * @param a The address to set.
-   * @returns {Promise<TransactionReceipt[]} an array of TransactionReceipt objects
+   * @returns {Promise<TransactionReceipt[]>} an array of TransactionReceipt objects
    */
   setAddr(node: string, a: string): Promise<TransactionReceipt[]>;
 
@@ -17,7 +22,7 @@ export default interface AddrResolver extends ResolverBase {
    * @param node The node to update.
    * @param coinType the slip44 id of the coin
    * @param a The address to set.
-   * @returns {{{Promise<TransactionReceipt[]}}} an array of TransactionReceipt objects
+   * @returns {{{Promise<TransactionReceipt[]>}}} an array of TransactionReceipt objects
    */
   setAddrByType(
     node: string,

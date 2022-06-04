@@ -8,6 +8,13 @@ import MetrixContract from '../mrx/MetrixContract';
 import { NetworkType } from '../types/NetworkType';
 import { fromHexAddress } from './AddressUtils';
 import { decodeContenthash, encodeContenthash } from './Content';
+import { BaseResolver } from '../mns';
+import {
+  AddrResolver,
+  ContentHashResolver,
+  TextResolver
+} from '../mns/resolver/profiles';
+import { TransactionReceipt } from '../mrx';
 
 const getMNSAddress = (network: NetworkType) => {
   return CONTRACTS[network].MNSRegistryWithFallback;
@@ -41,10 +48,50 @@ const getAddrWithResolver = async (
 ) => {
   const nh = namehash(name);
   try {
-    const Resolver = getResolverContract(
-      resolverAddr.replace('0x', ''),
-      provider
-    );
+    const resolver: AddrResolver = new (class
+      extends BaseResolver
+      implements AddrResolver
+    {
+      constructor(provider: Provider) {
+        super(resolverAddr.replace('0x', ''), provider, ABI.PublicResolver);
+      }
+      async setAddr(node: string, a: string): Promise<TransactionReceipt[]> {
+        const tx = await this.send('setAddr(bytes32,address)', [node, a]);
+        return await this.provider.getTxReceipts(tx, this.abi, this.address);
+      }
+
+      async setAddrByType(
+        node: string,
+        coinType: bigint,
+        a: string
+      ): Promise<TransactionReceipt[]> {
+        const tx = await this.send('setAddr(bytes32,uint256,address)', [
+          node,
+          `0x${coinType.toString(16)}`,
+          a
+        ]);
+        return await this.provider.getTxReceipts(tx, this.abi, this.address);
+      }
+
+      async addr(node: string): Promise<string> {
+        const result = await this.call('addr(bytes32)', [node]);
+        if (result) {
+          return result.toString();
+        }
+        return ethers.constants.AddressZero.replace('0x', '');
+      }
+
+      async addrByType(node: string, coinType: bigint): Promise<string> {
+        const result = await this.call('addr(bytes32,uint256)', [
+          node,
+          `0x${coinType.toString(16)}`
+        ]);
+        if (result) {
+          return result.toString();
+        }
+        return ethers.constants.AddressZero.replace('0x', '');
+      }
+    })(provider);
     const format = formatsByName[key];
     if (!format) {
       return ethers.constants.AddressZero;
@@ -53,10 +100,7 @@ const getAddrWithResolver = async (
     if (!coinType || !encoder) {
       return ethers.constants.AddressZero;
     }
-    const addr = await Resolver.call('addr(bytes32,uint256)', [
-      nh,
-      `${coinType}`
-    ]);
+    const addr = await resolver.addrByType(nh, BigInt(coinType));
     if (addr === undefined) return ethers.constants.AddressZero;
     if (addr.toString() === '0x') return ethers.constants.AddressZero;
     if (coinType === 326) {
@@ -84,7 +128,50 @@ const setAddrWithResolver = async (
   provider: Provider
 ) => {
   const nh = namehash(name);
-  const Resolver = getResolverContract(resolverAddr, provider);
+  const resolver: AddrResolver = new (class
+    extends BaseResolver
+    implements AddrResolver
+  {
+    constructor(provider: Provider) {
+      super(resolverAddr, provider, ABI.PublicResolver);
+    }
+    async setAddr(node: string, a: string): Promise<TransactionReceipt[]> {
+      const tx = await this.send('setAddr(bytes32,address)', [node, a]);
+      return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    }
+
+    async setAddrByType(
+      node: string,
+      coinType: bigint,
+      a: string
+    ): Promise<TransactionReceipt[]> {
+      const tx = await this.send('setAddr(bytes32,uint256,address)', [
+        node,
+        `0x${coinType.toString(16)}`,
+        a
+      ]);
+      return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    }
+
+    async addr(node: string): Promise<string> {
+      const result = await this.call('addr(bytes32)', [node]);
+      if (result) {
+        return result.toString();
+      }
+      return ethers.constants.AddressZero.replace('0x', '');
+    }
+
+    async addrByType(node: string, coinType: bigint): Promise<string> {
+      const result = await this.call('addr(bytes32,uint256)', [
+        node,
+        `0x${coinType.toString(16)}`
+      ]);
+      if (result) {
+        return result.toString();
+      }
+      return ethers.constants.AddressZero.replace('0x', '');
+    }
+  })(provider);
   const { decoder, coinType } = formatsByName[key];
   let addressAsBytes;
   if (!address || address === '') {
@@ -92,11 +179,11 @@ const setAddrWithResolver = async (
   } else {
     addressAsBytes = decoder(address);
   }
-  return Resolver.send('setAddr(bytes32,uint256,bytes)', [
+  return await resolver.setAddrByType(
     nh,
-    `0x${BigInt(coinType).toString(16)}`,
+    BigInt(coinType),
     addressAsBytes.toString('hex')
-  ]);
+  );
 };
 
 const getContentWithResolver = async (
@@ -109,19 +196,43 @@ const getContentWithResolver = async (
     return ethers.constants.AddressZero;
   }
   try {
-    const Resolver = getResolverContract(resolverAddr, provider);
+    const resolver: ContentHashResolver = new (class
+      extends BaseResolver
+      implements ContentHashResolver
+    {
+      constructor(provider: Provider) {
+        super(resolverAddr, provider, ABI.PublicResolver);
+      }
+      async setContenthash(
+        node: string,
+        hash: string
+      ): Promise<TransactionReceipt[]> {
+        const tx = await this.send('setContenthash(bytes32,bytes)', [
+          node,
+          hash
+        ]);
+        return await this.provider.getTxReceipts(tx, this.abi, this.address);
+      }
+
+      async contenthash(node: string): Promise<string> {
+        const result = await this.call('contenthash(bytes32)', [node]);
+        if (result) {
+          return result.toString();
+        }
+        return '';
+      }
+    })(provider);
+
     const contentHashSignature = ethers.utils
       .solidityKeccak256(['string'], ['contenthash(bytes32)'])
       .slice(0, 10);
 
-    const isContentHashSupported = await Resolver.call(
-      'supportsInterface(bytes4)',
-      [contentHashSignature]
-    );
+    const isContentHashSupported =
+      resolver.supportsInterface(contentHashSignature);
 
     if (isContentHashSupported?.toString() === 'true') {
       const { protocolType, decoded, error } = decodeContenthash(
-        (await Resolver.call('contenthash(bytes32)', [nh]))?.toString()
+        await resolver.contenthash(nh)
       );
       if (error) {
         console.log('error decoding', error);
@@ -135,7 +246,7 @@ const getContentWithResolver = async (
         contentType: 'contenthash'
       };
     } else {
-      const value = await Resolver.call('contenthash(bytes32)', [nh]);
+      const value = await resolver.contenthash(nh);
       return {
         value: value ? value.toString() : '',
         contentType: 'oldcontent'
@@ -149,7 +260,7 @@ const getContentWithResolver = async (
   }
 };
 
-const setContenthashWithResolver = (
+const setContenthashWithResolver = async (
   name: string,
   content: string,
   resolverAddr: string,
@@ -159,11 +270,30 @@ const setContenthashWithResolver = (
   if (parseInt(content, 16) !== 0) {
     encodedContenthash = encodeContenthash(content);
   }
-  const Resolver = getResolverContract(resolverAddr, provider);
-  return Resolver.send('setContenthash(bytes32, bytes)', [
-    namehash(name),
-    `${encodedContenthash}`
-  ]);
+  const resolver: ContentHashResolver = new (class
+    extends BaseResolver
+    implements ContentHashResolver
+  {
+    constructor(provider: Provider) {
+      super(resolverAddr, provider, ABI.PublicResolver);
+    }
+    async setContenthash(
+      node: string,
+      hash: string
+    ): Promise<TransactionReceipt[]> {
+      const tx = await this.send('setContenthash(bytes32,bytes)', [node, hash]);
+      return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    }
+
+    async contenthash(node: string): Promise<string> {
+      const result = await this.call('contenthash(bytes32)', [node]);
+      if (result) {
+        return result.toString();
+      }
+      return '';
+    }
+  })(provider);
+  return await resolver.setContenthash(namehash(name), `${encodedContenthash}`);
 };
 
 const getTextWithResolver = async (
@@ -177,9 +307,35 @@ const getTextWithResolver = async (
     return '';
   }
   try {
-    const Resolver = getResolverContract(resolverAddr, provider);
-    const addr = await Resolver.call('text(bytes32, string)', [nh, key]);
-    return addr ? addr.toString() : '';
+    const resolver: TextResolver = new (class
+      extends BaseResolver
+      implements TextResolver
+    {
+      constructor(provider: Provider) {
+        super(resolverAddr, provider, ABI.PublicResolver);
+      }
+      async setText(
+        node: string,
+        key: string,
+        value: string
+      ): Promise<TransactionReceipt[]> {
+        const tx = await this.send('setText(bytes32,string,string)', [
+          node,
+          key,
+          value
+        ]);
+        return await this.provider.getTxReceipts(tx, this.abi, this.address);
+      }
+
+      async text(node: string, key: string): Promise<string> {
+        const result = await this.call(' text(bytes32,string)', [node, key]);
+        if (result) {
+          return result.toString();
+        }
+        return '';
+      }
+    })(provider);
+    return await resolver.text(nh, key);
   } catch (e) {
     console.warn(
       'Error getting text record on the resolver contract, are you sure the resolver address is a resolver contract?'
@@ -188,7 +344,7 @@ const getTextWithResolver = async (
   }
 };
 
-const setTextWithResolver = (
+const setTextWithResolver = async (
   name: string,
   key: string,
   recordValue: string,
@@ -196,10 +352,35 @@ const setTextWithResolver = (
   provider: Provider
 ) => {
   const nh = namehash(name);
-  return getResolverContract(resolverAddr, provider).send(
-    'setText(bytes32, string, string)',
-    [nh, key, recordValue]
-  );
+  const resolver: TextResolver = new (class
+    extends BaseResolver
+    implements TextResolver
+  {
+    constructor(provider: Provider) {
+      super(resolverAddr, provider, ABI.PublicResolver);
+    }
+    async setText(
+      node: string,
+      key: string,
+      value: string
+    ): Promise<TransactionReceipt[]> {
+      const tx = await this.send('setText(bytes32,string,string)', [
+        node,
+        key,
+        value
+      ]);
+      return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    }
+
+    async text(node: string, key: string): Promise<string> {
+      const result = await this.call(' text(bytes32,string)', [node, key]);
+      if (result) {
+        return result.toString();
+      }
+      return '';
+    }
+  })(provider);
+  return await resolver.setText(nh, key, recordValue);
 };
 
 export {

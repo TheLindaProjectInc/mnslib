@@ -1,6 +1,11 @@
 import { TransactionReceipt } from '../../../mrx';
 import ResolverBase from './ResolverBase';
 
+/**
+ * Interface that represents a DNS Resolver
+ *
+ * @interface
+ */
 export default interface DNSResolver extends ResolverBase {
   /**
    * Set one or more DNS records.  Records are supplied in wire-format.
@@ -20,7 +25,7 @@ export default interface DNSResolver extends ResolverBase {
    *
    * @param node the namehash of the node for which to set the records
    * @param data the DNS wire format records to set
-   * @returns {Promise<TransactionReceipt[]} an array of TransactionReceipt objects
+   * @returns {Promise<TransactionReceipt[]>} an array of TransactionReceipt objects
    */
   setDNSRecords(node: string, data: string): Promise<TransactionReceipt[]>;
 
@@ -44,7 +49,7 @@ export default interface DNSResolver extends ResolverBase {
   /**
    * Clear all information for a DNS zone.
    * @param node the namehash of the node for which to clear the zone
-   * @returns {Promise<TransactionReceipt[]} an array of TransactionReceipt objects
+   * @returns {Promise<TransactionReceipt[]>} an array of TransactionReceipt objects
    */
   clearDNSZone(node: string): Promise<TransactionReceipt[]>;
 
@@ -53,7 +58,7 @@ export default interface DNSResolver extends ResolverBase {
    * May only be called by the owner of that node in the MNS registry.
    * @param node The node to update.
    * @param hash The zonehash to set
-   * @returns {Promise<TransactionReceipt[]} an array of TransactionReceipt objects
+   * @returns {Promise<TransactionReceipt[]>} an array of TransactionReceipt objects
    */
   setZoneHash(node: string, hash: string): Promise<TransactionReceipt[]>;
 

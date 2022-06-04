@@ -2,6 +2,11 @@ import { MetrixContract } from '../../mrx';
 import { Provider } from '../../provider';
 import ResolverBase from './profiles/ResolverBase';
 
+/**
+ * Class which is used a the base for resolvers
+ *
+ * @class
+ */
 export default abstract class BaseResolver
   extends MetrixContract
   implements ResolverBase
