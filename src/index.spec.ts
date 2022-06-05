@@ -27,7 +27,6 @@ describe('mnslib tests', () => {
 
   it('should have a ttl', async () => {
     const ttl = await name.getTTL();
-    console.log(`ttl: ${ttl}`);
     equal(!isNaN(ttl), true);
   }).timeout(5000);
 
