@@ -97,7 +97,7 @@ export default class Name {
    */
   async getTTL(): Promise<number> {
     const response = await this.mns.call('ttl(bytes32)', [this.hash]);
-    return response ? parseInt(response.toString()) : 0;
+    return response ? parseInt(BigInt(response.toString()).toString()) : 0;
   }
 
   /**
