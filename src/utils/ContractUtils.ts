@@ -24,7 +24,12 @@ const getResolverContract: (
   address: string,
   provider: Provider
 ) => MetrixContract = (address: string, provider: Provider) => {
-  return new MetrixContract(address, provider, ABI.PublicResolver, undefined);
+  return new MetrixContract(
+    address.replace('0x', '').toLowerCase(),
+    provider,
+    ABI.PublicResolver,
+    undefined
+  );
 };
 
 const getMNSContract = (address: string, provider: Provider) => {
@@ -227,10 +232,11 @@ const getContentWithResolver = async (
       .solidityKeccak256(['string'], ['contenthash(bytes32)'])
       .slice(0, 10);
 
-    const isContentHashSupported =
-      resolver.supportsInterface(contentHashSignature);
+    const isContentHashSupported = await resolver.supportsInterface(
+      contentHashSignature
+    );
 
-    if (isContentHashSupported?.toString() === 'true') {
+    if (isContentHashSupported) {
       const { protocolType, decoded, error } = decodeContenthash(
         await resolver.contenthash(nh)
       );

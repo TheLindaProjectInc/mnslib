@@ -25,6 +25,11 @@ describe('mnslib tests', () => {
     equal(exists, true);
   }).timeout(5000);
 
+  it('should have a ttl', async () => {
+    const ttl = await name.getTTL();
+    equal(!isNaN(ttl), true);
+  }).timeout(5000);
+
   it('should return expected TestNet MRX address', async () => {
     const address = await name.getAddress('MRX');
     equal(address, 'maTQfd4w7mqCzGL32RgBFMYY9ehCmjLEGf');

@@ -90,6 +90,7 @@ export default class RPCProvider implements Provider {
       encoded,
       this.sender
     )) as ContractResponse;
+
     if (response) {
       const output = response.executionResult.output;
       result = iface.decodeFunctionResult(method, `0x${output}`);
