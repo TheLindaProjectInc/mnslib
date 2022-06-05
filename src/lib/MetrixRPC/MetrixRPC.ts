@@ -1356,7 +1356,7 @@ abstract class MetrixRPC {
     senderAddress: string,
     gasLimit: string | undefined,
     callback: (e: Error | null, result: any /* eslint-disable-line */) => void
-  ): void {
+  ): void {  
     const args = [contrtactAddress, data, senderAddress];
     if (gasLimit) {
       args.push(gasLimit);

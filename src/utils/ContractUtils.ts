@@ -24,7 +24,12 @@ const getResolverContract: (
   address: string,
   provider: Provider
 ) => MetrixContract = (address: string, provider: Provider) => {
-  return new MetrixContract(address, provider, ABI.PublicResolver, undefined);
+  return new MetrixContract(
+    address.replace('0x', '').toLowerCase(),
+    provider,
+    ABI.PublicResolver,
+    undefined
+  );
 };
 
 const getMNSContract = (address: string, provider: Provider) => {
