@@ -96,8 +96,16 @@ export default class Name {
    * @returns {Promise<number>} the address the resolver
    */
   async getTTL(): Promise<number> {
-    const response = await this.mns.call('ttl(bytes32)', [this.hash]);
-    return response ? parseInt(response.toString()) : 0;
+    try {
+      const response = await this.mns.call('ttl(bytes32)', [this.hash]);
+      return !isNaN(Number(BigInt(response ? response.toString() : '0')))
+        ? Number(BigInt(response ? response.toString() : '0'))
+        : 0;
+    } catch (e) {
+      console.log(e);
+    }
+
+    return 0;
   }
 
   /**
