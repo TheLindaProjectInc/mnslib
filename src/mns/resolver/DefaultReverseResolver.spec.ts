@@ -18,7 +18,7 @@ describe('DefaultReverseResolver tests', () => {
     equal(address.replace('0x', '').toLowerCase(), resolver.address);
   }).timeout(5000);
 
-  it('should match name.getAddress() address', async () => {
+  it('should match resolver.name(hash) address', async () => {
     const label = await resolver.name(name.hash);
     equal('first.mrx', label);
   }).timeout(5000);
