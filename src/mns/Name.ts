@@ -109,6 +109,28 @@ export default class Name {
   }
 
   /**
+   * Sets the TTL
+   * @param ttl The TTL in seconds.
+   * @returns {Promise<TransactionReceipt[]>} an array of TransactionReceipt objects
+   */
+  async setTTL(ttl: bigint): Promise<TransactionReceipt[]> {
+    try {
+      const tx = await this.mns.send('setTTL(bytes32,uint64)', [
+        this.hash,
+        `0x${ttl.toString(16)}`
+      ]);
+      return await this.provider.getTxReceipts(
+        tx,
+        this.mns.abi,
+        this.mns.address
+      );
+    } catch (e) {
+      console.log(e);
+    }
+    return [];
+  }
+
+  /**
    * Get the resolver address
    * @returns {Promise<string>} the address the resolver
    */
