@@ -3,6 +3,7 @@ import ABI from '../../abi';
 import { CONTRACTS } from '../../constants';
 import { TransactionReceipt } from '../../mrx';
 import { Provider } from '../../provider';
+import { fromHexAddress } from '../../utils/AddressUtils';
 import BaseResolver from './BaseResolver';
 import ABIResolver from './profiles/ABIResolver';
 import AddrResolver from './profiles/AddrResolver';
@@ -87,12 +88,18 @@ export default class PublicResolver
     return await this.provider.getTxReceipts(tx, this.abi, this.address);
   }
 
-  async addr(node: string): Promise<string> {
+  async addr(
+    node: string,
+    convert: undefined | boolean = false
+  ): Promise<string> {
     const result = await this.call('addr(bytes32)', [node]);
-    if (result) {
-      return result.toString();
+    let mrxAddress: string | undefined = result
+      ? result.toString()
+      : ethers.constants.AddressZero;
+    if (convert === true) {
+      mrxAddress = fromHexAddress(this.provider.network, mrxAddress);
     }
-    return ethers.constants.AddressZero.replace('0x', '');
+    return mrxAddress ? mrxAddress : ethers.constants.AddressZero;
   }
 
   async addrByType(node: string, coinType: bigint): Promise<string> {
@@ -103,7 +110,7 @@ export default class PublicResolver
     if (result) {
       return result.toString();
     }
-    return ethers.constants.AddressZero.replace('0x', '');
+    return ethers.constants.AddressZero;
   }
 
   async setContenthash(
@@ -198,7 +205,7 @@ export default class PublicResolver
     if (result) {
       return result.toString();
     }
-    return ethers.constants.AddressZero.replace('0x', '');
+    return ethers.constants.AddressZero;
   }
 
   async setName(node: string, name: string): Promise<TransactionReceipt[]> {

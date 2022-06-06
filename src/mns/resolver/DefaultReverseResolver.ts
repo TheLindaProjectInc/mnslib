@@ -29,8 +29,8 @@ export default class DefaultReverseResolver
 
   async name(node: string): Promise<string> {
     const result = await this.call('name(bytes32)', [node]);
-    if (result) {
-      result.toString();
+    if (result != undefined) {
+      return result.toString();
     }
     return '';
   }
