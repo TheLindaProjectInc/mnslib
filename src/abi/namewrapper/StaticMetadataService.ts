@@ -14,7 +14,7 @@ export const StaticMetadataService = [
     inputs: [
       {
         internalType: 'uint256',
-        name: '',
+        name: 'tokenId',
         type: 'uint256'
       }
     ],

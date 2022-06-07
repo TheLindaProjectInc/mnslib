@@ -1,12 +1,12 @@
 import { TransactionReceipt } from '../../../mrx';
-import ResolverBase from './ResolverBase';
+import IERC165 from '../../../mrx/interface/IERC165';
 
 /**
  * Interface that represents an SECP256k1 public key Resolver
  *
  * @interface
  */
-export default interface PubkeyResolver extends ResolverBase {
+export default interface PubkeyResolver extends IERC165 {
   /**
    * Sets the SECP256k1 public key associated with an MNS node.
    * @param node The MNS node to query

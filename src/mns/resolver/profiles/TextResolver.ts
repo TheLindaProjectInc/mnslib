@@ -1,12 +1,12 @@
 import { TransactionReceipt } from '../../../mrx';
-import ResolverBase from './ResolverBase';
+import IERC165 from '../../../mrx/interface/IERC165';
 
 /**
  * Interface that represents an Text Resolver
  *
  * @interface
  */
-export default interface TextResolver extends ResolverBase {
+export default interface TextResolver extends IERC165 {
   /**
    * Sets the text data associated with an MNS node and key.
    * May only be called by the owner of that node in the MNS registry.

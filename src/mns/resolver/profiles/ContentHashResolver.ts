@@ -1,12 +1,12 @@
 import { TransactionReceipt } from '../../../mrx';
-import ResolverBase from './ResolverBase';
+import IERC165 from '../../../mrx/interface/IERC165';
 
 /**
  * Interface that represent a ContentHash Resolver
  *
  * @interface
  */
-export default interface ContentHashResolver extends ResolverBase {
+export default interface ContentHashResolver extends IERC165 {
   /**
    * Sets the contenthash associated with an MNS node.
    * May only be called by the owner of that node in the MNS registry.

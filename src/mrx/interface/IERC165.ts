@@ -3,7 +3,7 @@
  *
  * @interface
  */
-export default interface ResolverBase {
+export default interface IERC165 {
   /**
    * Returns true if this contract implements the interface defined by
    * `interfaceId`. See the corresponding

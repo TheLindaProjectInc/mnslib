@@ -1,12 +1,12 @@
 import { TransactionReceipt } from '../../../mrx';
-import ResolverBase from './ResolverBase';
+import IERC165 from '../../../mrx/interface/IERC165';
 
 /**
  * Interface that represents a DNS Resolver
  *
  * @interface
  */
-export default interface DNSResolver extends ResolverBase {
+export default interface DNSResolver extends IERC165 {
   /**
    * Set one or more DNS records.  Records are supplied in wire-format.
    * Records with the same node/name/resource must be supplied one after the

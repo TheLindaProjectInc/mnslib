@@ -1,12 +1,12 @@
 import { TransactionReceipt } from '../../../mrx';
-import ResolverBase from './ResolverBase';
+import IERC165 from '../../../mrx/interface/IERC165';
 
 /**
  * Interface that represent an Address Resolver
  *
  * @interface
  */
-export default interface AddrResolver extends ResolverBase {
+export default interface AddrResolver extends IERC165 {
   /**
    * Sets the address associated with an MNS node.
    * May only be called by the owner of that node in the MNS registry.
