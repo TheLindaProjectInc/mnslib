@@ -1,12 +1,12 @@
 import { TransactionReceipt } from '../../../mrx';
-import ResolverBase from './ResolverBase';
+import IERC165 from '../../../mrx/interface/IERC165';
 
 /**
  * Interface that represent an ABI Resolver
  *
  * @interface
  */
-export default interface ABIResolver extends ResolverBase {
+export default interface ABIResolver extends IERC165 {
   /**
    * Sets the ABI associated with an MNS node.
    * Nodes may have one ABI of each content type. To remove an ABI, set it to

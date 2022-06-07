@@ -1,12 +1,12 @@
 import { TransactionReceipt } from '../../../mrx';
-import ResolverBase from './ResolverBase';
+import IERC165 from '../../../mrx/interface/IERC165';
 
 /**
  * Interface that represents an Interface Resolver
  *
  * @interface
  */
-export default interface InterfaceResolver extends ResolverBase {
+export default interface InterfaceResolver extends IERC165 {
   /**
    * Sets an interface associated with a name.
    * Setting the address to 0 restores the default behaviour of querying the contract at `addr()` for interface support.

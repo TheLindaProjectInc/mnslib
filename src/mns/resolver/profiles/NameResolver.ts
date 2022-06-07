@@ -1,12 +1,12 @@
 import { TransactionReceipt } from '../../../mrx';
-import ResolverBase from './ResolverBase';
+import IERC165 from '../../../mrx/interface/IERC165';
 
 /**
  * Interface that represents a Name Resolver
  *
  * @interface
  */
-export default interface NameResolver extends ResolverBase {
+export default interface NameResolver extends IERC165 {
   /**
    * Sets the name associated with an MNS node, for reverse records.
    * May only be called by the owner of that node in the MNS registry.

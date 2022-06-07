@@ -10,6 +10,11 @@ export const BaseRegistrarImplementation = [
         internalType: 'bytes32',
         name: '_baseNode',
         type: 'bytes32'
+      },
+      {
+        internalType: 'string',
+        name: '_uri',
+        type: 'string'
       }
     ],
     stateMutability: 'nonpayable',
@@ -294,6 +299,19 @@ export const BaseRegistrarImplementation = [
         internalType: 'bytes32',
         name: '',
         type: 'bytes32'
+      }
+    ],
+    stateMutability: 'view',
+    type: 'function'
+  },
+  {
+    inputs: [],
+    name: 'baseURI',
+    outputs: [
+      {
+        internalType: 'string',
+        name: '',
+        type: 'string'
       }
     ],
     stateMutability: 'view',
@@ -656,7 +674,7 @@ export const BaseRegistrarImplementation = [
         type: 'bool'
       }
     ],
-    stateMutability: 'pure',
+    stateMutability: 'view',
     type: 'function'
   },
   {
@@ -676,6 +694,49 @@ export const BaseRegistrarImplementation = [
     inputs: [
       {
         internalType: 'uint256',
+        name: 'index',
+        type: 'uint256'
+      }
+    ],
+    name: 'tokenByIndex',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256'
+      }
+    ],
+    stateMutability: 'view',
+    type: 'function'
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'owner',
+        type: 'address'
+      },
+      {
+        internalType: 'uint256',
+        name: 'index',
+        type: 'uint256'
+      }
+    ],
+    name: 'tokenOfOwnerByIndex',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256'
+      }
+    ],
+    stateMutability: 'view',
+    type: 'function'
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
         name: 'tokenId',
         type: 'uint256'
       }
@@ -686,6 +747,19 @@ export const BaseRegistrarImplementation = [
         internalType: 'string',
         name: '',
         type: 'string'
+      }
+    ],
+    stateMutability: 'view',
+    type: 'function'
+  },
+  {
+    inputs: [],
+    name: 'totalSupply',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256'
       }
     ],
     stateMutability: 'view',

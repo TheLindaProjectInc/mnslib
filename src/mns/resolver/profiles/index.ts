@@ -5,7 +5,7 @@ import DNSResolver from './DNSResolver';
 import InterfaceResolver from './InterfaceResolver';
 import NameResolver from './NameResolver';
 import PubkeyResolver from './PubkeyResolver';
-import ResolverBase from './ResolverBase';
+
 import TextResolver from './TextResolver';
 
 export {
@@ -16,6 +16,5 @@ export {
   InterfaceResolver,
   NameResolver,
   PubkeyResolver,
-  ResolverBase,
   TextResolver
 };

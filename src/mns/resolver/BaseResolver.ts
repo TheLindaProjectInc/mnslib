@@ -1,6 +1,6 @@
 import { MetrixContract } from '../../mrx';
 import { Provider } from '../../provider';
-import ResolverBase from './profiles/ResolverBase';
+import IERC165 from '../../mrx/interface/IERC165';
 
 /**
  * Class which is used a the base for resolvers
@@ -9,7 +9,7 @@ import ResolverBase from './profiles/ResolverBase';
  */
 export default abstract class BaseResolver
   extends MetrixContract
-  implements ResolverBase
+  implements IERC165
 {
   constructor(
     address: string,
