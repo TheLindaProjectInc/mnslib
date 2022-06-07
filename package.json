@@ -66,6 +66,6 @@
         "content-hash": "^2.5.2",
         "ethers": "^5.6.5",
         "locks": "^0.2.2",
-        "node-fetch": "^2.6.1"
+        "node-fetch": "^3.2.5"
     }
 }
