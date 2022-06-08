@@ -126,4 +126,19 @@ export default interface IERC721 extends IERC165 {
     tokenId: string,
     data: string
   ): Promise<TransactionReceipt[]>;
+
+  /**
+   *  Returns the token collection name.
+   */
+  name(): Promise<string>;
+
+  /**
+   *  Returns the token collection symbol.
+   */
+  symbol(): Promise<string>;
+
+  /**
+   *  Returns the Uniform Resource Identifier (URI) for `tokenId` token.
+   */
+  tokenURI(tokenId: string): Promise<string>;
 }
