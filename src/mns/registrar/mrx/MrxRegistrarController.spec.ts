@@ -1,6 +1,5 @@
 import { equal } from 'assert';
 import { APIProvider } from '../../../provider';
-import { getMNSAddress } from '../../../utils/ContractUtils';
 import MrxRegistrarController from './MrxRegistrarController';
 
 describe('MRXRegistrarController tests', () => {
@@ -16,6 +15,7 @@ describe('MRXRegistrarController tests', () => {
     );
     equal(isNaN(Number(price)), false);
   }).timeout(5000);
+
   it('should be a valid name', async () => {
     const valid = await controller.valid('test');
     equal(valid, true);

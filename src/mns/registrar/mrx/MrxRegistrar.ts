@@ -82,7 +82,7 @@ export default class MrxRegistrar
   }
 
   async ownerOf(tokenId: string): Promise<string> {
-    const owner = await this.call('ownerOf(uint256)', [`tokenId`]);
+    const owner = await this.call('ownerOf(uint256)', [tokenId]);
     return owner ? owner.toString() : ethers.constants.AddressZero;
   }
 
