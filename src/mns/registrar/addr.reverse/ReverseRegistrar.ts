@@ -1,7 +1,8 @@
 import { ethers } from 'ethers';
 import ABI from '../../../abi';
 import { CONTRACTS } from '../../../constants';
-import { MetrixContract, TransactionReceipt } from '../../../mrx';
+import TransactionReceipt from '../../../mrx/TransactionReceipt';
+import MetrixContract from '../../../mrx/MetrixContract';
 import { Provider } from '../../../provider';
 
 /**
