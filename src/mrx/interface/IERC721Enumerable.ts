@@ -1,11 +1,11 @@
-import IERC721 from './IERC721';
+import { IERC721 } from './IERC721';
 
 /**
  * Interface that represents a contract, which implements EIP721Enumerable
  *
  * @interface
  */
-export default interface IERC721Enumerable extends IERC721 {
+export interface IERC721Enumerable extends IERC721 {
   /**
    * Returns the total amount of tokens stored by the contract.
    */

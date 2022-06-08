@@ -1,15 +1,12 @@
 import { ethers } from 'ethers';
 import ABI from '../../../abi';
 import { CONTRACTS } from '../../../constants';
-import IERC165 from '../../../mrx/interface/IERC165';
+import { IERC165 } from '../../../mrx/interface/IERC165';
 import MetrixContract from '../../../mrx/MetrixContract';
 import TransactionReceipt from '../../../mrx/TransactionReceipt';
 import { Provider } from '../../../provider';
 
-export default class MrxRegistrarController
-  extends MetrixContract
-  implements IERC165
-{
+export class MrxRegistrarController extends MetrixContract implements IERC165 {
   constructor(provider: Provider) {
     super(
       CONTRACTS[provider.network].MRXRegistrarController,

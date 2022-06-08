@@ -1,7 +1,7 @@
 import { equal } from 'assert';
 import { APIProvider } from '../../../provider';
 import { getMNSAddress } from '../../../utils/ContractUtils';
-import TestRegistrar from './TestRegistrar';
+import { TestRegistrar } from './TestRegistrar';
 
 describe('TestRegistrar tests', () => {
   const network = 'TestNet';

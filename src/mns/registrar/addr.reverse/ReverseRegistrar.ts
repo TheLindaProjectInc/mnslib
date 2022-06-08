@@ -10,7 +10,7 @@ import { Provider } from '../../../provider';
  * expires registrations a fixed period after they're initially claimed.
  * @class
  */
-export default class ReverseRegistrar extends MetrixContract {
+export class ReverseRegistrar extends MetrixContract {
   constructor(provider: Provider) {
     super(
       CONTRACTS[provider.network].ReverseRegistrar,

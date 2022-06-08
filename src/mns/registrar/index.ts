@@ -1,4 +1,4 @@
-export * from './addr.reverse/ReverseRegistrar';
-export * from './mrx/MrxRegistrar';
-export * from './mrx/MrxRegistrarController';
-export * from './test/TestRegistrar';
+export * as ReverseRegistrar from './addr.reverse/ReverseRegistrar';
+export * as MrxRegistrar from './mrx/MrxRegistrar';
+export * as MrxRegistrarController from './mrx/MrxRegistrarController';
+export * as TestRegistrar from './test/TestRegistrar';

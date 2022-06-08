@@ -1,6 +1,6 @@
 import { equal } from 'assert';
 import { APIProvider } from '../../../provider';
-import MrxRegistrarController from './MrxRegistrarController';
+import { MrxRegistrarController } from './MrxRegistrarController';
 
 describe('MRXRegistrarController tests', () => {
   const network = 'MainNet';

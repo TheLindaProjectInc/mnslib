@@ -10,7 +10,7 @@ import { Provider } from '../../../provider';
  * expires registrations a fixed period after they're initially claimed.
  * @class
  */
-export default class TestRegistrar extends MetrixContract {
+export class TestRegistrar extends MetrixContract {
   constructor(provider: Provider) {
     if (provider.network !== 'TestNet') {
       throw new Error('TestRegistrar contract only available on the TestNet');

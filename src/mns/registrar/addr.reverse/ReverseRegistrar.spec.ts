@@ -2,7 +2,7 @@ import { equal } from 'assert';
 import { CONTRACTS } from '../../../constants';
 import { APIProvider } from '../../../provider';
 import { getMNSAddress } from '../../../utils/ContractUtils';
-import ReverseRegistrar from './ReverseRegistrar';
+import { ReverseRegistrar } from './ReverseRegistrar';
 
 describe('ReverseRegistrar tests', () => {
   const network = 'TestNet';
