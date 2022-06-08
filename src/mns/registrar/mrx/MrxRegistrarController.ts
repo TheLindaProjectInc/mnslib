@@ -15,6 +15,12 @@ export class MrxRegistrarController extends MetrixContract implements IERC165 {
     );
   }
 
+  async MIN_REGISTRATION_DURATION(): Promise<bigint> {
+    const min = await this.call('MIN_REGISTRATION_DURATION()', []);
+    const m = BigInt(min ? min.toString() : 0);
+    return m ? m : BigInt(0);
+  }
+
   async supportsInterface(interfaceId: string): Promise<boolean> {
     const result = await this.call('supportsInterface(bytes4)', [interfaceId]);
     if (result) {
