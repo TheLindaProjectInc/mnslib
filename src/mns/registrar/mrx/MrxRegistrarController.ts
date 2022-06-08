@@ -72,7 +72,7 @@ export class MrxRegistrarController extends MetrixContract implements IERC165 {
     secret: string
   ): Promise<string> {
     const commitment = await this.call(
-      'makeCommitmentWithConfig(string,address,bytes32)',
+      'makeCommitment(string,address,bytes32)',
       [name, owner, secret]
     );
     return commitment ? commitment.toString() : ethers.constants.HashZero;
