@@ -1,6 +1,6 @@
 import { MetrixContract } from '../../mrx';
 import { Provider } from '../../provider';
-import IERC165 from '../../mrx/interface/IERC165';
+import { IERC165 } from '../../mrx/interface/IERC165';
 
 /**
  * Class which is used a the base for resolvers

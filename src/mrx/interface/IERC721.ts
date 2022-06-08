@@ -1,12 +1,12 @@
 import TransactionReceipt from '../TransactionReceipt';
-import IERC165 from './IERC165';
+import { IERC165 } from './IERC165';
 
 /**
  * Interface that represents a contract, which implements EIP721
  *
  * @interface
  */
-export default interface IERC721 extends IERC165 {
+export interface IERC721 extends IERC165 {
   /**
    *  Returns the number of tokens in ``owner``'s account.
    */

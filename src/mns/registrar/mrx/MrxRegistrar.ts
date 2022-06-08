@@ -1,18 +1,17 @@
 import { ethers } from 'ethers';
 import ABI from '../../../abi';
 import { CONTRACTS } from '../../../constants';
-import { MetrixContract, TransactionReceipt } from '../../../mrx';
-import IERC721Enumerable from '../../../mrx/interface/IERC721Enumerable';
+
+import { IERC721Enumerable } from '../../../mrx/interface/IERC721Enumerable';
+import MetrixContract from '../../../mrx/MetrixContract';
+import TransactionReceipt from '../../../mrx/TransactionReceipt';
 import { Provider } from '../../../provider';
 
 /**
  * A registrar that controls '.mrx' names
  * @class
  */
-export default class MrxRegistrar
-  extends MetrixContract
-  implements IERC721Enumerable
-{
+export class MrxRegistrar extends MetrixContract implements IERC721Enumerable {
   constructor(provider: Provider) {
     super(
       CONTRACTS[provider.network].BaseRegistrarImplementation,

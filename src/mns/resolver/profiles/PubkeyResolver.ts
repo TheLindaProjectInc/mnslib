@@ -1,5 +1,5 @@
 import { TransactionReceipt } from '../../../mrx';
-import IERC165 from '../../../mrx/interface/IERC165';
+import { IERC165 } from '../../../mrx/interface/IERC165';
 
 /**
  * Interface that represents an SECP256k1 public key Resolver
