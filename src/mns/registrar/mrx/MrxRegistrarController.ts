@@ -101,14 +101,15 @@ export class MrxRegistrarController extends MetrixContract implements IERC165 {
     name: string,
     owner: string,
     duration: bigint,
-    secret: string
+    secret: string,
+    value: string
   ): Promise<TransactionReceipt[]> {
-    const tx = await this.send('register(string,address,uint256,bytes32)', [
-      name,
-      owner,
-      `0x${duration.toString(16)}`,
-      secret
-    ]);
+    const tx = await this.send(
+      'register(string,address,uint256,bytes32)',
+      [name, owner, `0x${duration.toString(16)}`, secret],
+      value,
+      420000
+    );
     return await this.provider.getTxReceipts(tx, this.abi, this.address);
   }
 
@@ -118,20 +119,29 @@ export class MrxRegistrarController extends MetrixContract implements IERC165 {
     duration: bigint,
     secret: string,
     resolver: string,
-    addr: string
+    addr: string,
+    value: string
   ): Promise<TransactionReceipt[]> {
     const tx = await this.send(
       'registerWithConfig(string,address,uint256,bytes32,address,address)',
-      [name, owner, `0x${duration.toString(16)}`, secret, resolver, addr]
+      [name, owner, `0x${duration.toString(16)}`, secret, resolver, addr],
+      value,
+      420000
     );
     return await this.provider.getTxReceipts(tx, this.abi, this.address);
   }
 
-  async renew(name: string, duration: bigint): Promise<TransactionReceipt[]> {
-    const tx = await this.send('renew(string,uint256)', [
-      name,
-      `0x${duration.toString(16)}`
-    ]);
+  async renew(
+    name: string,
+    duration: bigint,
+    value: string
+  ): Promise<TransactionReceipt[]> {
+    const tx = await this.send(
+      'renew(string,uint256)',
+      [name, `0x${duration.toString(16)}`],
+      value,
+      420000
+    );
     return await this.provider.getTxReceipts(tx, this.abi, this.address);
   }
 }
