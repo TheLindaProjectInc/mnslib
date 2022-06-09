@@ -2,7 +2,7 @@ import { ethers } from 'ethers';
 import ABI from '../../../abi';
 import { CONTRACTS } from '../../../constants';
 import MetrixContract from '../../../mrx/MetrixContract';
-import TransactionReceipt from '../../../mrx/TransactionReceipt';
+import { Transaction } from '../../../mrx/Transaction';
 import { Provider } from '../../../provider';
 
 /**
@@ -56,10 +56,14 @@ export class TestRegistrar extends MetrixContract {
    * Register a name that's not currently registered
    * @param label The hash of the label to register.
    * @param owner The address of the new owner.
-   * @returns {Promise<TransactionReceipt[]>} an array of TransactionReceipt objects
+   * @returns {Promise<Transaction>} aTransaction object
    */
-  async register(label: string, owner: string): Promise<TransactionReceipt[]> {
+  async register(label: string, owner: string): Promise<Transaction> {
     const tx = await this.send('register(bytes32,address)', [label, owner]);
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 }

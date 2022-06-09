@@ -1,4 +1,4 @@
-import TransactionReceipt from '../TransactionReceipt';
+import { Transaction } from '../Transaction';
 import { IERC165 } from './IERC165';
 
 /**
@@ -39,7 +39,7 @@ export interface IERC721 extends IERC165 {
     from: string,
     to: string,
     tokenId: string
-  ): Promise<TransactionReceipt[]>;
+  ): Promise<Transaction>;
 
   /**
    * Transfers `tokenId` token from `from` to `to`.
@@ -55,11 +55,7 @@ export interface IERC721 extends IERC165 {
    *
    * Emits a {Transfer} event.
    */
-  transferFrom(
-    from: string,
-    to: string,
-    tokenId: string
-  ): Promise<TransactionReceipt[]>;
+  transferFrom(from: string, to: string, tokenId: string): Promise<Transaction>;
 
   /**
    * Gives permission to `to` to transfer `tokenId` token to another account.
@@ -74,7 +70,7 @@ export interface IERC721 extends IERC165 {
    *
    * Emits an {Approval} event.
    */
-  approve(to: string, tokenId: string): Promise<TransactionReceipt[]>;
+  approve(to: string, tokenId: string): Promise<Transaction>;
 
   /**
    * Returns the account approved for `tokenId` token.
@@ -95,10 +91,7 @@ export interface IERC721 extends IERC165 {
    *
    * Emits an {ApprovalForAll} event.
    */
-  setApprovalForAll(
-    operator: string,
-    approved: boolean
-  ): Promise<TransactionReceipt[]>;
+  setApprovalForAll(operator: string, approved: boolean): Promise<Transaction>;
 
   /**
    * Returns if the `operator` is allowed to manage all of the assets of `owner`.
@@ -125,7 +118,7 @@ export interface IERC721 extends IERC165 {
     to: string,
     tokenId: string,
     data: string
-  ): Promise<TransactionReceipt[]>;
+  ): Promise<Transaction>;
 
   /**
    *  Returns the token collection name.

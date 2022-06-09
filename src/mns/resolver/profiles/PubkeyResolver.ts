@@ -1,5 +1,5 @@
-import { TransactionReceipt } from '../../../mrx';
 import { IERC165 } from '../../../mrx/interface/IERC165';
+import { Transaction } from '../../../mrx/Transaction';
 
 /**
  * Interface that represents an SECP256k1 public key Resolver
@@ -12,9 +12,9 @@ export default interface PubkeyResolver extends IERC165 {
    * @param node The MNS node to query
    * @param x the X coordinate of the curve point for the public key.
    * @param y the Y coordinate of the curve point for the public key.
-   * @returns {Promise<TransactionReceipt[]>} an array of TransactionReceipt objects
+   * @returns {Promise<Transaction>} an array of TransactionReceipt objects
    */
-  setPubkey(node: string, x: string, y: string): Promise<TransactionReceipt[]>;
+  setPubkey(node: string, x: string, y: string): Promise<Transaction>;
   /**
    * Returns the SECP256k1 public key associated with an MNS node.
    * Defined in EIP 619.

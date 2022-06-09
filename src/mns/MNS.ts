@@ -11,7 +11,7 @@ import {
   getResolverContract,
   getReverseRegistrarContract
 } from '../utils/ContractUtils';
-import { TransactionReceipt } from '../mrx';
+import { Transaction } from '../mrx/Transaction';
 
 /** Class which can be used to make registry record queries. */
 export default class MNS {
@@ -105,19 +105,23 @@ export default class MNS {
   /**
    * Set a reverse record for an address
    * @param name The name for example 'first.mrx'
-   * @returns {Promise<TransactionReceipt[]>} an array of TransactionReceipt objects
+   * @returns {Promise<Transaction>} a transaction object
    */
-  async setReverseRecord(name: string): Promise<TransactionReceipt[]> {
+  async setReverseRecord(name: string): Promise<Transaction> {
     const reverseRegistrarAddr = await this.name('addr.reverse').getOwner();
     const reverseRegistrar = getReverseRegistrarContract(
       reverseRegistrarAddr,
       this.provider
     );
     const tx = await reverseRegistrar.send('setName(string)', [name]);
-    return await this.provider.getTxReceipts(
+    const getReceipts = this.provider.getTxReceipts(
       tx,
       reverseRegistrar.abi,
       reverseRegistrar.address
     );
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 }

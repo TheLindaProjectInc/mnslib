@@ -14,7 +14,7 @@ import {
   ContentHashResolver,
   TextResolver
 } from '../mns/resolver/profiles';
-import { TransactionReceipt } from '../mrx';
+import { Transaction } from '../mrx/Transaction';
 
 const getMNSAddress = (network: NetworkType) => {
   return CONTRACTS[network].MNSRegistryWithFallback;
@@ -60,22 +60,38 @@ const getAddrWithResolver = async (
       constructor(provider: Provider) {
         super(resolverAddr.replace('0x', ''), provider, ABI.PublicResolver);
       }
-      async setAddr(node: string, a: string): Promise<TransactionReceipt[]> {
+      async setAddr(node: string, a: string): Promise<Transaction> {
         const tx = await this.send('setAddr(bytes32,address)', [node, a]);
-        return await this.provider.getTxReceipts(tx, this.abi, this.address);
+        const getReceipts = this.provider.getTxReceipts(
+          tx,
+          this.abi,
+          this.address
+        );
+        return {
+          txid: tx.txid,
+          getReceipts
+        };
       }
 
       async setAddrByType(
         node: string,
         coinType: bigint,
         a: string
-      ): Promise<TransactionReceipt[]> {
+      ): Promise<Transaction> {
         const tx = await this.send('setAddr(bytes32,uint256,address)', [
           node,
           `0x${coinType.toString(16)}`,
           a
         ]);
-        return await this.provider.getTxReceipts(tx, this.abi, this.address);
+        const getReceipts = this.provider.getTxReceipts(
+          tx,
+          this.abi,
+          this.address
+        );
+        return {
+          txid: tx.txid,
+          getReceipts
+        };
       }
 
       async addr(node: string): Promise<string> {
@@ -140,22 +156,38 @@ const setAddrWithResolver = async (
     constructor(provider: Provider) {
       super(resolverAddr, provider, ABI.PublicResolver);
     }
-    async setAddr(node: string, a: string): Promise<TransactionReceipt[]> {
+    async setAddr(node: string, a: string): Promise<Transaction> {
       const tx = await this.send('setAddr(bytes32,address)', [node, a]);
-      return await this.provider.getTxReceipts(tx, this.abi, this.address);
+      const getReceipts = this.provider.getTxReceipts(
+        tx,
+        this.abi,
+        this.address
+      );
+      return {
+        txid: tx.txid,
+        getReceipts
+      };
     }
 
     async setAddrByType(
       node: string,
       coinType: bigint,
       a: string
-    ): Promise<TransactionReceipt[]> {
+    ): Promise<Transaction> {
       const tx = await this.send('setAddr(bytes32,uint256,address)', [
         node,
         `0x${coinType.toString(16)}`,
         a
       ]);
-      return await this.provider.getTxReceipts(tx, this.abi, this.address);
+      const getReceipts = this.provider.getTxReceipts(
+        tx,
+        this.abi,
+        this.address
+      );
+      return {
+        txid: tx.txid,
+        getReceipts
+      };
     }
 
     async addr(node: string): Promise<string> {
@@ -208,15 +240,20 @@ const getContentWithResolver = async (
       constructor(provider: Provider) {
         super(resolverAddr, provider, ABI.PublicResolver);
       }
-      async setContenthash(
-        node: string,
-        hash: string
-      ): Promise<TransactionReceipt[]> {
+      async setContenthash(node: string, hash: string): Promise<Transaction> {
         const tx = await this.send('setContenthash(bytes32,bytes)', [
           node,
           hash
         ]);
-        return await this.provider.getTxReceipts(tx, this.abi, this.address);
+        const getReceipts = this.provider.getTxReceipts(
+          tx,
+          this.abi,
+          this.address
+        );
+        return {
+          txid: tx.txid,
+          getReceipts
+        };
       }
 
       async contenthash(node: string): Promise<string> {
@@ -283,12 +320,17 @@ const setContenthashWithResolver = async (
     constructor(provider: Provider) {
       super(resolverAddr, provider, ABI.PublicResolver);
     }
-    async setContenthash(
-      node: string,
-      hash: string
-    ): Promise<TransactionReceipt[]> {
+    async setContenthash(node: string, hash: string): Promise<Transaction> {
       const tx = await this.send('setContenthash(bytes32,bytes)', [node, hash]);
-      return await this.provider.getTxReceipts(tx, this.abi, this.address);
+      const getReceipts = this.provider.getTxReceipts(
+        tx,
+        this.abi,
+        this.address
+      );
+      return {
+        txid: tx.txid,
+        getReceipts
+      };
     }
 
     async contenthash(node: string): Promise<string> {
@@ -324,13 +366,21 @@ const getTextWithResolver = async (
         node: string,
         key: string,
         value: string
-      ): Promise<TransactionReceipt[]> {
+      ): Promise<Transaction> {
         const tx = await this.send('setText(bytes32,string,string)', [
           node,
           key,
           value
         ]);
-        return await this.provider.getTxReceipts(tx, this.abi, this.address);
+        const getReceipts = this.provider.getTxReceipts(
+          tx,
+          this.abi,
+          this.address
+        );
+        return {
+          txid: tx.txid,
+          getReceipts
+        };
       }
 
       async text(node: string, key: string): Promise<string> {
@@ -369,13 +419,21 @@ const setTextWithResolver = async (
       node: string,
       key: string,
       value: string
-    ): Promise<TransactionReceipt[]> {
+    ): Promise<Transaction> {
       const tx = await this.send('setText(bytes32,string,string)', [
         node,
         key,
         value
       ]);
-      return await this.provider.getTxReceipts(tx, this.abi, this.address);
+      const getReceipts = this.provider.getTxReceipts(
+        tx,
+        this.abi,
+        this.address
+      );
+      return {
+        txid: tx.txid,
+        getReceipts
+      };
     }
 
     async text(node: string, key: string): Promise<string> {

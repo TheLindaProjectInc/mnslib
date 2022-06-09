@@ -11,6 +11,7 @@ import {
 } from '../utils/ContractUtils';
 import MetrixContract from '../mrx/MetrixContract';
 import labelhash from '../utils/labelhash';
+import { Transaction } from '../mrx/Transaction';
 import { TransactionReceipt } from '../mrx';
 
 /** Class which can be used to make record queries. */
@@ -46,19 +47,23 @@ export default class Name {
   /**
    * Set the owning address of the Name
    * @param address an EVM compatible address
-   * @returns {Promise<TransactionReceipt[]>} an array of TransactionReceipt objects
+   * @returns {Promise<Transaction>} a Transaction object
    */
-  async setOwner(address: string): Promise<TransactionReceipt[]> {
+  async setOwner(address: string): Promise<Transaction> {
     if (!address) throw new Error('No newOwner address provided!');
     const tx = await this.mns.send('setOwner(bytes32, address)', [
       this.hash,
       address
     ]);
-    return await this.provider.getTxReceipts(
+    const getReceipts = this.provider.getTxReceipts(
       tx,
       this.mns.abi,
       this.mns.address
     );
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   /**
@@ -76,19 +81,23 @@ export default class Name {
   /**
    * Set the resolver of the Name
    * @param address an EVM compatible address
-   * @returns {Promise<TransactionReceipt[]>} an array of TransactionReceipt objects
+   * @returns {Promise<Transaction>} a Transaction object
    */
-  async setResolver(address: string): Promise<TransactionReceipt[]> {
+  async setResolver(address: string): Promise<Transaction> {
     if (!address) throw new Error('No resolver address provided!');
     const tx = await this.mns.send('setResolver(bytes32, address)', [
       this.hash,
       address
     ]);
-    return await this.provider.getTxReceipts(
+    const getReceipts = this.provider.getTxReceipts(
       tx,
       this.mns.abi,
       this.mns.address
     );
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   /**
@@ -111,23 +120,33 @@ export default class Name {
   /**
    * Sets the TTL
    * @param ttl The TTL in seconds.
-   * @returns {Promise<TransactionReceipt[]>} an array of TransactionReceipt objects
+   * @returns {Promise<Transaction>} a Transaction object
    */
-  async setTTL(ttl: bigint): Promise<TransactionReceipt[]> {
+  async setTTL(ttl: bigint): Promise<Transaction> {
+    const empty = async () => {
+      return [] as TransactionReceipt[];
+    };
     try {
       const tx = await this.mns.send('setTTL(bytes32,uint64)', [
         this.hash,
         `0x${ttl.toString(16)}`
       ]);
-      return await this.provider.getTxReceipts(
+      const getReceipts = this.provider.getTxReceipts(
         tx,
         this.mns.abi,
         this.mns.address
       );
+      return {
+        txid: tx.txid,
+        getReceipts
+      };
     } catch (e) {
       console.log(e);
     }
-    return [];
+    return {
+      txid: ethers.constants.HashZero.replace('0x', ''),
+      getReceipts: empty()
+    };
   }
 
   /**
@@ -163,12 +182,9 @@ export default class Name {
    * Set the address
    * @param key a coin symbol with slip44 support like 'MRX'
    * @param address an address
-   * @returns {Promise<TransactionReceipt[]>} an array of TransactionReceipt objects
+   * @returns {Promise<Transaction>} a Transaction object
    */
-  async setAddress(
-    key: string,
-    address: string
-  ): Promise<TransactionReceipt[]> {
+  async setAddress(key: string, address: string): Promise<Transaction> {
     if (!key) {
       throw new Error('No coinId provided');
     }
@@ -204,9 +220,9 @@ export default class Name {
   /**
    * Set the contenthash
    * @param content the hash
-   * @returns {Promise<TransactionReceipt[]>} an array of TransactionReceipt objects
+   * @returns {Promise<Transaction>} a Transaction object
    */
-  async setContenthash(content: string): Promise<TransactionReceipt[]> {
+  async setContenthash(content: string): Promise<Transaction> {
     const resolverAddr = await this.getResolverAddr();
     return setContenthashWithResolver(
       this.name,
@@ -230,12 +246,9 @@ export default class Name {
    * Sets the text data associated with a key.
    * @param key The key to set.
    * @param recordValue The text data value to set.
-   * @returns {Promise<TransactionReceipt[]>} an array of TransactionReceipt objects
+   * @returns {Promise<Transaction>} a Transaction object
    */
-  async setText(
-    key: string,
-    recordValue: string
-  ): Promise<TransactionReceipt[]> {
+  async setText(key: string, recordValue: string): Promise<Transaction> {
     const resolverAddr = await this.getResolverAddr();
     return setTextWithResolver(
       this.name,
@@ -250,22 +263,23 @@ export default class Name {
    * Sets the owner of a subnode
    * @param label The key to set.
    * @param newOwner An address for the owner
-   * @returns {Promise<TransactionReceipt[]>} an array of TransactionReceipt objects
+   * @returns {Promise<Transaction>} a Transaction object
    */
-  async setSubnodeOwner(
-    label: string,
-    newOwner: string
-  ): Promise<TransactionReceipt[]> {
+  async setSubnodeOwner(label: string, newOwner: string): Promise<Transaction> {
     const lh = labelhash(label);
     const tx = await this.mns.send(
       'setSubnodeOwner(bytes32, bytes32, address)',
       [this.hash, lh, newOwner]
     );
-    return await this.provider.getTxReceipts(
+    const getReceipts = this.provider.getTxReceipts(
       tx,
       this.mns.abi,
       this.mns.address
     );
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   /**
@@ -274,33 +288,37 @@ export default class Name {
    * @param newOwner The address of the new owner.
    * @param resolver The address of the resolver.
    * @param ttl The TTL in seconds.
-   * @returns {Promise<TransactionReceipt[]>} an array of TransactionReceipt objects
+   * @returns {Promise<Transaction>} a Transaction object
    */
   async setSubnodeRecord(
     label: string,
     newOwner: string,
     resolver: string,
     ttl = 0
-  ): Promise<TransactionReceipt[]> {
+  ): Promise<Transaction> {
     const lh = labelhash(label);
     const tx = await this.mns.send(
       'setSubnodeRecord(bytes32, bytes32, address, address, uint64)',
       [this.hash, lh, newOwner, resolver, `0x${BigInt(ttl).toString(16)}`]
     );
-    return await this.provider.getTxReceipts(
+    const getReceipts = this.provider.getTxReceipts(
       tx,
       this.mns.abi,
       this.mns.address
     );
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   /**
    * Create a subdomain of this name
    * @param label The hash of the label specifying the subnode.
 
-   * @returns {Promise<TransactionReceipt[]>} an array of TransactionReceipt objects
+   * @returns {Promise<Transaction>} a Transaction object
    */
-  async createSubdomain(label: string): Promise<TransactionReceipt[]> {
+  async createSubdomain(label: string): Promise<Transaction> {
     const resolverPromise = this.getResolver();
     const ownerPromise = this.getOwner();
     const [resolver, owner] = await Promise.all([

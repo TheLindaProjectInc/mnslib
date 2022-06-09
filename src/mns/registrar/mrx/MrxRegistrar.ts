@@ -4,7 +4,7 @@ import { CONTRACTS } from '../../../constants';
 
 import { IERC721Enumerable } from '../../../mrx/interface/IERC721Enumerable';
 import MetrixContract from '../../../mrx/MetrixContract';
-import TransactionReceipt from '../../../mrx/TransactionReceipt';
+import { Transaction } from '../../../mrx/Transaction';
 import { Provider } from '../../../provider';
 
 /**
@@ -89,31 +89,43 @@ export class MrxRegistrar extends MetrixContract implements IERC721Enumerable {
     from: string,
     to: string,
     tokenId: string
-  ): Promise<TransactionReceipt[]> {
+  ): Promise<Transaction> {
     const tx = await this.send('safeTransferFrom(address,address,uint256)', [
       from,
       to,
       tokenId
     ]);
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   async transferFrom(
     from: string,
     to: string,
     tokenId: string
-  ): Promise<TransactionReceipt[]> {
+  ): Promise<Transaction> {
     const tx = await this.send('transferFrom(address,address,uint256)', [
       from,
       to,
       tokenId
     ]);
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
-  async approve(to: string, tokenId: string): Promise<TransactionReceipt[]> {
+  async approve(to: string, tokenId: string): Promise<Transaction> {
     const tx = await this.send('approve(address,uint256)', [to, tokenId]);
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   async getApproved(tokenId: string): Promise<string> {
@@ -124,12 +136,16 @@ export class MrxRegistrar extends MetrixContract implements IERC721Enumerable {
   async setApprovalForAll(
     operator: string,
     approved: boolean
-  ): Promise<TransactionReceipt[]> {
+  ): Promise<Transaction> {
     const tx = await this.send('setApprovalForAll(address,bool)', [
       operator,
       `${approved}`
     ]);
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   async isApprovedForAll(owner: string, operator: string): Promise<boolean> {
@@ -148,12 +164,16 @@ export class MrxRegistrar extends MetrixContract implements IERC721Enumerable {
     to: string,
     tokenId: string,
     data: string
-  ): Promise<TransactionReceipt[]> {
+  ): Promise<Transaction> {
     const tx = await this.send(
       'safeTransferFrom(address,address,uint256,bytes)',
       [from, to, tokenId, data]
     );
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   async supportsInterface(interfaceId: string): Promise<boolean> {
@@ -184,8 +204,12 @@ export class MrxRegistrar extends MetrixContract implements IERC721Enumerable {
   /**
    * Reclaim ownership of a name in MNS, if you own it in the registrar.
    */
-  async reclaim(id: string, owner: string) {
+  async reclaim(id: string, owner: string): Promise<Transaction> {
     const tx = await this.send('reclaim(uint256,address)', [id, owner]);
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 }
