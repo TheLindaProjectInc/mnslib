@@ -1,6 +1,6 @@
 import ABI from '../../abi';
 import { CONTRACTS } from '../../constants';
-import { TransactionReceipt } from '../../mrx';
+import { Transaction } from '../../mrx/Transaction';
 import { Provider } from '../../provider';
 import BaseResolver from './BaseResolver';
 import NameResolver from './profiles/NameResolver';
@@ -22,9 +22,13 @@ export default class DefaultReverseResolver
     );
   }
 
-  async setName(node: string, name: string): Promise<TransactionReceipt[]> {
+  async setName(node: string, name: string): Promise<Transaction> {
     const tx = await this.send('setName(bytes32,string)', [node, name]);
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   async name(node: string): Promise<string> {

@@ -1,9 +1,9 @@
 import { ethers } from 'ethers';
 import ABI from '../../../abi';
 import { CONTRACTS } from '../../../constants';
-import TransactionReceipt from '../../../mrx/TransactionReceipt';
 import MetrixContract from '../../../mrx/MetrixContract';
 import { Provider } from '../../../provider';
+import { Transaction } from '../../../mrx/Transaction';
 
 /**
  * A registrar that allocates subdomains to the first person to claim them, but
@@ -42,9 +42,13 @@ export class ReverseRegistrar extends MetrixContract {
    * @param owner The address to set as the owner of the reverse record in MNS.
    * @return The MNS node hash of the reverse record.
    */
-  async claim(owner: string): Promise<TransactionReceipt[]> {
+  async claim(owner: string): Promise<Transaction> {
     const tx = await this.send('claim(address)', [owner]);
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   /**
@@ -54,12 +58,13 @@ export class ReverseRegistrar extends MetrixContract {
    * @param owner The address to set as the owner of the reverse record in MNS.
    * @return The MNS node hash of the reverse record.
    */
-  async claimForAddr(
-    addr: string,
-    owner: string
-  ): Promise<TransactionReceipt[]> {
+  async claimForAddr(addr: string, owner: string): Promise<Transaction> {
     const tx = await this.send('claimForAddr(address,address)', [addr, owner]);
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
   /**
    * Transfers ownership of the reverse MNS record associated with the
@@ -71,9 +76,13 @@ export class ReverseRegistrar extends MetrixContract {
   async claimWithResolver(
     owner: string,
     resolver: string
-  ): Promise<TransactionReceipt[]> {
+  ): Promise<Transaction> {
     const tx = await this.send('claimWithResolver(string)', [owner, resolver]);
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   /**
@@ -88,12 +97,16 @@ export class ReverseRegistrar extends MetrixContract {
     addr: string,
     owner: string,
     resolver: string
-  ): Promise<TransactionReceipt[]> {
+  ): Promise<Transaction> {
     const tx = await this.send(
       'claimWithResolverForAddr(address,address,address)',
       [addr, owner, resolver]
     );
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   /**
@@ -103,9 +116,13 @@ export class ReverseRegistrar extends MetrixContract {
    * @param name The name to set for this address.
    * @return The MNS node hash of the reverse record.
    */
-  async setName(name: string): Promise<TransactionReceipt[]> {
+  async setName(name: string): Promise<Transaction> {
     const tx = await this.send('setName(string)', [name]);
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   /**
@@ -122,13 +139,17 @@ export class ReverseRegistrar extends MetrixContract {
     addr: string,
     owner: string,
     name: string
-  ): Promise<TransactionReceipt[]> {
+  ): Promise<Transaction> {
     const tx = await this.send('setNameForAddr(address,address,string)', [
       addr,
       owner,
       name
     ]);
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   /**

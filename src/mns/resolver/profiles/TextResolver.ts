@@ -1,5 +1,5 @@
-import { TransactionReceipt } from '../../../mrx';
 import { IERC165 } from '../../../mrx/interface/IERC165';
+import { Transaction } from '../../../mrx/Transaction';
 
 /**
  * Interface that represents an Text Resolver
@@ -13,13 +13,9 @@ export default interface TextResolver extends IERC165 {
    * @param node The node to update.
    * @param key The key to set.
    * @param value The text data value to set.
-   * @returns {Promise<TransactionReceipt[]>} an array of TransactionReceipt objects
+   * @returns {Promise<Transaction>} an array of TransactionReceipt objects
    */
-  setText(
-    node: string,
-    key: string,
-    value: string
-  ): Promise<TransactionReceipt[]>;
+  setText(node: string, key: string, value: string): Promise<Transaction>;
   /**
    * Returns the text data associated with an MNS node and key.
    * @param node The MNS node to query.

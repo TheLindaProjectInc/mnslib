@@ -3,7 +3,7 @@ import ABI from '../../../abi';
 import { CONTRACTS } from '../../../constants';
 import { IERC165 } from '../../../mrx/interface/IERC165';
 import MetrixContract from '../../../mrx/MetrixContract';
-import TransactionReceipt from '../../../mrx/TransactionReceipt';
+import { Transaction } from '../../../mrx/Transaction';
 import { Provider } from '../../../provider';
 
 export class MrxRegistrarController extends MetrixContract implements IERC165 {
@@ -92,9 +92,13 @@ export class MrxRegistrarController extends MetrixContract implements IERC165 {
     return commitment ? commitment.toString() : ethers.constants.HashZero;
   }
 
-  async commit(commitment: string): Promise<TransactionReceipt[]> {
+  async commit(commitment: string): Promise<Transaction> {
     const tx = await this.send('commit(bytes32)', [commitment]);
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   async register(
@@ -103,14 +107,18 @@ export class MrxRegistrarController extends MetrixContract implements IERC165 {
     duration: bigint,
     secret: string,
     value: string
-  ): Promise<TransactionReceipt[]> {
+  ): Promise<Transaction> {
     const tx = await this.send(
       'register(string,address,uint256,bytes32)',
       [name, owner, `0x${duration.toString(16)}`, secret],
       value,
       420000
     );
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   async registerWithConfig(
@@ -121,27 +129,35 @@ export class MrxRegistrarController extends MetrixContract implements IERC165 {
     resolver: string,
     addr: string,
     value: string
-  ): Promise<TransactionReceipt[]> {
+  ): Promise<Transaction> {
     const tx = await this.send(
       'registerWithConfig(string,address,uint256,bytes32,address,address)',
       [name, owner, `0x${duration.toString(16)}`, secret, resolver, addr],
       value,
       420000
     );
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   async renew(
     name: string,
     duration: bigint,
     value: string
-  ): Promise<TransactionReceipt[]> {
+  ): Promise<Transaction> {
     const tx = await this.send(
       'renew(string,uint256)',
       [name, `0x${duration.toString(16)}`],
       value,
       420000
     );
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 }

@@ -1,5 +1,5 @@
-import { TransactionReceipt } from '../../../mrx';
 import { IERC165 } from '../../../mrx/interface/IERC165';
+import { Transaction } from '../../../mrx/Transaction';
 
 /**
  * Interface that represent an ABI Resolver
@@ -14,13 +14,9 @@ export default interface ABIResolver extends IERC165 {
    * @param node The node to update.
    * @param contentType The content type of the ABI
    * @param data The ABI data.
-   * @returns {Promise<TransactionReceipt[]>} an array of TransactionReceipt objects
+   * @returns {Promise<Transaction>} an array of TransactionReceipt objects
    */
-  setABI(
-    node: string,
-    contentType: bigint,
-    data: string
-  ): Promise<TransactionReceipt[]>;
+  setABI(node: string, contentType: bigint, data: string): Promise<Transaction>;
   /**
    * Returns the ABI associated with an MNS node.
    * Defined in EIP205.

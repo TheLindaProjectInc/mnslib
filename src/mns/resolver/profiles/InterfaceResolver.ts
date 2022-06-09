@@ -1,5 +1,5 @@
-import { TransactionReceipt } from '../../../mrx';
 import { IERC165 } from '../../../mrx/interface/IERC165';
+import { Transaction } from '../../../mrx/Transaction';
 
 /**
  * Interface that represents an Interface Resolver
@@ -13,13 +13,13 @@ export default interface InterfaceResolver extends IERC165 {
    * @param node The node to update.
    * @param interfaceId The EIP 165 interface ID.
    * @param implementer The address of a contract that implements this interface for this node.
-   * @returns {Promise<TransactionReceipt[]>} an array of TransactionReceipt objects
+   * @returns {Promise<Transaction>} an array of TransactionReceipt objects
    */
   setInterface(
     node: string,
     interfaceId: string,
     implementer: string
-  ): Promise<TransactionReceipt[]>;
+  ): Promise<Transaction>;
 
   /**
    * Returns the address of a contract that implements the specified interface for this name.

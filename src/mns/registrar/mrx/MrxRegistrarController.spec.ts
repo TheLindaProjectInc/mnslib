@@ -11,10 +11,9 @@ describe('MRXRegistrarController tests', () => {
 
   it('should return a price', async () => {
     const price = await controller.rentPrice(
-      'pyropets',
+      'test',
       BigInt(60 * 60 * 24 * 365)
     );
-    console.log(`price: ${price.toString()}`);
     equal(isNaN(Number(price)), false);
   }).timeout(5000);
 
@@ -25,13 +24,12 @@ describe('MRXRegistrarController tests', () => {
 
   it('should makeCommitmentWithConfig', async () => {
     const commitment = await controller.makeCommitmentWithConfig(
-      'pyropets',
+      'test',
       `0x${controller.address}`,
       ethers.constants.HashZero,
       '0x0f34d660e34ccafac00b463fdd3a80a7437c666d',
       `0x${controller.address}`
     );
-    console.log(`commitment: ${commitment}`);
     notEqual(commitment, ethers.constants.HashZero);
   }).timeout(5000);
 

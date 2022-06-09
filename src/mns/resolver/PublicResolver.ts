@@ -1,7 +1,7 @@
 import { ethers } from 'ethers';
 import ABI from '../../abi';
 import { CONTRACTS } from '../../constants';
-import { TransactionReceipt } from '../../mrx';
+import { Transaction } from '../../mrx/Transaction';
 import { Provider } from '../../provider';
 import { fromHexAddress } from '../../utils/AddressUtils';
 import BaseResolver from './BaseResolver';
@@ -43,13 +43,17 @@ export default class PublicResolver
     node: string,
     contentType: bigint,
     data: string
-  ): Promise<TransactionReceipt[]> {
+  ): Promise<Transaction> {
     const tx = await this.send('setABI(bytes32,uint256,bytes)', [
       node,
       `0x${contentType.toString(16)}`,
       data
     ]);
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   async ABI(
@@ -70,22 +74,30 @@ export default class PublicResolver
     return [BigInt(0), ''];
   }
 
-  async setAddr(node: string, a: string): Promise<TransactionReceipt[]> {
+  async setAddr(node: string, a: string): Promise<Transaction> {
     const tx = await this.send('setAddr(bytes32,address)', [node, a]);
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   async setAddrByType(
     node: string,
     coinType: bigint,
     a: string
-  ): Promise<TransactionReceipt[]> {
+  ): Promise<Transaction> {
     const tx = await this.send('setAddr(bytes32,uint256,address)', [
       node,
       `0x${coinType.toString(16)}`,
       a
     ]);
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   async addr(
@@ -113,12 +125,13 @@ export default class PublicResolver
     return ethers.constants.AddressZero;
   }
 
-  async setContenthash(
-    node: string,
-    hash: string
-  ): Promise<TransactionReceipt[]> {
+  async setContenthash(node: string, hash: string): Promise<Transaction> {
     const tx = await this.send('setContenthash(bytes32,bytes)', [node, hash]);
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   async contenthash(node: string): Promise<string> {
@@ -129,12 +142,13 @@ export default class PublicResolver
     return '';
   }
 
-  async setDNSRecords(
-    node: string,
-    data: string
-  ): Promise<TransactionReceipt[]> {
+  async setDNSRecords(node: string, data: string): Promise<Transaction> {
     const tx = await this.send('setDNSRecords(bytes32,bytes)', [node, data]);
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
   async dnsRecord(
     node: string,
@@ -163,14 +177,22 @@ export default class PublicResolver
     return false;
   }
 
-  async clearDNSZone(node: string): Promise<TransactionReceipt[]> {
+  async clearDNSZone(node: string): Promise<Transaction> {
     const tx = await this.send('clearDNSZone(bytes32)', [node]);
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
-  async setZoneHash(node: string, hash: string): Promise<TransactionReceipt[]> {
+  async setZoneHash(node: string, hash: string): Promise<Transaction> {
     const tx = await this.send('setZoneHash(bytes32,bytes)', [node, hash]);
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   async zoneHash(node: string): Promise<string> {
@@ -185,13 +207,17 @@ export default class PublicResolver
     node: string,
     interfaceId: string,
     implementer: string
-  ): Promise<TransactionReceipt[]> {
+  ): Promise<Transaction> {
     const tx = await this.send('setInterface(bytes32,bytes4,address)', [
       node,
       interfaceId,
       implementer
     ]);
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   async interfaceImplementer(
@@ -208,9 +234,13 @@ export default class PublicResolver
     return ethers.constants.AddressZero;
   }
 
-  async setName(node: string, name: string): Promise<TransactionReceipt[]> {
+  async setName(node: string, name: string): Promise<Transaction> {
     const tx = await this.send('setName(bytes32,string)', [node, name]);
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   async name(node: string): Promise<string> {
@@ -221,17 +251,17 @@ export default class PublicResolver
     return '';
   }
 
-  async setPubkey(
-    node: string,
-    x: string,
-    y: string
-  ): Promise<TransactionReceipt[]> {
+  async setPubkey(node: string, x: string, y: string): Promise<Transaction> {
     const tx = await this.send('setPubkey(bytes32,bytes32,bytes32)', [
       node,
       x,
       y
     ]);
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   async pubkey(node: string): Promise<[x: string, y: string]> {
@@ -250,13 +280,17 @@ export default class PublicResolver
     node: string,
     key: string,
     value: string
-  ): Promise<TransactionReceipt[]> {
+  ): Promise<Transaction> {
     const tx = await this.send('setText(bytes32,string,string)', [
       node,
       key,
       value
     ]);
-    return await this.provider.getTxReceipts(tx, this.abi, this.address);
+    const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
+    return {
+      txid: tx.txid,
+      getReceipts
+    };
   }
 
   async text(node: string, key: string): Promise<string> {
