@@ -7,7 +7,7 @@ export const contracts: Deployment = {
   DefaultReverseResolver: '594679c02371634e92fb98fcb216da5e5513c261',
   ReverseRegistrar: '1e0e17c71f77db4ccd437eec131194c83517b710',
   BaseRegistrarImplementation: '38ddc88dea72954a65c12756174c7ad551024f7d',
-  MRXtoUSDOracle: '0fa18be71dc3117034b3244b9af38f70e335a051',
+  MRXtoUSDOracle: '87a3d9dbf38548cfea9e634a24381960acca9b1c',
   MRXRegistrarController: 'adc68013c85eecb897bce76a6d0d6dce47b9977a',
   StaticMetadataService: 'f2dff9e241188b7b77f60b993daccf4da670d696',
   NameWrapper: '6d6915b350e268fb664782c09ef23a087ea93381',
