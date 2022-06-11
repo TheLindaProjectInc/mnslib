@@ -23,22 +23,22 @@ describe('mnslib tests', () => {
     ]);
     const exists = recordExists ? recordExists.toString() === 'true' : false;
     equal(exists, true);
-  }).timeout(5000);
+  }).timeout(10000);
 
   it('should have a ttl', async () => {
     const ttl = await name.getTTL();
     equal(!isNaN(ttl), true);
-  }).timeout(5000);
+  }).timeout(10000);
 
   it('should return expected TestNet MRX address', async () => {
     const address = await name.getAddress('MRX');
     equal(address, 'maTQfd4w7mqCzGL32RgBFMYY9ehCmjLEGf');
-  }).timeout(5000);
+  }).timeout(10000);
 
   it('should return expected TestNet address', async () => {
     const address = await name.getAddress();
     equal(address, '0xC87bB8Ab63De99A58a5339217C4A1C92f0FBFEFe');
-  }).timeout(5000);
+  }).timeout(10000);
 
   it('should return expected TestNet owner', async () => {
     const owner = await name.getOwner();
@@ -46,19 +46,19 @@ describe('mnslib tests', () => {
       owner.toLowerCase().replace('0x', ''),
       'c87bb8ab63de99a58a5339217c4a1c92f0fbfefe'
     );
-  }).timeout(5000);
+  }).timeout(10000);
 
   it('should return expected TestNet name given Ethereum checksum address', async () => {
     const addrName = await mns.getName(
       '0xC87bB8Ab63De99A58a5339217C4A1C92f0FBFEFe'
     );
     equal(addrName, first);
-  }).timeout(5000);
+  }).timeout(10000);
 
   it('should return expected TestNet name given hex address', async () => {
     const addrName = await mns.getName(
       'c87bb8ab63de99a58a5339217c4a1c92f0fbfefe'
     );
     equal(addrName, first);
-  }).timeout(5000);
+  }).timeout(10000);
 });

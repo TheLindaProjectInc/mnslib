@@ -16,10 +16,10 @@ describe('DefaultReverseResolver tests', () => {
   it('should match the default reverse resolver address', async () => {
     const address = await name.getResolver();
     equal(address.replace('0x', '').toLowerCase(), resolver.address);
-  }).timeout(5000);
+  }).timeout(10000);
 
   it('should match resolver.name(hash) address', async () => {
     const label = await resolver.name(name.hash);
     equal('first.mrx', label);
-  }).timeout(5000);
+  }).timeout(10000);
 });
