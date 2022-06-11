@@ -16,10 +16,10 @@ describe('ReverseRegistrar tests', () => {
       resolver.replace('0x', '').toLowerCase(),
       CONTRACTS[network].DefaultReverseResolver
     );
-  }).timeout(5000);
+  }).timeout(10000);
 
   it('should match the MNS address', async () => {
     const registry = await registrar.mns();
     equal(registry.replace('0x', '').toLowerCase(), getMNSAddress(network));
-  }).timeout(5000);
+  }).timeout(10000);
 });
