@@ -45,7 +45,7 @@ export default class Web3Provider implements Provider {
   async getTxReceipts(tx: any, abi: any[], contract?: string) {
     const receipts: TransactionReceipt[] = [];
     try {
-      const { txid, sender, hash160 } = tx; // eslint-disable-line @typescript-eslint/no-unused-vars
+      const txid = tx; // eslint-disable-line @typescript-eslint/no-unused-vars
       const checkConfirm = async () => {
         const receipt = await this.getTransactionReceipt(txid);
         return receipt;
