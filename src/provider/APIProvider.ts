@@ -3,6 +3,7 @@ import fetch from 'node-fetch';
 import { Result } from 'ethers/lib/utils';
 import Provider from './Provider';
 import { NetworkType } from '../types/NetworkType';
+import TransactionReceipt from '../mrx/TransactionReceipt';
 
 export default class APIProvider implements Provider {
   network: NetworkType;
@@ -11,9 +12,82 @@ export default class APIProvider implements Provider {
     this.network = network;
   }
 
+  private async getTransactionReceipt(
+    txid: string
+  ): Promise<TransactionReceipt | undefined> {
+    let uri;
+    switch (this.network) {
+      case 'MainNet':
+        uri = 'https://explorer.metrixcoin.com/api';
+        break;
+      case 'TestNet':
+        uri = 'https://testnet-explorer.metrixcoin.com/api';
+        break;
+      default:
+        return undefined;
+    }
+    let receipt: TransactionReceipt | undefined;
+    try {
+      const response = await fetch(`${uri}/tx/${txid}`);
+      if (response.status === 200) {
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.indexOf('application/json') !== -1) {
+          receipt = JSON.parse(JSON.stringify(await response.json()));
+        }
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    return receipt;
+  }
+
   // eslint-disable-next-line
   async getTxReceipts(tx: any, abi: any[], contract?: string) {
-    return [];
+    const receipts: TransactionReceipt[] = [];
+    try {
+      const txid = tx; // eslint-disable-line @typescript-eslint/no-unused-vars
+      const checkConfirm = async () => {
+        const receipt = await this.getTransactionReceipt(txid);
+        return receipt;
+      };
+      const confirmed = await checkConfirm();
+      if (
+        confirmed && confirmed.confirmations != undefined
+          ? confirmed.confirmations > 0
+          : false
+      ) {
+        receipts.push(confirmed as TransactionReceipt);
+      } else {
+        let receipt: TransactionReceipt | undefined;
+        for (let i = 0; i < 30; i++) {
+          receipt = await checkConfirm();
+          if (!receipt) {
+            await new Promise((resolve) => setTimeout(resolve, 60000));
+          } else {
+            if (
+              receipt.confirmations != undefined
+                ? receipt.confirmations > 0
+                : false
+            ) {
+              break;
+            } else {
+              await new Promise((resolve) => setTimeout(resolve, 60000));
+            }
+          }
+        }
+        if (receipt) {
+          receipts.push(receipt);
+        }
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (e: any) {
+      console.log(
+        `Failed, ${e.message ? e.message : 'An unknown error occurred'}`
+      );
+      return receipts;
+    }
+    return receipts;
   }
   async callContract(
     contract: string,
