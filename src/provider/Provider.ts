@@ -6,7 +6,7 @@ export default interface Provider {
   network: NetworkType;
 
   getTxReceipts(
-    tx: any, // eslint-disable-line @typescript-eslint/no-explicit-any
+    tx: { txid: string; sender: string; hash160: string },
     abi: any[], // eslint-disable-line @typescript-eslint/no-explicit-any
     contract?: string
   ): Promise<TransactionReceipt[]>;
