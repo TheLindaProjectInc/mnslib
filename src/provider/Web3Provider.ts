@@ -27,7 +27,7 @@ export default class Web3Provider implements Provider {
     }
     let receipt: TransactionReceipt | undefined;
     try {
-      const response = await fetch(`${uri}/api/tx/${txid}`);
+      const response = await fetch(`${uri}/tx/${txid}`);
       if (response.status === 200) {
         const contentType = response.headers.get('content-type');
         if (contentType && contentType.indexOf('application/json') !== -1) {
