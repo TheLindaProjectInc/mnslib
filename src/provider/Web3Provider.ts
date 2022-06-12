@@ -156,9 +156,7 @@ export default class Web3Provider implements Provider {
           gasPrice
         ]
       );
-      return result.txid
-        ? result.txid
-        : ethers.constants.HashZero.replace('0x', '');
+      return result ? result : ethers.constants.HashZero.replace('0x', '');
     } catch (e) {
       console.log(e);
     }
