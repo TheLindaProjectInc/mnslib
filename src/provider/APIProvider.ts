@@ -42,11 +42,14 @@ export default class APIProvider implements Provider {
     return receipt;
   }
 
-  // eslint-disable-next-line
-  async getTxReceipts(tx: any, abi: any[], contract?: string) {
+  async getTxReceipts(
+    tx: { txid: string; sender: string; hash160: string },
+    abi: any[], // eslint-disable-line
+    contract?: string // eslint-disable-line @typescript-eslint/no-unused-vars
+  ) {
     const receipts: TransactionReceipt[] = [];
     try {
-      const txid = tx; // eslint-disable-line @typescript-eslint/no-unused-vars
+      const { txid, sender, hash160 } = tx; // eslint-disable-line @typescript-eslint/no-unused-vars
       const checkConfirm = async () => {
         const receipt = await this.getTransactionReceipt(txid);
         return receipt;

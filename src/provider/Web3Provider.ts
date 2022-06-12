@@ -42,10 +42,14 @@ export default class Web3Provider implements Provider {
   }
 
   // eslint-disable-next-line
-  async getTxReceipts(tx: any, abi: any[], contract?: string) {
+  async getTxReceipts(
+    tx: { txid: string; sender: string; hash160: string },
+    abi: any[], // eslint-disable-line
+    contract?: string // eslint-disable-line @typescript-eslint/no-unused-vars
+  ) {
     const receipts: TransactionReceipt[] = [];
     try {
-      const txid = tx; // eslint-disable-line @typescript-eslint/no-unused-vars
+      const { txid, sender, hash160 } = tx; // eslint-disable-line @typescript-eslint/no-unused-vars
       const checkConfirm = async () => {
         const receipt = await this.getTransactionReceipt(txid);
         return receipt;
@@ -156,9 +160,17 @@ export default class Web3Provider implements Provider {
           gasPrice
         ]
       );
-      return result.txid
-        ? result.txid
-        : ethers.constants.HashZero.replace('0x', '');
+      return result && result.txid != undefined
+        ? {
+            txid: result.txid,
+            sender: ethers.constants.AddressZero.replace('0x', ''),
+            hash160: ethers.constants.AddressZero.replace('0x', '')
+          }
+        : {
+            txid: ethers.constants.HashZero.replace('0x', ''),
+            sender: ethers.constants.AddressZero.replace('0x', ''),
+            hash160: ethers.constants.AddressZero.replace('0x', '')
+          };
     } catch (e) {
       console.log(e);
     }

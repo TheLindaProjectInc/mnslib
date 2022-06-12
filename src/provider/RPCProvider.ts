@@ -18,7 +18,11 @@ export default class RPCProvider implements Provider {
     this.sender = sender;
   }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  async getTxReceipts(tx: any, abi: any[], contract?: string) {
+  async getTxReceipts(
+    tx: { txid: string; sender: string; hash160: string },
+    abi: any[], // eslint-disable-line @typescript-eslint/no-explicit-any
+    contract?: string
+  ) {
     if (!abi) {
       return [];
     }
