@@ -88,7 +88,7 @@ export default class PublicResolver
     coinType: bigint,
     a: string
   ): Promise<Transaction> {
-    const tx = await this.send('setAddr(bytes32,uint256,address)', [
+    const tx = await this.send('setAddr(bytes32,uint256,bytes)', [
       node,
       `0x${coinType.toString(16)}`,
       a
