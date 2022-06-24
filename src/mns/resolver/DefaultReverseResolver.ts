@@ -1,5 +1,6 @@
 import ABI from '../../abi';
 import { CONTRACTS } from '../../constants';
+import MetrixContract from '../../mrx/MetrixContract';
 import { Transaction } from '../../mrx/Transaction';
 import { Provider } from '../../provider';
 import BaseResolver from './BaseResolver';
@@ -10,10 +11,7 @@ import NameResolver from './profiles/NameResolver';
  *
  * @class
  */
-export default class DefaultReverseResolver
-  extends BaseResolver
-  implements NameResolver
-{
+export default class DefaultReverseResolver extends MetrixContract {
   constructor(provider: Provider) {
     super(
       CONTRACTS[provider.network].DefaultReverseResolver,
