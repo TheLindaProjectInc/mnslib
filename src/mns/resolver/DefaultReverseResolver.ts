@@ -3,8 +3,6 @@ import { CONTRACTS } from '../../constants';
 import MetrixContract from '../../mrx/MetrixContract';
 import { Transaction } from '../../mrx/Transaction';
 import { Provider } from '../../provider';
-import BaseResolver from './BaseResolver';
-import NameResolver from './profiles/NameResolver';
 
 /**
  * Class which can be used to interact with the DefaultReverseResolver
