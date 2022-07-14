@@ -176,4 +176,29 @@ export default class Web3Provider implements Provider {
     }
     return undefined;
   }
+
+  async balance(address: string): Promise<bigint> {
+    let uri = '';
+    switch (this.network) {
+      case 'MainNet':
+        uri = 'https://explorer.metrixcoin.com/api';
+        break;
+      case 'TestNet':
+        uri = 'https://testnet-explorer.metrixcoin.com/api';
+        break;
+      default:
+        return BigInt(0);
+    }
+    const raw = await (
+      await fetch(
+        `${uri}/address/${
+          address.startsWith('0x')
+            ? address.slice(2).toLowerCase()
+            : address.toLowerCase()
+        }`
+      )
+    ).json();
+    const bal = raw.balance ? BigInt(raw.balance) : BigInt(0);
+    return bal;
+  }
 }

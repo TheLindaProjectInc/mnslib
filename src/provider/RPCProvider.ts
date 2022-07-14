@@ -148,4 +148,13 @@ export default class RPCProvider implements Provider {
     }
     return result;
   }
+
+  async balance(address: string): Promise<bigint> {
+    const raw = await this.mrpc.promiseGetAccountInfo(address);
+    if (raw && raw.balance) {
+      const bal = raw.balance ? BigInt(raw.balance) : BigInt(0);
+      return bal;
+    }
+    return BigInt(0);
+  }
 }

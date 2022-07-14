@@ -20,6 +20,17 @@ export default class MetrixContract {
   }
 
   /**
+   * Get this contract balance
+   *
+   * @return {Promise<bigint>} the satoshi balance of this contract
+   *
+   * @public
+   */
+  public async balance(): Promise<bigint> {
+    return await this.provider.balance(this.address);
+  }
+
+  /**
    * Perform calltocontract
    *
    * @param {string} method The contract method to call
