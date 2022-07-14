@@ -19,6 +19,13 @@ export default class MetrixContract {
     this.bytecode = bytecode;
   }
 
+  /**
+   * Get this contract balance
+   *
+   * @return {Promise<bigint>} the satoshi balance of this contract
+   *
+   * @public
+   */
   public async balance(): Promise<bigint> {
     return await this.provider.balance(this.address);
   }
