@@ -606,6 +606,35 @@ abstract class MetrixRPC {
     }
   }
 
+  public promiseGetAccountInfo(
+    address: string
+  ): Promise<any> {
+    return new Promise<any>(
+      (resolve: (result: any) => any, reject: (e: Error) => any): void => {
+        this.getAccountInfo(
+          address,
+          (e: Error | null, result: any): void => {
+            if (e) reject(e);
+            else resolve(result);
+          }
+        );
+      }
+    );
+  }
+
+  public getAccountInfo(
+    address: string,
+    callback: (e: Error | null, result: any /* eslint-disable-line */) => void
+  ): void {
+    
+      this.callDaemon(
+        'getaccountinfo',
+        '[ ' + address + ' ]',
+        callback
+      );
+    
+  }
+
   public promiseGetAddressesByAccount(
     paramOptionalAccount: string | null
   ): Promise<any> {

@@ -19,6 +19,10 @@ export default class MetrixContract {
     this.bytecode = bytecode;
   }
 
+  public async balance(): Promise<bigint> {
+    return await this.provider.balance(this.address);
+  }
+
   /**
    * Perform calltocontract
    *
