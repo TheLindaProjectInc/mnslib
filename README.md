@@ -15,7 +15,7 @@ npm install --save @metrixnames/mnslib
 ### Example Usage
 
 ```
-import MNS, { getMNSAddress } from '@metrixnames/mnslib';
+import { MNS, Name, getMNSAddress } from '@metrixnames/mnslib';
 
 const network = 'TestNet'; // can be 'MainNet' or 'TestNet'
 
