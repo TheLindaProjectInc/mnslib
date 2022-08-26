@@ -1,6 +1,6 @@
+import { APIProvider } from '@metrixcoin/metrilib';
 import { equal } from 'assert';
 import { MNS, Name, DefaultReverseResolver } from '../..';
-import { APIProvider } from '../../provider';
 import { getMNSAddress } from '../../utils/ContractUtils';
 
 describe('DefaultReverseResolver tests', () => {

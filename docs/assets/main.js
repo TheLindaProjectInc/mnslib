@@ -1,4 +1,5 @@
 'use strict';
+'use strict';
 (() => {
   var Qe = Object.create;
   var ae = Object.defineProperty;

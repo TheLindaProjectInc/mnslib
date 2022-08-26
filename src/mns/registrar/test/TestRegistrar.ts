@@ -1,10 +1,7 @@
+import { MetrixContract, Provider, Transaction } from '@metrixcoin/metrilib';
 import { ethers } from 'ethers';
 import ABI from '../../../abi';
 import { CONTRACTS } from '../../../constants';
-import MetrixContract from '../../../mrx/MetrixContract';
-import { Transaction } from '../../../mrx/Transaction';
-import { Provider } from '../../../provider';
-
 /**
  * A registrar that allocates subdomains to the first person to claim them, but
  * expires registrations a fixed period after they're initially claimed.

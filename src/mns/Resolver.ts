@@ -1,7 +1,7 @@
+import { MetrixContract, Provider } from '@metrixcoin/metrilib';
 import { namehash } from 'ethers/lib/utils';
-import Provider from '../provider/Provider';
-import MetrixContract from '../mrx/MetrixContract';
 import Name from './Name';
+
 /** Class which can be used to get a Name object to make queries with. */
 export default class Resolver {
   mns: MetrixContract;

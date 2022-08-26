@@ -1,5 +1,10 @@
+import {
+  MetrixContract,
+  Provider,
+  Transaction,
+  TransactionReceipt
+} from '@metrixcoin/metrilib';
 import { ethers } from 'ethers';
-import Provider from '../provider/Provider';
 import {
   getAddrWithResolver,
   getContentWithResolver,
@@ -9,10 +14,8 @@ import {
   setContenthashWithResolver,
   setTextWithResolver
 } from '../utils/ContractUtils';
-import MetrixContract from '../mrx/MetrixContract';
+
 import labelhash from '../utils/labelhash';
-import { Transaction } from '../mrx/Transaction';
-import { TransactionReceipt } from '../mrx';
 
 /** Class which can be used to make record queries. */
 export default class Name {

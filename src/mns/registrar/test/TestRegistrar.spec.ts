@@ -1,5 +1,5 @@
+import { APIProvider } from '@metrixcoin/metrilib';
 import { equal } from 'assert';
-import { APIProvider } from '../../../provider';
 import { getMNSAddress } from '../../../utils/ContractUtils';
 import { TestRegistrar } from './TestRegistrar';
 

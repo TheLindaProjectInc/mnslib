@@ -1,7 +1,7 @@
+import { APIProvider } from '@metrixcoin/metrilib';
 import { equal } from 'assert';
 import { CONTRACTS } from './constants';
 import { MNS, Name } from './mns';
-import { APIProvider } from './provider';
 import { getMNSAddress, getMNSContract } from './utils/ContractUtils';
 
 describe('mnslib tests', () => {
