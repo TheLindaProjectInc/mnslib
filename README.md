@@ -2,7 +2,7 @@
 
 # mnslib
 
-mnslib is an update/port of [**ensjs**](https://github.com/ensdomains/ensjs) made to work for the Metrix Name Service and MetrixCoin blockchain. The [metrilib](https://github.com/TheLindaProjectInc/metrilib) dependency is used to interact with the MetrrixCoin blockchain.
+mnslib is an update/port of [**ensjs**](https://github.com/ensdomains/ensjs) made to work for the Metrix Name Service and MetrixCoin blockchain. The [metrilib](https://github.com/TheLindaProjectInc/metrilib) dependency is used to interact with the MetrixCoin blockchain.
 
 ### [**Documentation**](https://thelindaprojectinc.github.io/mnslib/modules.html)
 
