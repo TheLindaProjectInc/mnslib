@@ -1,11 +1,12 @@
+import {
+  IERC721Enumerable,
+  MetrixContract,
+  Provider,
+  Transaction
+} from '@metrixcoin/metrilib';
 import { ethers } from 'ethers';
 import ABI from '../../../abi';
 import { CONTRACTS } from '../../../constants';
-
-import { IERC721Enumerable } from '../../../mrx/interface/IERC721Enumerable';
-import MetrixContract from '../../../mrx/MetrixContract';
-import { Transaction } from '../../../mrx/Transaction';
-import { Provider } from '../../../provider';
 
 /**
  * A registrar that controls '.mrx' names

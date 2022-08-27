@@ -1,4 +1,4 @@
-import { NetworkType } from '../types/NetworkType';
+import { NetworkType } from '@metrixcoin/metrilib';
 import b58Prefix from './b58Prefix';
 
 const networkPrefix: b58Prefix = {

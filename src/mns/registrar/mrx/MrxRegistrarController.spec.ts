@@ -1,6 +1,7 @@
+import { APIProvider } from '@metrixcoin/metrilib';
+
 import { equal, notEqual } from 'assert';
 import { ethers } from 'ethers';
-import { APIProvider } from '../../../provider';
 import { MrxRegistrarController } from './MrxRegistrarController';
 
 describe('MRXRegistrarController tests', () => {

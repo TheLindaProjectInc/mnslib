@@ -1,17 +1,19 @@
 import { ethers } from 'ethers';
 import { namehash } from 'ethers/lib/utils';
 import { CONTRACTS } from '../constants';
-import Provider from '../provider/Provider';
-import MetrixContract from '../mrx/MetrixContract';
 import Name from './Name';
 import Resolver from './Resolver';
-import { NetworkType } from '../types/NetworkType';
 import {
   getMNSContract,
   getResolverContract,
   getReverseRegistrarContract
 } from '../utils/ContractUtils';
-import { Transaction } from '../mrx/Transaction';
+import {
+  MetrixContract,
+  NetworkType,
+  Provider,
+  Transaction
+} from '@metrixcoin/metrilib';
 
 /** Class which can be used to make registry record queries. */
 export default class MNS {

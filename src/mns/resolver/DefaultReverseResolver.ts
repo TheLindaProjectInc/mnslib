@@ -1,15 +1,14 @@
+import { Provider, Transaction } from '@metrixcoin/metrilib';
 import ABI from '../../abi';
 import { CONTRACTS } from '../../constants';
-import MetrixContract from '../../mrx/MetrixContract';
-import { Transaction } from '../../mrx/Transaction';
-import { Provider } from '../../provider';
+import BaseResolver from './BaseResolver';
 
 /**
  * Class which can be used to interact with the DefaultReverseResolver
  *
  * @class
  */
-export default class DefaultReverseResolver extends MetrixContract {
+export default class DefaultReverseResolver extends BaseResolver {
   constructor(provider: Provider) {
     super(
       CONTRACTS[provider.network].DefaultReverseResolver,

@@ -1,10 +1,12 @@
+import {
+  IERC165,
+  MetrixContract,
+  Provider,
+  Transaction
+} from '@metrixcoin/metrilib';
 import { ethers } from 'ethers';
 import ABI from '../../../abi';
 import { CONTRACTS } from '../../../constants';
-import { IERC165 } from '../../../mrx/interface/IERC165';
-import MetrixContract from '../../../mrx/MetrixContract';
-import { Transaction } from '../../../mrx/Transaction';
-import { Provider } from '../../../provider';
 
 export class MrxRegistrarController extends MetrixContract implements IERC165 {
   constructor(provider: Provider) {

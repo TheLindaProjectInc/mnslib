@@ -1,8 +1,7 @@
+import { Provider, Transaction } from '@metrixcoin/metrilib';
 import { ethers } from 'ethers';
 import ABI from '../../abi';
 import { CONTRACTS } from '../../constants';
-import { Transaction } from '../../mrx/Transaction';
-import { Provider } from '../../provider';
 import { fromHexAddress } from '../../utils/AddressUtils';
 import BaseResolver from './BaseResolver';
 import ABIResolver from './profiles/ABIResolver';

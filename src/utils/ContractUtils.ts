@@ -3,9 +3,6 @@ import { ethers } from 'ethers';
 import { namehash } from 'ethers/lib/utils';
 import ABI from '../abi';
 import { CONTRACTS } from '../constants';
-import Provider from '../provider/Provider';
-import MetrixContract from '../mrx/MetrixContract';
-import { NetworkType } from '../types/NetworkType';
 import { fromHexAddress } from './AddressUtils';
 import { decodeContenthash, encodeContenthash } from './Content';
 import { BaseResolver } from '../mns';
@@ -14,7 +11,12 @@ import {
   ContentHashResolver,
   TextResolver
 } from '../mns/resolver/profiles';
-import { Transaction } from '../mrx/Transaction';
+import {
+  MetrixContract,
+  NetworkType,
+  Provider,
+  Transaction
+} from '@metrixcoin/metrilib';
 
 const getMNSAddress = (network: NetworkType) => {
   return CONTRACTS[network].MNSRegistryWithFallback;

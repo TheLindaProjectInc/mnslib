@@ -1,5 +1,4 @@
-import { IERC165 } from '../../../mrx/interface/IERC165';
-import { Transaction } from '../../../mrx/Transaction';
+import { IERC165, Transaction } from '@metrixcoin/metrilib';
 
 /**
  * Interface that represent an Address Resolver
