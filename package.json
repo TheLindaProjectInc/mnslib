@@ -65,7 +65,7 @@
         "@metrixcoin/metrilib": "^1.5.3-beta",
         "bs58": "^5.0.0",
         "content-hash": "^2.5.2",
-        "ethers": "^5.6.5",
+        "ethers": "^6.0.2",
         "locks": "^0.2.2",
         "node-fetch": "^2.6.1"
     }
