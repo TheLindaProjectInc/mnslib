@@ -1,6 +1,6 @@
 {
     "name": "@metrixnames/mnslib",
-    "version": "2.1.3",
+    "version": "2.1.4",
     "description": "Library for interacting with the Metrix Name Service",
     "repository": "TheLindaProjectInc/mnslib",
     "source": "src/index.ts",
@@ -62,7 +62,7 @@
     },
     "dependencies": {
         "@ensdomains/address-encoder": "^0.2.18",
-        "@metrixcoin/metrilib": "^1.5.3-beta",
+        "@metrixcoin/metrilib": "^1.5.4-beta",
         "bs58": "^5.0.0",
         "content-hash": "^2.5.2",
         "ethers": "^6.0.2",

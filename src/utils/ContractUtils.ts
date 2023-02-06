@@ -1,6 +1,5 @@
 import { formatsByName } from '@ensdomains/address-encoder';
-import { ethers } from 'ethers';
-import { namehash } from 'ethers/lib/utils';
+import { ethers, namehash } from 'ethers';
 import ABI from '../abi';
 import { CONTRACTS } from '../constants';
 import { fromHexAddress } from './AddressUtils';
@@ -101,7 +100,7 @@ const getAddrWithResolver = async (
         if (result) {
           return result.toString();
         }
-        return ethers.constants.AddressZero.replace('0x', '');
+        return ethers.ZeroAddress.replace('0x', '');
       }
 
       async addrByType(node: string, coinType: bigint): Promise<string> {
@@ -112,26 +111,26 @@ const getAddrWithResolver = async (
         if (result) {
           return result.toString();
         }
-        return ethers.constants.AddressZero.replace('0x', '');
+        return ethers.ZeroAddress.replace('0x', '');
       }
     })(provider);
     const format = formatsByName[key];
     if (!format) {
-      return ethers.constants.AddressZero;
+      return ethers.ZeroAddress;
     }
     const { coinType, encoder } = formatsByName[key];
     if (!coinType || !encoder) {
-      return ethers.constants.AddressZero;
+      return ethers.ZeroAddress;
     }
     const addr = await resolver.addrByType(nh, BigInt(coinType));
-    if (addr === undefined) return ethers.constants.AddressZero;
-    if (addr.toString() === '0x') return ethers.constants.AddressZero;
+    if (addr === undefined) return ethers.ZeroAddress;
+    if (addr.toString() === '0x') return ethers.ZeroAddress;
     if (coinType === 326) {
       const hexAddress = fromHexAddress(
         provider.network,
         addr.toString().slice(2)
       );
-      return hexAddress ? hexAddress : ethers.constants.AddressZero;
+      return hexAddress ? hexAddress : ethers.ZeroAddress;
     }
     return encoder(Buffer.from(addr.toString().slice(2), 'hex'));
   } catch (e) {
@@ -139,7 +138,7 @@ const getAddrWithResolver = async (
     console.warn(
       'Error getting addr on the resolver contract, are you sure the resolver address is a resolver contract?'
     );
-    return ethers.constants.AddressZero;
+    return ethers.ZeroAddress;
   }
 };
 
@@ -197,7 +196,7 @@ const setAddrWithResolver = async (
       if (result) {
         return result.toString();
       }
-      return ethers.constants.AddressZero.replace('0x', '');
+      return ethers.ZeroAddress.replace('0x', '');
     }
 
     async addrByType(node: string, coinType: bigint): Promise<string> {
@@ -208,7 +207,7 @@ const setAddrWithResolver = async (
       if (result) {
         return result.toString();
       }
-      return ethers.constants.AddressZero.replace('0x', '');
+      return ethers.ZeroAddress.replace('0x', '');
     }
   })(provider);
   const { decoder, coinType } = formatsByName[key];
@@ -232,7 +231,7 @@ const getContentWithResolver = async (
 ) => {
   const nh = namehash(name);
   if (parseInt(resolverAddr, 16) === 0) {
-    return ethers.constants.AddressZero;
+    return ethers.ZeroAddress;
   }
   try {
     const resolver: ContentHashResolver = new (class
@@ -267,8 +266,8 @@ const getContentWithResolver = async (
       }
     })(provider);
 
-    const contentHashSignature = ethers.utils
-      .solidityKeccak256(['string'], ['contenthash(bytes32)'])
+    const contentHashSignature = ethers
+      .solidityPackedKeccak256(['string'], ['contenthash(bytes32)'])
       .slice(0, 10);
 
     const isContentHashSupported = await resolver.supportsInterface(
@@ -282,7 +281,7 @@ const getContentWithResolver = async (
       if (error) {
         console.log('error decoding', error);
         return {
-          value: ethers.constants.AddressZero,
+          value: ethers.ZeroAddress,
           contentType: 'contenthash'
         };
       }

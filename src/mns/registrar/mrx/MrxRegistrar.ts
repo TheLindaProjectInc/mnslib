@@ -44,7 +44,7 @@ export class MrxRegistrar extends MetrixContract implements IERC721Enumerable {
    */
   async mns(): Promise<string> {
     const mnsAddr = await this.call('mns()', []);
-    return mnsAddr ? mnsAddr.toString() : ethers.constants.AddressZero;
+    return mnsAddr ? mnsAddr.toString() : ethers.ZeroAddress;
   }
 
   /**
@@ -53,7 +53,7 @@ export class MrxRegistrar extends MetrixContract implements IERC721Enumerable {
    */
   async baseNode(): Promise<string> {
     const node = await this.call('baseNode()', []);
-    return node ? node.toString() : ethers.constants.HashZero;
+    return node ? node.toString() : ethers.ZeroHash;
   }
 
   async totalSupply(): Promise<bigint> {
@@ -67,14 +67,14 @@ export class MrxRegistrar extends MetrixContract implements IERC721Enumerable {
       owner,
       `0x${index.toString(16)}`
     ]);
-    return token ? token.toString() : ethers.constants.HashZero;
+    return token ? token.toString() : ethers.ZeroHash;
   }
 
   async tokenByIndex(index: bigint): Promise<string> {
     const token = await this.call('tokenByIndex(uint256)', [
       `0x${index.toString(16)}`
     ]);
-    return token ? token.toString() : ethers.constants.HashZero;
+    return token ? token.toString() : ethers.ZeroHash;
   }
 
   async balanceOf(owner: string): Promise<bigint> {
@@ -87,7 +87,7 @@ export class MrxRegistrar extends MetrixContract implements IERC721Enumerable {
     const owner = await this.call('ownerOf(uint256)', [
       `0x${tokenId.toString(16)}`
     ]);
-    return owner ? owner.toString() : ethers.constants.AddressZero;
+    return owner ? owner.toString() : ethers.ZeroAddress;
   }
 
   async safeTransferFrom(
@@ -140,7 +140,7 @@ export class MrxRegistrar extends MetrixContract implements IERC721Enumerable {
     const approved = await this.call('getApproved(uint256)', [
       `0x${tokenId.toString(16)}`
     ]);
-    return approved ? approved.toString() : ethers.constants.AddressZero;
+    return approved ? approved.toString() : ethers.ZeroAddress;
   }
 
   async setApprovalForAll(

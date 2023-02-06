@@ -1,9 +1,8 @@
-import { ethers } from 'ethers';
+import { isHexString } from 'ethers';
 import bs58 from 'bs58';
 const contentHash = require('content-hash'); // eslint-disable-line @typescript-eslint/no-var-requires
 const supportedCodecs = ['ipns-ns', 'ipfs-ns', 'swarm-ns', 'onion', 'onion3'];
 
-const utils = ethers.utils;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function decodeContenthash(encoded: any) {
   let decoded, protocolType, error;
@@ -47,7 +46,7 @@ export function validateContent(encoded: any) {
 export function isValidContenthash(encoded: any) {
   try {
     const codec = contentHash.getCodec(encoded);
-    return utils.isHexString(encoded) && supportedCodecs.includes(codec);
+    return isHexString(encoded) && supportedCodecs.includes(codec);
   } catch (e) {
     console.log(e);
   }

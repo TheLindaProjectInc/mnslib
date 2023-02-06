@@ -15,7 +15,7 @@ export class TestRegistrar extends MetrixContract {
     super(
       CONTRACTS[provider.network].TestRegistrar
         ? (CONTRACTS[provider.network].TestRegistrar as string)
-        : ethers.constants.AddressZero.replace('0x', ''),
+        : ethers.ZeroAddress.replace('0x', ''),
       provider,
       ABI.TestRegistrar
     );
@@ -26,7 +26,7 @@ export class TestRegistrar extends MetrixContract {
    */
   async mns(): Promise<string> {
     const mnsAddr = await this.call('mns()', []);
-    return mnsAddr ? mnsAddr.toString() : ethers.constants.AddressZero;
+    return mnsAddr ? mnsAddr.toString() : ethers.ZeroAddress;
   }
 
   /**
@@ -35,7 +35,7 @@ export class TestRegistrar extends MetrixContract {
    */
   async rootNode(): Promise<string> {
     const node = await this.call('rootNode()', []);
-    return node ? node.toString() : ethers.constants.HashZero;
+    return node ? node.toString() : ethers.ZeroHash;
   }
 
   /**

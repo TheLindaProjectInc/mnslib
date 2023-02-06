@@ -5,7 +5,7 @@ import {
   getReverseRegistrarContract
 } from './utils/ContractUtils';
 
-import { namehash } from 'ethers/lib/utils';
+import { namehash } from 'ethers';
 import labelhash from './utils/labelhash';
 import Deployment from './interfaces/Deployment';
 

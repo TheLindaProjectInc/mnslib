@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import { namehash } from 'ethers/lib/utils';
+import { namehash } from 'ethers';
 import { CONTRACTS } from '../constants';
 import Name from './Name';
 import Resolver from './Resolver';
@@ -65,7 +65,7 @@ export default class MNS {
     ]);
     return this.getNameWithResolver(
       address,
-      resolverAddr ? resolverAddr.toString() : ethers.constants.AddressZero
+      resolverAddr ? resolverAddr.toString() : ethers.ZeroAddress
     );
   }
 

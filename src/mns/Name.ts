@@ -44,7 +44,7 @@ export default class Name {
    */
   async getOwner(): Promise<string> {
     const response = await this.mns.call('owner(bytes32)', [this.hash]);
-    return response ? response.toString() : ethers.constants.AddressZero;
+    return response ? response.toString() : ethers.ZeroAddress;
   }
 
   /**
@@ -75,9 +75,7 @@ export default class Name {
    */
   async getResolver(): Promise<string> {
     const response = await this.mns.call('resolver(bytes32)', [this.hash]);
-    this.resolver = response
-      ? response.toString()
-      : ethers.constants.AddressZero;
+    this.resolver = response ? response.toString() : ethers.ZeroAddress;
     return this.resolver;
   }
 
@@ -147,7 +145,7 @@ export default class Name {
       console.log(e);
     }
     return {
-      txid: ethers.constants.HashZero.replace('0x', ''),
+      txid: ethers.ZeroHash.replace('0x', ''),
       getReceipts: empty()
     };
   }
@@ -171,11 +169,11 @@ export default class Name {
    */
   async getAddress(coinId?: string): Promise<string> {
     const resolverAddr = await this.getResolverAddr();
-    if (parseInt(resolverAddr, 16) === 0) return ethers.constants.AddressZero;
+    if (parseInt(resolverAddr, 16) === 0) return ethers.ZeroAddress;
     const Resolver = getResolverContract(resolverAddr, this.provider);
     if (!coinId) {
       const response = await Resolver.call('addr(bytes32)', [this.hash]);
-      return response ? response.toString() : ethers.constants.AddressZero;
+      return response ? response.toString() : ethers.ZeroAddress;
     }
 
     return getAddrWithResolver(this.name, coinId, resolverAddr, this.provider);
@@ -332,10 +330,6 @@ export default class Name {
   }
 
   async deleteSubdomain(label: string) {
-    return this.setSubnodeRecord(
-      label,
-      ethers.constants.AddressZero,
-      ethers.constants.AddressZero
-    );
+    return this.setSubnodeRecord(label, ethers.ZeroAddress, ethers.ZeroAddress);
   }
 }
