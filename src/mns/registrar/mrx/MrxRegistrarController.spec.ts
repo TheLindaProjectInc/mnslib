@@ -27,11 +27,11 @@ describe('MRXRegistrarController tests', () => {
     const commitment = await controller.makeCommitmentWithConfig(
       'test',
       `0x${controller.address}`,
-      ethers.constants.HashZero,
+      ethers.ZeroHash,
       '0x0f34d660e34ccafac00b463fdd3a80a7437c666d',
       `0x${controller.address}`
     );
-    notEqual(commitment, ethers.constants.HashZero);
+    notEqual(commitment, ethers.ZeroHash);
   }).timeout(10000);
 
   it('should be an invalid name', async () => {

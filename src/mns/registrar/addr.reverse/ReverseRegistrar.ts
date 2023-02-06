@@ -22,7 +22,7 @@ export class ReverseRegistrar extends MetrixContract {
    */
   async mns(): Promise<string> {
     const mnsAddr = await this.call('mns()', []);
-    return mnsAddr ? mnsAddr.toString() : ethers.constants.AddressZero;
+    return mnsAddr ? mnsAddr.toString() : ethers.ZeroAddress;
   }
 
   /**
@@ -31,7 +31,7 @@ export class ReverseRegistrar extends MetrixContract {
    */
   async defaultResolver(): Promise<string> {
     const resolver = await this.call('defaultResolver()', []);
-    return resolver ? resolver.toString() : ethers.constants.AddressZero;
+    return resolver ? resolver.toString() : ethers.ZeroAddress;
   }
 
   /**
@@ -157,6 +157,6 @@ export class ReverseRegistrar extends MetrixContract {
    */
   async node(addr: string): Promise<string> {
     const n = await this.call('node(address)', [addr]);
-    return n ? n.toString() : ethers.constants.HashZero;
+    return n ? n.toString() : ethers.ZeroHash;
   }
 }

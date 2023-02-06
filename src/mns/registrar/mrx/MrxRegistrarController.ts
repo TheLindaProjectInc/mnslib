@@ -77,7 +77,7 @@ export class MrxRegistrarController extends MetrixContract implements IERC165 {
       'makeCommitment(string,address,bytes32)',
       [name, owner, secret]
     );
-    return commitment ? commitment.toString() : ethers.constants.HashZero;
+    return commitment ? commitment.toString() : ethers.ZeroHash;
   }
 
   async makeCommitmentWithConfig(
@@ -91,7 +91,7 @@ export class MrxRegistrarController extends MetrixContract implements IERC165 {
       'makeCommitmentWithConfig(string,address,bytes32,address,address)',
       [name, owner, secret, resolver, addr]
     );
-    return commitment ? commitment.toString() : ethers.constants.HashZero;
+    return commitment ? commitment.toString() : ethers.ZeroHash;
   }
 
   async commit(commitment: string): Promise<Transaction> {

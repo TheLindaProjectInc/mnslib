@@ -106,11 +106,11 @@ export default class PublicResolver
     const result = await this.call('addr(bytes32)', [node]);
     let mrxAddress: string | undefined = result
       ? result.toString()
-      : ethers.constants.AddressZero;
+      : ethers.ZeroAddress;
     if (convert === true) {
       mrxAddress = fromHexAddress(this.provider.network, mrxAddress);
     }
-    return mrxAddress ? mrxAddress : ethers.constants.AddressZero;
+    return mrxAddress ? mrxAddress : ethers.ZeroAddress;
   }
 
   async addrByType(node: string, coinType: bigint): Promise<string> {
@@ -121,7 +121,7 @@ export default class PublicResolver
     if (result) {
       return result.toString();
     }
-    return ethers.constants.AddressZero;
+    return ethers.ZeroAddress;
   }
 
   async setContenthash(node: string, hash: string): Promise<Transaction> {
@@ -230,7 +230,7 @@ export default class PublicResolver
     if (result) {
       return result.toString();
     }
-    return ethers.constants.AddressZero;
+    return ethers.ZeroAddress;
   }
 
   async setName(node: string, name: string): Promise<Transaction> {
@@ -272,7 +272,7 @@ export default class PublicResolver
       ];
       return tup;
     }
-    return [ethers.constants.HashZero, ethers.constants.HashZero];
+    return [ethers.ZeroHash, ethers.ZeroHash];
   }
 
   async setText(
