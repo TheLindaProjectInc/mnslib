@@ -1,7 +1,7 @@
 import { ethers } from 'ethers';
-import { namehash } from 'ethers';
 import { CONTRACTS } from '../constants';
 import Name from './Name';
+
 import Resolver from './Resolver';
 import {
   getMNSContract,
@@ -14,6 +14,8 @@ import {
   Provider,
   Transaction
 } from '@metrixcoin/metrilib';
+
+const namehash = require('@ensdomains/eth-ens-namehash').hash; // eslint-disable-line @typescript-eslint/no-var-requires
 
 /** Class which can be used to make registry record queries. */
 export default class MNS {
