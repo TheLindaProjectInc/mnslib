@@ -1,6 +1,7 @@
 import { MetrixContract, Provider } from '@metrixcoin/metrilib';
-import { namehash } from 'ethers';
+
 import Name from './Name';
+const namehash = require('@ensdomains/eth-ens-namehash').hash; // eslint-disable-line @typescript-eslint/no-var-requires
 
 /** Class which can be used to get a Name object to make queries with. */
 export default class Resolver {
