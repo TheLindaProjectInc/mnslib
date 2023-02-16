@@ -1,5 +1,6 @@
 import { formatsByName } from '@ensdomains/address-encoder';
-import { ethers, namehash } from 'ethers';
+import { ethers } from 'ethers';
+
 import ABI from '../abi';
 import { CONTRACTS } from '../constants';
 import { fromHexAddress } from './AddressUtils';
@@ -16,6 +17,7 @@ import {
   Provider,
   Transaction
 } from '@metrixcoin/metrilib';
+const namehash = require('@ensdomains/eth-ens-namehash').hash; // eslint-disable-line @typescript-eslint/no-var-requires
 
 const getMNSAddress = (network: NetworkType) => {
   return CONTRACTS[network].MNSRegistryWithFallback;
