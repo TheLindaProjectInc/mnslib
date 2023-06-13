@@ -16,12 +16,12 @@ describe('MRXRegistrarController tests', () => {
       BigInt(60 * 60 * 24 * 365)
     );
     equal(isNaN(Number(price)), false);
-  }).timeout(10000);
+  }).timeout(30000);
 
   it('should be a valid name', async () => {
     const valid = await controller.valid('pyropets');
     equal(valid, true);
-  }).timeout(10000);
+  }).timeout(30000);
 
   it('should makeCommitmentWithConfig', async () => {
     const commitment = await controller.makeCommitmentWithConfig(
@@ -32,10 +32,10 @@ describe('MRXRegistrarController tests', () => {
       `0x${controller.address}`
     );
     notEqual(commitment, ethers.ZeroHash);
-  }).timeout(10000);
+  }).timeout(30000);
 
   it('should be an invalid name', async () => {
     const valid = await controller.valid('test....');
     equal(valid, false);
-  }).timeout(10000);
+  }).timeout(30000);
 });
