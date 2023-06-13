@@ -1,6 +1,6 @@
 {
     "name": "@metrixnames/mnslib",
-    "version": "2.1.9",
+    "version": "2.1.10",
     "description": "Library for interacting with the Metrix Name Service",
     "repository": "TheLindaProjectInc/mnslib",
     "source": "src/index.ts",
@@ -46,7 +46,7 @@
         "@istanbuljs/nyc-config-typescript": "^1.0.2",
         "@types/locks": "^0.2.1",
         "@types/mocha": "^10.0.1",
-        "@types/node": "^18.0.4",
+        "@types/node": "^20.3.1",
         "@types/node-fetch": "^2.6.1",
         "@typescript-eslint/eslint-plugin": "^5.23.0",
         "@typescript-eslint/parser": "^5.23.0",
@@ -57,17 +57,18 @@
         "prettier": "^2.6.2",
         "source-map-support": "^0.5.21",
         "ts-node": "^10.8.0",
-        "typedoc": "^0.23.7",
+        "typedoc": "^0.24.4",
         "typescript": "4.9.5"
     },
     "dependencies": {
         "@ensdomains/address-encoder": "^0.2.20",
         "@ensdomains/eth-ens-namehash": "^2.0.15",
-        "@metrixcoin/metrilib": "^1.5.7-beta",
+        "@metrixcoin/metrilib": "^1.5.19-beta",
         "bs58": "^5.0.0",
         "content-hash": "^2.5.2",
         "ethers": "^6.0.3",
         "locks": "^0.2.2",
         "node-fetch": "^2.6.1"
-    }
+    },
+    "optionalDependencies": { "fsevents": "*" }
 }

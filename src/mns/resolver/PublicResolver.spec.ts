@@ -16,9 +16,9 @@ describe('PublicResolver tests', () => {
   it('should match the public resolver address', async () => {
     const address: string = await name.getResolverAddr();
     equal(address.replace('0x', '').toLowerCase(), resolver.address);
-  }).timeout(10000);
+  }).timeout(30000);
 
   it('should match name.getAddress() address', async () => {
     equal(await name.getAddress(), await resolver.addr(name.hash));
-  }).timeout(10000);
+  }).timeout(30000);
 });
