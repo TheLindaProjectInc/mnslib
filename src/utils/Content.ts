@@ -1,6 +1,6 @@
 import { isHexString } from 'ethers';
 import bs58 from 'bs58';
-const contentHash = require('content-hash'); // eslint-disable-line @typescript-eslint/no-var-requires
+const contentHash = require('content-hash'); // eslint-disable-line @typescript-eslint/no-require-imports
 const supportedCodecs = ['ipns-ns', 'ipfs-ns', 'swarm-ns', 'onion', 'onion3'];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -98,6 +98,7 @@ export function encodeContenthash(text: string) {
         });
       }
     } catch (err) {
+      console.log(err);
       console.warn('Error encoding content hash', { text, encoded });
       //throw 'Error encoding content hash'
     }
