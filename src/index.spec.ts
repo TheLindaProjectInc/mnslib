@@ -37,14 +37,14 @@ describe('mnslib tests', () => {
 
   it('should return expected TestNet address', async () => {
     const address = await name.getAddress();
-    equal(address, '0xC87bB8Ab63De99A58a5339217C4A1C92f0FBFEFe');
+    equal(address, '0x0aC0B5E95A1F9717811B9cEebCb6855d02f638b3');
   }).timeout(30000);
 
   it('should return expected TestNet owner', async () => {
     const owner = await name.getOwner();
     equal(
       owner.toLowerCase().replace('0x', ''),
-      'c87bb8ab63de99a58a5339217c4a1c92f0fbfefe'
+      '0ac0b5e95a1f9717811b9ceebcb6855d02f638b3'
     );
   }).timeout(30000);
 

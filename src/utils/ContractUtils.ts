@@ -17,7 +17,7 @@ import {
   Provider,
   Transaction
 } from '@metrixcoin/metrilib';
-const namehash = require('@ensdomains/eth-ens-namehash').hash; // eslint-disable-line @typescript-eslint/no-var-requires
+const namehash = require('@ensdomains/eth-ens-namehash').hash; // eslint-disable-line @typescript-eslint/no-require-imports
 
 const getMNSAddress = (network: NetworkType) => {
   return CONTRACTS[network].MNSRegistryWithFallback;
@@ -396,6 +396,7 @@ const getTextWithResolver = async (
     })(provider);
     return await resolver.text(nh, key);
   } catch (e) {
+    console.log(e);
     console.warn(
       'Error getting text record on the resolver contract, are you sure the resolver address is a resolver contract?'
     );

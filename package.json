@@ -1,6 +1,6 @@
 {
     "name": "@metrixnames/mnslib",
-    "version": "2.2.1",
+    "version": "2.2.2",
     "description": "Library for interacting with the Metrix Name Service",
     "repository": "TheLindaProjectInc/mnslib",
     "source": "src/index.ts",
@@ -22,7 +22,7 @@
     "scripts": {
         "test": "mocha --config mocharc.json",
         "coverage": "nyc --reporter=json-summary npm run test",
-        "lint": "eslint . --ext .ts",
+        "lint": "eslint .",
         "format": "prettier --write \"**/*.+(js|ts|json)\"",
         "build": "tsc",
         "doc": "npx typedoc src"
@@ -48,22 +48,22 @@
         "@types/mocha": "^10.0.1",
         "@types/node": "^20.3.1",
         "@types/node-fetch": "^2.6.1",
-        "@typescript-eslint/eslint-plugin": "^5.23.0",
-        "@typescript-eslint/parser": "^5.23.0",
+        "@typescript-eslint/eslint-plugin": "^8.1.0",
+        "@typescript-eslint/parser": "^8.1.0",
         "assert": "^2.0.0",
-        "eslint": "^8.15.0",
+        "eslint": "^9.9.0",
         "mocha": "^10.0.0",
         "nyc": "^15.1.0",
         "prettier": "^2.6.2",
         "source-map-support": "^0.5.21",
         "ts-node": "^10.8.0",
-        "typedoc": "^0.24.4",
-        "typescript": "4.9.5"
+        "typedoc": "^0.26.5",
+        "typescript": "5.5.4"
     },
     "dependencies": {
         "@ensdomains/address-encoder": "^0.2.20",
         "@ensdomains/eth-ens-namehash": "^2.0.15",
-        "@metrixcoin/metrilib": "^1.6.0-beta",
+        "@metrixcoin/metrilib": "^1.6.1-beta",
         "bs58": "^5.0.0",
         "content-hash": "^2.5.2",
         "ethers": "^6.0.3",

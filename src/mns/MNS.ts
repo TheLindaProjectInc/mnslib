@@ -15,7 +15,7 @@ import {
   Transaction
 } from '@metrixcoin/metrilib';
 
-const namehash = require('@ensdomains/eth-ens-namehash').hash; // eslint-disable-line @typescript-eslint/no-var-requires
+const namehash = require('@ensdomains/eth-ens-namehash').hash; // eslint-disable-line @typescript-eslint/no-require-imports
 
 /** Class which can be used to make registry record queries. */
 export default class MNS {
