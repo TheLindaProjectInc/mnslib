@@ -64,7 +64,7 @@
         "@ensdomains/address-encoder": "^0.2.20",
         "@ensdomains/eth-ens-namehash": "^2.0.15",
         "@metrixcoin/metrilib": "^1.6.1-beta",
-        "bs58": "^5.0.0",
+        "bs58": "^6.0.0",
         "content-hash": "^2.5.2",
         "ethers": "^6.0.3",
         "locks": "^0.2.2",
