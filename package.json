@@ -63,7 +63,7 @@
         "typescript": "5.5.4"
     },
     "dependencies": {
-        "@ensdomains/address-encoder": "^0.2.20",
+        "@ensdomains/address-encoder": "^1.1.2",
         "@ensdomains/eth-ens-namehash": "^2.0.15",
         "@metrixcoin/metrilib": "^1.6.2-beta",
         "bs58": "^6.0.0",
